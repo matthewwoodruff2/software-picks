@@ -42,6 +42,8 @@
 .tp-chev::after{content:"";position:absolute;left:50%;top:44%;width:9px;height:9px;border-right:2.5px solid #000;border-bottom:2.5px solid #000;transform:translate(-50%,-50%) rotate(45deg);transition:transform .2s}
 .tp-track[open] .tp-chev::after{transform:translate(-50%,-20%) rotate(225deg)}
 .tp-races{display:flex;flex-direction:column;gap:10px;padding:12px;background:var(--tp-grey)}
+.tp-full{align-self:flex-start;color:var(--tp-ink);font-weight:500;font-size:.92rem;text-decoration:none;border-bottom:2px solid var(--tp-gold);padding:2px 0}
+.tp-full:hover{color:var(--tp-gold-dk)}
 .tp-race{background:var(--tp-paper);border:1px solid var(--tp-line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
 .tp-race.tp-is-best{border:2px solid var(--tp-gold)}
 .tp-rh{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
