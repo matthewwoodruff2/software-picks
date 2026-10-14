@@ -75,29 +75,33 @@
 .tp-ae{margin:0;color:var(--tp-muted);font-size:.84rem}
 .tp-btn{align-self:flex-start;display:inline-block;background:var(--tp-black);color:#fff;text-decoration:none;border-radius:300px;padding:10px 22px;font-weight:500;text-transform:uppercase;font-size:.88rem;letter-spacing:.02em}
 .tp-btn.tp-slot{background:transparent;color:var(--tp-muted);border:1.5px dashed #b5b5b5}
-.tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
-.tp-cta{border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:stretch}
+.tp-cta{border-radius:14px;padding:24px;display:grid;grid-template-rows:auto auto 1fr auto auto auto;gap:10px;min-width:0}
 .tp-cta-lab{background:var(--tp-grey);border:1px solid var(--tp-line)}
-.tp-cta-edge{background:var(--tp-black);color:#fff}
+.tp-cta-edge{background:var(--tp-black);color:#fff;border:1px solid var(--tp-black)}
 .tp-cta .tp-eyebrow{font-weight:700}
 .tp-cta-lab .tp-eyebrow{color:var(--tp-gold-dk)}
-.tp-cta h2{margin:0;font-size:1.5rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
+.tp-cta h2{margin:0;font-size:1.6rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
 .tp-cta-edge h2{color:#fff}
 .tp-cta h2 span{color:var(--tp-gold)}
 .tp-cta-lab h2 span{color:var(--tp-gold-dk)}
 .tp-cta p{margin:0}
+.tp-cta-copy{align-self:start}
 .tp-cta-edge p{color:#e6e6e6}
-.tp-cta-edge a{align-self:flex-start;background:var(--tp-gold);color:#000;border-radius:300px;padding:11px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem;margin-top:auto}
-.tp-lab-form{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.tp-cta-act{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px;margin:4px 0 0}
+.tp-cta-edge .tp-cta-act a{background:var(--tp-gold);color:#000;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-cta-fine{font-size:.8rem;color:var(--tp-muted)}
+.tp-cta-edge .tp-cta-fine{color:#aaa}
+.tp-lab-form{display:flex;flex-wrap:wrap;gap:8px}
 .tp-lab-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 .tp-lab-form input{flex:1 1 200px;min-width:0;font:inherit;font-size:1rem;padding:11px 18px;border-radius:300px;border:1.5px solid #b5b5b5;background:#fff;color:var(--tp-ink)}
 .tp-lab-form input:focus-visible{outline:3px solid var(--tp-gold);outline-offset:1px;border-color:var(--tp-ink)}
-.tp-lab-form button{font:inherit;font-weight:500;font-size:.9rem;text-transform:uppercase;cursor:pointer;border:0;border-radius:300px;padding:11px 22px;background:var(--tp-black);color:#fff}
+.tp-lab-form button{font:inherit;font-weight:500;font-size:.9rem;text-transform:uppercase;cursor:pointer;border:0;border-radius:300px;padding:12px 24px;background:var(--tp-black);color:#fff}
 .tp-lab-form button:focus-visible{outline:3px solid var(--tp-gold);outline-offset:2px}
 .tp-lab-form button[disabled]{opacity:.6;cursor:wait}
-.tp-lab-msg{margin:0;font-size:.92rem;font-weight:500;min-height:1.2em}
+.tp-lab-msg{margin:0;font-size:.92rem;font-weight:500}
+.tp-lab-msg:empty{display:none}
 .tp-lab-msg.ok{color:var(--tp-hi)} .tp-lab-msg.err{color:#b3261e}
-.tp-lab-fine{font-size:.8rem;color:var(--tp-muted)}
 .tp-fine{color:var(--tp-muted);font-size:.82rem;display:flex;flex-direction:column;gap:4px;margin-top:10px}
 .tp-fine p{margin:0}
 @media (max-width:540px){.tp-rh{grid-template-columns:auto 1fr}.tp-tags{grid-column:1/-1;flex-direction:row;justify-content:flex-start}}
@@ -140,14 +144,27 @@
 .sp-foot-fine{max-width:1180px;margin:0 auto;border-top:1px solid #333;padding:14px max(16px,env(safe-area-inset-right,0px)) 24px max(16px,env(safe-area-inset-left,0px));font-size:.8rem;color:#aaa}
 .sp-foot-fine p{margin:4px 0}
 .sp-crumbs{font-size:.85rem;color:var(--tp-muted)} .sp-crumbs a{color:var(--tp-muted)}
-.sp-intro{display:flex;flex-direction:column;gap:10px;max-width:70ch}
-.sp-intro p{margin:0;font-size:1.05rem;line-height:1.6}
-.sp-intro p:first-child::first-line{font-weight:500}
-.sp-glance{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#fff;border:1px solid var(--tp-line);border-radius:12px;overflow:hidden}
-.sp-glance div{padding:10px 14px;min-width:0;box-shadow:inset -1px -1px 0 var(--tp-line)}
-@media (max-width:560px){.sp-glance{grid-template-columns:repeat(2,minmax(0,1fr))}}
-.sp-glance dt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-muted)}
-.sp-glance dd{margin:2px 0 0;font-weight:500;font-size:.95rem;overflow-wrap:anywhere}
+.sp-tracks{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.sp-tracks-l{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-muted);margin-right:4px}
+.sp-ts{border:1.5px solid var(--tp-line);color:var(--tp-ink);text-decoration:none;border-radius:300px;padding:7px 14px;font-size:.92rem;font-weight:500;background:#fff}
+.sp-ts:hover{border-color:var(--tp-ink)}
+.sp-ts.on{background:var(--tp-black);border-color:var(--tp-black);color:#fff}
+.sp-ts-all{border-style:dashed;color:var(--tp-muted)}
+.sp-glance{margin:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.sp-g{display:flex;flex-direction:column;gap:4px;background:#fff;border:1px solid var(--tp-line);border-radius:12px;padding:14px 16px;min-width:0;text-decoration:none;color:var(--tp-ink);box-shadow:0 1px 2px rgba(0,0,0,.04)}
+a.sp-g:hover{border-color:var(--tp-gold)}
+.sp-g dt{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-muted)}
+.sp-g dd{margin:0;font-weight:700;font-size:1.05rem;text-transform:uppercase;letter-spacing:-.01em;display:flex;align-items:center;gap:8px;flex-wrap:wrap;overflow-wrap:anywhere;line-height:1.2}
+.sp-g dd.sp-g-big{font-size:1.6rem;align-items:baseline}
+.sp-g dd small{font-size:.72rem;font-weight:500;color:var(--tp-muted);letter-spacing:.04em}
+.sp-g > small{font-size:.8rem;color:var(--tp-muted)}
+.sp-g .tp-cloth{min-width:30px;height:30px;font-size:.95rem}
+.sp-badge{display:inline-block;background:var(--tp-gold);color:#000;border-radius:300px;padding:2px 9px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.sp-g-best{background:var(--tp-black);border-color:var(--tp-black);color:#fff}
+.sp-g-best dt{color:var(--tp-gold)} .sp-g-best > small{color:#ccc}
+.sp-g-val{background:#fbf5df;border-color:var(--tp-gold)}
+.sp-g-val dt{color:var(--tp-gold-dk)}
+@media (max-width:620px){.sp-glance{grid-template-columns:repeat(2,minmax(0,1fr))}.sp-tracks{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding-bottom:4px;scrollbar-width:none}.sp-tracks::-webkit-scrollbar{display:none}.sp-ts,.sp-tracks-l{flex:0 0 auto;white-space:nowrap}}
 .sp-highlights{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
 .sp-hl{border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--tp-ink)}
 .sp-hl-best{background:var(--tp-black);color:#fff} .sp-hl-best .sp-hl-k{color:var(--tp-gold)}
@@ -180,15 +197,15 @@
 .sp-stat b{font-size:1.8rem;font-variant-numeric:tabular-nums} .sp-stat span{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tp-muted)}
 .tp-race{scroll-margin-top:12px}
 </style>
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Belmont Park Picks Friday, October 16, 2026 | TracksideProfits", "url": "https://picks.tracksideprofits.com/belmont-park-picks/2026-10-16/", "description": "Free Belmont Park picks for Friday, October 16, 2026: top pick, value play and pace analysis for all 9 races, plus our Best Bet, Fire Marshal in Race 5.", "dateModified": "2026-10-14T16:17", "publisher": {"@type": "Organization", "name": "TracksideProfits", "url": "https://www.tracksideprofits.com", "logo": "https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/d25ea72e-9f5c-4081-8afe-26573e70c19e/093976e8-5fab-46f8-b7ef-fb6b9fd4e4f2.png?format=300w"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Software Picks", "item": "https://picks.tracksideprofits.com/"}, {"@type": "ListItem", "position": 2, "name": "Belmont Park Picks", "item": "https://picks.tracksideprofits.com/belmont-park-picks/"}]}]}</script></head><body>
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "name": "Belmont Park Picks Friday, October 16, 2026 | TracksideProfits", "url": "https://picks.tracksideprofits.com/belmont-park-picks/2026-10-16/", "description": "Free Belmont Park picks for Friday, October 16, 2026: top pick, value play and pace analysis for all 9 races, plus our Best Bet, Fire Marshal in Race 5.", "dateModified": "2026-10-14T16:27", "publisher": {"@type": "Organization", "name": "TracksideProfits", "url": "https://www.tracksideprofits.com", "logo": "https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/d25ea72e-9f5c-4081-8afe-26573e70c19e/093976e8-5fab-46f8-b7ef-fb6b9fd4e4f2.png?format=300w"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Software Picks", "item": "https://picks.tracksideprofits.com/"}, {"@type": "ListItem", "position": 2, "name": "Belmont Park Picks", "item": "https://picks.tracksideprofits.com/belmont-park-picks/"}]}]}</script></head><body>
 <div class="tp-picks">
-<div class="sp-bar"><span class="sp-bar-pill">Members only</span> <b>Trackside Edge</b> <a href="https://www.tracksideprofits.com/trackside-edge">Join &rarr;</a></div><header class="sp-top"><div class="sp-top-in"><a class="sp-logo" href="https://www.tracksideprofits.com" aria-label="TracksideProfits home"><img src="https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/d25ea72e-9f5c-4081-8afe-26573e70c19e/093976e8-5fab-46f8-b7ef-fb6b9fd4e4f2.png?format=300w" alt="TracksideProfits" width="52" height="52"></a><nav class="sp-nav" aria-label="Main"><a href="https://www.tracksideprofits.com">Home</a><a href="https://www.tracksideprofits.com/horse-racing-wagering-lab">Email Picks</a><a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a><a href="https://www.tracksideprofits.com/blueprints">Blueprints</a><div class="sp-drop"><button type="button" class="sp-drop-btn" aria-haspopup="true">Racing <span aria-hidden="true">&#9662;</span></button><div class="sp-drop-menu"><a href="https://www.tracksideprofits.com/breeders-cup-classic-handicapping-hub">Breeders&#x27; Cup</a><a href="https://www.tracksideprofits.com/breeders-cup-power-rankings">BC Power Rankings</a><a href="https://www.tracksideprofits.com/blog">Blogs</a><a href="https://www.tracksideprofits.com/race-previews-lIEFA">Videos</a></div></div></nav><a class="sp-members" href="https://www.tracksideprofits.com/trackside-edge">Members</a><details class="sp-burger"><summary aria-label="Open menu"><span></span><span></span><span></span></summary><nav aria-label="Mobile"><a href="https://www.tracksideprofits.com">Home</a><a href="https://www.tracksideprofits.com/horse-racing-wagering-lab">Email Picks</a><a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a><a href="https://www.tracksideprofits.com/blueprints">Blueprints</a><span class="sp-mob-h">Racing</span><a class="sp-mob-sub" href="https://www.tracksideprofits.com/breeders-cup-classic-handicapping-hub">Breeders&#x27; Cup</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/breeders-cup-power-rankings">BC Power Rankings</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/blog">Blogs</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/race-previews-lIEFA">Videos</a></nav></details></div></header>
+<div class="sp-bar"><span class="sp-bar-pill">Members only</span> <b>Trackside Edge</b> <a href="https://www.tracksideprofits.com/trackside-edge">Join &rarr;</a></div><header class="sp-top"><div class="sp-top-in"><a class="sp-logo" href="https://www.tracksideprofits.com" aria-label="TracksideProfits home"><img src="https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/d25ea72e-9f5c-4081-8afe-26573e70c19e/093976e8-5fab-46f8-b7ef-fb6b9fd4e4f2.png?format=300w" alt="TracksideProfits" width="52" height="52"></a><nav class="sp-nav" aria-label="Main"><a href="https://www.tracksideprofits.com">Home</a><a href="https://www.tracksideprofits.com/horse-racing-wagering-lab">Wagering Lab</a><a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a><a href="https://www.tracksideprofits.com/blueprints">Blueprints</a><div class="sp-drop"><button type="button" class="sp-drop-btn" aria-haspopup="true">Racing <span aria-hidden="true">&#9662;</span></button><div class="sp-drop-menu"><a href="https://www.tracksideprofits.com/breeders-cup-classic-handicapping-hub">Breeders&#x27; Cup</a><a href="https://www.tracksideprofits.com/breeders-cup-power-rankings">BC Power Rankings</a><a href="https://www.tracksideprofits.com/blog">Blogs</a><a href="https://www.tracksideprofits.com/race-previews-lIEFA">Videos</a></div></div></nav><a class="sp-members" href="https://www.tracksideprofits.com/trackside-edge">Members</a><details class="sp-burger"><summary aria-label="Open menu"><span></span><span></span><span></span></summary><nav aria-label="Mobile"><a href="https://www.tracksideprofits.com">Home</a><a href="https://www.tracksideprofits.com/horse-racing-wagering-lab">Wagering Lab</a><a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a><a href="https://www.tracksideprofits.com/blueprints">Blueprints</a><span class="sp-mob-h">Racing</span><a class="sp-mob-sub" href="https://www.tracksideprofits.com/breeders-cup-classic-handicapping-hub">Breeders&#x27; Cup</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/breeders-cup-power-rankings">BC Power Rankings</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/blog">Blogs</a><a class="sp-mob-sub" href="https://www.tracksideprofits.com/race-previews-lIEFA">Videos</a></nav></details></div></header>
 <div class="tp-hero"><div class="tp-hero-in">
 <span class="tp-eyebrow">Free picks for every race</span><h1>Belmont Park Picks <span>Fri, Oct 16</span></h1><p>Free picks for all 9 races at Belmont Park on Friday, October 16, 2026, generated by the TracksideProfits handicapping software.</p></div></div>
 <main class="tp-body">
 <p class="sp-crumbs"><a href="/">Today&rsquo;s Picks</a> &rsaquo; <a href="/belmont-park-picks/">Belmont Park Picks</a> &rsaquo; Fri, Oct 16</p>
-<div class="sp-intro"><p>Belmont Park&#x27;s nine-race Friday card is built mostly around maiden and allowance races, five on the turf and four on dirt. It is a competitive card, with two races rated wide open.</p><p>Our strongest opinion is Fire Marshal in Race 5, who owns the fastest recent speed figures in the field and is still improving. At a price, The Gabe Digger in Race 1 is worth a look. The public let this one go at long odds last time, but the software gives it a real chance.</p></div><dl class="sp-glance"><div><dt>Races</dt><dd>9</dd></div><div><dt>Surfaces</dt><dd>5 turf, 4 dirt</dd></div><div><dt>First post</dt><dd>1:10 local</dd></div><div><dt>Best Bet</dt><dd>Race 5: Fire Marshal</dd></div><div><dt>Value play</dt><dd>Race 1: The Gabe Digger</dd></div></dl>
-<div class="sp-highlights"><a class="sp-hl sp-hl-best" href="#tp-bel-2026-10-16-r5"><span class="sp-hl-k">Best Bet of the day</span><span class="sp-hl-n"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span>Fire Marshal</span><span class="sp-hl-m">Race 5 &middot; 47% win est. &middot; Fastest recent speed figures in the field. Figures moving forward.</span></a><a class="sp-hl sp-hl-val" href="#tp-bel-2026-10-16-r1"><span class="sp-hl-k">Value play of the day</span><span class="sp-hl-n"><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span>The Gabe Digger</span><span class="sp-hl-m">Race 1 &middot; 22% win est. &middot; dismissed at long odds last time out</span></a></div>
+<nav class="sp-tracks" aria-label="Tracks racing Fri, Oct 16"><span class="sp-tracks-l">Fri, Oct 16</span><a class="sp-ts on" href="/belmont-park-picks/" aria-current="page">Belmont Park</a><a class="sp-ts" href="/gulfstream-park-picks/">Gulfstream Park</a><a class="sp-ts" href="/keeneland-picks/2026-10-16/">Keeneland</a><a class="sp-ts" href="/santa-anita-picks/">Santa Anita</a><a class="sp-ts sp-ts-all" href="/">All tracks</a></nav>
+<dl class="sp-glance"><div class="sp-g"><dt>Races</dt><dd class="sp-g-big">9</dd></div><div class="sp-g"><dt>Surfaces</dt><dd>5 Turf &middot; 4 Dirt</dd></div><div class="sp-g"><dt>First post</dt><dd class="sp-g-big">1:10<small>local time</small></dd></div><a class="sp-g" href="#tp-bel-2026-10-16-r8"><dt>Top purse &middot; Race 8</dt><dd>OC 80k/N2X</dd></a><a class="sp-g sp-g-best" href="#tp-bel-2026-10-16-r5"><dt>Best Bet &middot; Race 5</dt><dd><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span>Fire Marshal</span></dd><small>47% win est.</small></a><a class="sp-g sp-g-val" href="#tp-bel-2026-10-16-r1"><dt>Value play &middot; Race 1</dt><dd><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span><span>The Gabe Digger</span></dd><small>22% win est.</small></a></dl>
 
 <h2 class="sp-h2">Race-by-race picks</h2>
 <div class="tp-races" style="padding:0;background:none"><div class="tp-race" id="tp-bel-2026-10-16-r1">
@@ -296,20 +313,21 @@
 <h2 class="sp-h2">More picks for Friday, October 16</h2><div class="sp-links"><a href="/gulfstream-park-picks/">Gulfstream Park picks</a><a href="/keeneland-picks/">Keeneland picks</a><a href="/santa-anita-picks/">Santa Anita picks</a></div>
 <h2 class="sp-h2">Belmont Park picks archive</h2><div class="sp-links"><a href="/belmont-park-picks/2026-10-17/">Sat, Oct 17</a><a href="/belmont-park-picks/2026-10-16/">Fri, Oct 16</a><a href="/belmont-park-picks/2026-10-11/">Sun, Oct 11</a></div>
 <div class="tp-ctas">
-<div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">100% free &middot; every Friday</span>
+<div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">Free &middot; every Friday</span>
 <h2>The Wagering <span>Lab.</span></h2>
-<p>Two curated race breakdowns every Friday before the weekend's biggest races, plus our free betting tracker and handicapping scoring tool. Every pick is tracked publicly.</p>
-<form class="tp-lab-form" data-kit-form="9140538" novalidate>
+<p class="tp-cta-copy">Two curated race breakdowns every Friday before the weekend's biggest races, plus our free betting tracker and handicapping scoring tool.</p>
+<form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate>
 <label for="tp-lab-email">Email address</label>
 <input id="tp-lab-email" name="email_address" type="email" autocomplete="email" placeholder="Email address" required>
-<button type="submit">Join the Wagering Lab</button>
+<button type="submit">Join free</button>
 </form>
 <p class="tp-lab-msg" role="status" aria-live="polite"></p>
-<span class="tp-lab-fine">No credit card. No spam. Unsubscribe anytime.</span></div>
+<span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
 <div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
-<h2>Want a person behind the picks? <span>Trackside Edge</span></h2>
-<p>The software covers every race. Trackside Edge members get our four hand-curated plays every Friday, all 12 full-card Blueprints and the private member community.</p>
-<a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
+<h2>Trackside <span>Edge.</span></h2>
+<p class="tp-cta-copy">Want a person behind the picks? Members get four hand-curated plays every Friday, all 12 full-card Blueprints and the private member community.</p>
+<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
+<span class="tp-cta-fine">$29.99 per month.</span></div>
 </div>
 
 <div class="tp-fine"><p>Picks are made before scratches and late changes. If a selection scratches, move to the next pick. Post times are local track time. Win estimates are the software's, not guarantees. Results recaps fill in as official finishes appear in our data.</p>
