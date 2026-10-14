@@ -63,11 +63,29 @@
 .tp-ae{margin:0;color:var(--tp-muted);font-size:.84rem}
 .tp-btn{align-self:flex-start;display:inline-block;background:var(--tp-black);color:#fff;text-decoration:none;border-radius:300px;padding:10px 22px;font-weight:500;text-transform:uppercase;font-size:.88rem;letter-spacing:.02em}
 .tp-btn.tp-slot{background:transparent;color:var(--tp-muted);border:1.5px dashed #b5b5b5}
-.tp-cta{margin-top:18px;background:var(--tp-black);color:#fff;border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px}
-.tp-cta h2{margin:0;font-size:1.5rem;font-weight:700;text-transform:uppercase;color:#fff}
+.tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px}
+.tp-cta{border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.tp-cta-lab{background:var(--tp-grey);border:1px solid var(--tp-line)}
+.tp-cta-edge{background:var(--tp-black);color:#fff}
+.tp-cta .tp-eyebrow{font-weight:700}
+.tp-cta-lab .tp-eyebrow{color:var(--tp-gold-dk)}
+.tp-cta h2{margin:0;font-size:1.5rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
+.tp-cta-edge h2{color:#fff}
 .tp-cta h2 span{color:var(--tp-gold)}
-.tp-cta p{margin:0;color:#e6e6e6}
-.tp-cta a{align-self:flex-start;background:var(--tp-gold);color:#000;border-radius:300px;padding:11px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-cta-lab h2 span{color:var(--tp-gold-dk)}
+.tp-cta p{margin:0}
+.tp-cta-edge p{color:#e6e6e6}
+.tp-cta-edge a{align-self:flex-start;background:var(--tp-gold);color:#000;border-radius:300px;padding:11px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem;margin-top:auto}
+.tp-lab-form{display:flex;flex-wrap:wrap;gap:8px;margin-top:auto}
+.tp-lab-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.tp-lab-form input{flex:1 1 200px;min-width:0;font:inherit;font-size:1rem;padding:11px 18px;border-radius:300px;border:1.5px solid #b5b5b5;background:#fff;color:var(--tp-ink)}
+.tp-lab-form input:focus-visible{outline:3px solid var(--tp-gold);outline-offset:1px;border-color:var(--tp-ink)}
+.tp-lab-form button{font:inherit;font-weight:500;font-size:.9rem;text-transform:uppercase;cursor:pointer;border:0;border-radius:300px;padding:11px 22px;background:var(--tp-black);color:#fff}
+.tp-lab-form button:focus-visible{outline:3px solid var(--tp-gold);outline-offset:2px}
+.tp-lab-form button[disabled]{opacity:.6;cursor:wait}
+.tp-lab-msg{margin:0;font-size:.92rem;font-weight:500;min-height:1.2em}
+.tp-lab-msg.ok{color:var(--tp-hi)} .tp-lab-msg.err{color:#b3261e}
+.tp-lab-fine{font-size:.8rem;color:var(--tp-muted)}
 .tp-fine{color:var(--tp-muted);font-size:.82rem;display:flex;flex-direction:column;gap:4px;margin-top:10px}
 .tp-fine p{margin:0}
 @media (max-width:540px){.tp-rh{grid-template-columns:auto 1fr}.tp-tags{grid-column:1/-1;flex-direction:row;justify-content:flex-start}}
@@ -1385,9 +1403,22 @@
 <span class="tp-pk-pct"><b>15%</b><small>win est.</small></span></li></ol>
 <p class="tp-why"><b>Why Tiger Luck:</b> Among the fastest on recent figures; Pedigree suits the distance.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Thirsty Eterna, Bel Air Blintzcess</p></div></div>
 </details></div>
-<div class="tp-cta"><h2>Want a person behind the picks? <span>Trackside Edge</span></h2>
+<div class="tp-ctas">
+<div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">100% free &middot; every Friday</span>
+<h2>The Wagering <span>Lab.</span></h2>
+<p>Two curated race breakdowns every Friday before the weekend's biggest races, plus our free betting tracker and handicapping scoring tool. Every pick is tracked publicly.</p>
+<form class="tp-lab-form" data-kit-form="9140538" novalidate>
+<label for="tp-lab-email">Email address</label>
+<input id="tp-lab-email" name="email_address" type="email" autocomplete="email" placeholder="Email address" required>
+<button type="submit">Join the Wagering Lab</button>
+</form>
+<p class="tp-lab-msg" role="status" aria-live="polite"></p>
+<span class="tp-lab-fine">No credit card. No spam. Unsubscribe anytime.</span></div>
+<div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
+<h2>Want a person behind the picks? <span>Trackside Edge</span></h2>
 <p>The software covers every race. Trackside Edge members get our four hand-curated plays every Friday, all 12 full-card Blueprints and the private member community.</p>
 <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
+</div>
 <div class="tp-fine"><p>Picks are made before scratches and late changes. If a selection scratches, move to the next pick. Post times are local track time. Win estimates are the software's, not guarantees.</p>
 <p>There are no guaranteed winners. Past results do not guarantee future results. Wager responsibly. If you or someone you know has a gambling problem, call 1-800-GAMBLER.</p>
 <p>Updated Oct 14, 2026</p></div>
@@ -1398,6 +1429,13 @@ var btns=root.querySelectorAll('.tp-day'),blocks=root.querySelectorAll('.tp-dayb
 function show(d){btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.day===d?'true':'false')});blocks.forEach(function(x){x.hidden=x.dataset.day!==d})}
 btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.day)})});
 var today=new Date();var iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+var lf=root.querySelector('.tp-lab-form');if(lf){lf.addEventListener('submit',function(ev){ev.preventDefault();var inp=lf.querySelector('input'),btn=lf.querySelector('button'),msg=root.querySelector('.tp-lab-msg');var em=(inp.value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.className='tp-lab-msg err';msg.textContent='Enter a valid email address.';inp.focus();return;}
+btn.disabled=true;msg.className='tp-lab-msg';msg.textContent='Signing you up...';var fd=new FormData();fd.append('email_address',em);
+fetch('https://app.kit.com/forms/'+lf.dataset.kitForm+'/subscriptions',{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.status==='success'){msg.className='tp-lab-msg ok';msg.textContent='You\'re in! Check your email to confirm your subscription.';lf.reset();}
+else{msg.className='tp-lab-msg err';msg.textContent='That didn\'t go through. Check your email address and try again.';}
+}).catch(function(){msg.className='tp-lab-msg err';msg.textContent='Connection problem. Try again in a moment.';}).then(function(){btn.disabled=false});});}
 var days=[].map.call(btns,function(b){return b.dataset.day});var pick=days.filter(function(d){return d>=iso})[0]||days[days.length-1];if(pick)show(pick);})();
 </script>
 </div>
