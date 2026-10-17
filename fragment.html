@@ -1,0 +1,530 @@
+<div class="tp-picks">
+<style>
+/* Matches tracksideprofits.com: black + white with gold (#D4AF37), bold uppercase Roboto, pill buttons.
+   Single light theme on purpose so it sits on the Squarespace page. All rules scoped to .tp-picks. */
+.tp-picks{--tp-black:#000;--tp-ink:#111;--tp-gold:#d4af37;--tp-gold-dk:#8a6d12;--tp-paper:#fff;--tp-grey:#f2f2f2;
+ --tp-line:#e3e3e3;--tp-muted:#555;--tp-hi:#1d7a46;--tp-mid:#8a6d12;--tp-lo:#777;
+ --tp-font:Roboto,"Helvetica Neue",Arial,sans-serif;
+ font-family:var(--tp-font);color:var(--tp-ink);background:var(--tp-paper);line-height:1.5;font-size:16px;color-scheme:light}
+.tp-picks *{box-sizing:border-box}
+.tp-picks [hidden]{display:none!important}
+.tp-hero{background:var(--tp-black);color:#fff;padding:32px max(24px,env(safe-area-inset-left,0px)) 30px max(24px,env(safe-area-inset-right,0px))}
+.tp-hero-in{max-width:1240px;margin:0 auto;display:flex;flex-direction:column;gap:10px}
+.tp-eyebrow{color:var(--tp-gold);text-transform:uppercase;letter-spacing:.08em;font-size:.82rem;font-weight:500}
+.tp-hero h1{margin:0;font-size:clamp(2rem,6vw,2.9rem);line-height:1.05;font-weight:700;text-transform:uppercase;letter-spacing:-.02em;color:#fff;text-wrap:balance}
+.tp-hero h1 span{color:var(--tp-gold)}
+.tp-hero p{margin:0;color:#e6e6e6;max-width:72ch;font-size:1.02rem}
+.tp-days{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.tp-day{font:inherit;font-weight:500;font-size:.95rem;cursor:pointer;border-radius:300px;padding:9px 18px;border:2px solid #fff;background:transparent;color:#fff}
+.tp-day[aria-pressed="true"]{background:var(--tp-gold);border-color:var(--tp-gold);color:#000}
+.tp-day:focus-visible,.tp-track summary:focus-visible,.tp-btn:focus-visible{outline:3px solid var(--tp-gold);outline-offset:2px}
+.tp-body{max-width:1240px;margin:0 auto;padding:28px max(24px,env(safe-area-inset-right,0px)) 48px max(24px,env(safe-area-inset-left,0px));display:flex;flex-direction:column;gap:12px}
+.tp-hint{margin:0;color:var(--tp-muted);font-size:.95rem}
+.tp-note{margin:0;background:#fbf5df;border:1px dashed var(--tp-gold-dk);border-radius:10px;padding:10px 14px;font-size:.92rem}
+.tp-dayblock{display:flex;flex-direction:column;gap:12px}
+.tp-dayhead{margin:6px 0 0;font-size:1.35rem;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
+.tp-track{border:1px solid var(--tp-line);border-radius:12px;background:var(--tp-paper);overflow:hidden}
+.tp-track summary{list-style:none;cursor:pointer;display:grid;grid-template-columns:1fr auto;grid-template-areas:"name chev" "meta chev" "bb chev";gap:2px 12px;padding:16px 18px;background:var(--tp-paper)}
+.tp-track summary::-webkit-details-marker{display:none}
+.tp-track[open] summary{background:var(--tp-black);color:#fff}
+.tp-sum-name{grid-area:name;font-size:1.3rem;font-weight:700;text-transform:uppercase;letter-spacing:-.01em;line-height:1.15}
+.tp-sum-meta{grid-area:meta;color:var(--tp-muted);font-size:.92rem}
+.tp-track[open] .tp-sum-meta{color:#ccc}
+.tp-sum-bb{grid-area:bb;font-size:.92rem;font-weight:500;color:var(--tp-gold-dk)}
+.tp-track[open] .tp-sum-bb{color:var(--tp-gold)}
+.tp-sum-bb small{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;margin-right:6px;font-weight:700}
+.tp-chev{grid-area:chev;align-self:center;width:34px;height:34px;border-radius:50%;background:var(--tp-gold);position:relative}
+.tp-chev::after{content:"";position:absolute;left:50%;top:44%;width:9px;height:9px;border-right:2.5px solid #000;border-bottom:2.5px solid #000;transform:translate(-50%,-50%) rotate(45deg);transition:transform .2s}
+.tp-track[open] .tp-chev::after{transform:translate(-50%,-20%) rotate(225deg)}
+.tp-races{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:12px;padding:14px;background:var(--tp-grey);align-items:start}
+.tp-races > .tp-full{grid-column:1/-1}
+.tp-full{align-self:flex-start;color:var(--tp-ink);font-weight:500;font-size:.92rem;text-decoration:none;border-bottom:2px solid var(--tp-gold);padding:2px 0}
+.tp-full:hover{color:var(--tp-gold-dk)}
+.tp-race{background:var(--tp-paper);border:1px solid var(--tp-line);border-radius:10px;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.tp-race.tp-is-best{border:2px solid var(--tp-gold)}
+.tp-rh{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:start}
+.tp-rn{display:flex;flex-direction:column;align-items:center;font-size:1.9rem;font-weight:700;line-height:1;min-width:44px}
+.tp-rn small{font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--tp-muted);font-weight:500;margin-bottom:2px}
+.tp-ri{display:flex;flex-direction:column;min-width:0}
+.tp-ri span{color:var(--tp-muted);font-size:.9rem;font-variant-numeric:tabular-nums}
+.tp-tags{display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.tp-tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:300px;padding:3px 10px;white-space:nowrap;border:1.5px solid currentColor}
+.tp-tag-best{background:var(--tp-gold);border-color:var(--tp-gold);color:#000}
+.tp-c-high{color:var(--tp-hi)} .tp-c-medium{color:var(--tp-mid)} .tp-c-low{color:var(--tp-lo)}
+.tp-list{list-style:none;margin:0;padding:0}
+.tp-pick{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:8px 0;border-top:1px solid var(--tp-line)}
+.tp-cloth{display:inline-grid;place-items:center;min-width:34px;height:34px;padding:0 4px;border-radius:5px;font-weight:700;font-size:1.05rem;box-shadow:inset 0 0 0 1px rgba(0,0,0,.2)}
+.tp-pk{display:flex;flex-direction:column;min-width:0}
+.tp-pk-name{font-weight:700;text-transform:uppercase;letter-spacing:-.01em;overflow-wrap:anywhere;line-height:1.2}
+.tp-top .tp-pk-name{font-size:1.12rem}
+.tp-pk-conn{color:var(--tp-muted);font-size:.84rem;overflow-wrap:anywhere}
+.tp-pk-pct{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.tp-pk-pct b{font-size:1.1rem;font-variant-numeric:tabular-nums}
+.tp-pk-pct small{font-size:.68rem;color:var(--tp-muted);text-transform:uppercase;letter-spacing:.05em}
+.tp-top .tp-pk-pct b{color:var(--tp-gold-dk)}
+.tp-why{margin:0;font-size:.94rem}
+.tp-pk-lbl{font-size:.68rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-gold-dk)}
+.tp-edge-up{margin:2px 0 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:.86rem;background:var(--tp-black);color:#e6e6e6;border-radius:10px;padding:9px 12px}
+.tp-edge-up b{color:var(--tp-gold)}
+.tp-edge-up span{flex:1 1 220px;min-width:0}
+.tp-edge-up a{background:var(--tp-gold);color:#000;border-radius:300px;padding:6px 14px;font-weight:500;text-decoration:none;text-transform:uppercase;font-size:.78rem}
+.tp-edge-lock{flex:0 0 auto!important;width:12px;height:10px;border:2px solid var(--tp-gold);border-radius:2px;position:relative;margin-top:4px}
+.tp-edge-lock::before{content:"";position:absolute;left:1px;top:-8px;width:6px;height:6px;border:2px solid var(--tp-gold);border-bottom:0;border-radius:6px 6px 0 0}
+.tp-hint a{color:var(--tp-gold-dk);font-weight:500}
+.tp-value{margin:0;font-size:.92rem;background:#fbf5df;border-radius:10px;padding:10px 12px;line-height:1.55}
+.tp-value .tp-cloth{min-width:26px;height:26px;font-size:.85rem;vertical-align:middle}
+.tp-vtag{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-gold-dk);margin-right:8px}
+.tp-vpct{color:var(--tp-muted);font-size:.85rem}
+.tp-pace{margin:0;font-size:.92rem;color:#333}
+.tp-result{margin:0;font-size:.92rem;border-left:4px solid var(--tp-line);padding:4px 0 4px 10px}
+.tp-r-win{border-color:var(--tp-hi)} .tp-r-itm{border-color:var(--tp-gold)} .tp-r-out{border-color:#b5b5b5}
+.tp-ae{margin:0;color:var(--tp-muted);font-size:.84rem}
+.tp-btn{align-self:flex-start;display:inline-block;background:var(--tp-black);color:#fff;text-decoration:none;border-radius:300px;padding:10px 22px;font-weight:500;text-transform:uppercase;font-size:.88rem;letter-spacing:.02em}
+.tp-btn.tp-slot{background:transparent;color:var(--tp-muted);border:1.5px dashed #b5b5b5}
+.tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:stretch}
+.tp-cta{border-radius:14px;padding:24px;display:grid;grid-template-rows:auto auto 1fr auto auto auto;gap:10px;min-width:0}
+.tp-cta-lab{background:var(--tp-grey);border:1px solid var(--tp-line)}
+.tp-cta-edge{background:var(--tp-black);color:#fff;border:1px solid var(--tp-black)}
+.tp-cta .tp-eyebrow{font-weight:700}
+.tp-cta-lab .tp-eyebrow{color:var(--tp-gold-dk)}
+.tp-cta h2{margin:0;font-size:1.6rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
+.tp-cta-edge h2{color:#fff}
+.tp-cta h2 span{color:var(--tp-gold)}
+.tp-cta-lab h2 span{color:var(--tp-gold-dk)}
+.tp-cta p{margin:0}
+.tp-cta-copy{align-self:start}
+.tp-cta-edge p{color:#e6e6e6}
+.tp-cta-act{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-height:46px;margin:4px 0 0}
+.tp-cta-edge .tp-cta-act a{background:var(--tp-gold);color:#000;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-cta-fine{font-size:.8rem;color:var(--tp-muted)}
+.tp-cta-edge .tp-cta-fine{color:#aaa}
+.tp-lab-form{display:flex;flex-wrap:wrap;gap:8px}
+.tp-lab-form label{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.tp-lab-form input{flex:1 1 200px;min-width:0;font:inherit;font-size:1rem;padding:11px 18px;border-radius:300px;border:1.5px solid #b5b5b5;background:#fff;color:var(--tp-ink)}
+.tp-lab-form input:focus-visible{outline:3px solid var(--tp-gold);outline-offset:1px;border-color:var(--tp-ink)}
+.tp-lab-form button{font:inherit;font-weight:500;font-size:.9rem;text-transform:uppercase;cursor:pointer;border:0;border-radius:300px;padding:12px 24px;background:var(--tp-black);color:#fff}
+.tp-lab-form button:focus-visible{outline:3px solid var(--tp-gold);outline-offset:2px}
+.tp-lab-form button[disabled]{opacity:.6;cursor:wait}
+.tp-lab-msg{margin:0;font-size:.92rem;font-weight:500}
+.tp-lab-msg:empty{display:none}
+.tp-lab-msg.ok{color:var(--tp-hi)} .tp-lab-msg.err{color:#b3261e}
+.tp-fine{color:var(--tp-muted);font-size:.82rem;display:flex;flex-direction:column;gap:4px;margin-top:10px}
+.tp-fine p{margin:0}
+@media (max-width:540px){.tp-rh{grid-template-columns:auto 1fr}.tp-tags{grid-column:1/-1;flex-direction:row;justify-content:flex-start}}
+@media (prefers-reduced-motion:reduce){.tp-chev::after{transition:none}}
+</style>
+<div class="tp-hero"><div class="tp-hero-in">
+<span class="tp-eyebrow">TracksideProfits software &middot; every race</span><h1>Today's <span>Picks</span></h1><p>A top pick and a value play for every race, plus the Best Bet of each card, from our handicapping software. Pick a day, then tap a track.</p>
+<div class="tp-days" role="group" aria-label="Race day"><button type="button" class="tp-day" id="tp-day-2026-10-17" data-day="2026-10-17" aria-pressed="true">Sat, Oct 17</button><button type="button" class="tp-day" id="tp-day-2026-10-18" data-day="2026-10-18" aria-pressed="false">Sun, Oct 18</button></div>
+</div></div>
+<div class="tp-body">
+<p class="tp-hint">Tap a track to open its picks. Best Bets are outlined in gold. Trackside Edge members get the full card: top three, win estimates, pace notes and confidence. <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Edge</a></p>
+<div class="tp-dayblock" data-day="2026-10-17"><h2 class="tp-dayhead">Saturday, October 17</h2><details class="tp-track">
+<summary><span class="tp-sum-name">Belmont Park</span>
+<span class="tp-sum-meta">11 races &middot; First post 12:05 local</span><span class="tp-sum-bb"><small>Best Bet</small>R1 &middot; Commuted</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/belmont-park-picks/2026-10-17/" target="_top">Open the Belmont Park card page &rarr;</a><div class="tp-race tp-is-best" id="tp-bel-2026-10-17-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Alw 32000s</b><span>6 furlongs &middot; Dirt &middot; Post 12:05 &middot; 6 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Commuted</span><span class="tp-pk-conn">Santana R Jr &middot; Rice Linda</span></span></li></ol>
+<p class="tp-why"><b>Why Commuted:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>6 furlongs &middot; Inner Turf &middot; Post 12:38 &middot; 6 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Gift of Gab</span><span class="tp-pk-conn">Franco M &middot; Stettinius Suzanne</span></span></li></ol>
+<p class="tp-why"><b>Why Gift of Gab:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Delightful Flame</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Alw 32000s</b><span>1 1/4 miles &middot; Dirt &middot; Post 1:11 &middot; 6 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Missouri River</span><span class="tp-pk-conn">Ocasio L M &middot; Pino Michael V</span></span></li></ol>
+<p class="tp-why"><b>Why Missouri River:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>1 1/16 miles &middot; Turf &middot; Post 1:44 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Lady Firefoot</span><span class="tp-pk-conn">Zayas E J &middot; Schauer Steven I</span></span></li></ol>
+<p class="tp-why"><b>Why Lady Firefoot:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Planet Clare</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>6 furlongs &middot; Inner Turf &middot; Post 2:17 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Mission Improbable</span><span class="tp-pk-conn">Zayas E J &middot; Brisset Rodolphe</span></span></li></ol>
+<p class="tp-why"><b>Why Mission Improbable:</b> Among the fastest on recent figures. Takes a drop in class.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Global Prosperity</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Barn does well with sprinters.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Alw 32000s</b><span>6 &frac12; furlongs &middot; Dirt &middot; Post 2:50 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Meg&#x27;s Foxy Grey</span><span class="tp-pk-conn">Fresu A &middot; Nevin Michelle</span></span></li></ol>
+<p class="tp-why"><b>Why Meg&#x27;s Foxy Grey:</b> Among the fastest on recent figures. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span> <b>Will Not Be Swayed</b><br>Went off at long odds last time out but rates as a real contender here. Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>1 1/2 miles &middot; Turf &middot; Post 3:23 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Carc Brothers</span><span class="tp-pk-conn">Franco M &middot; Atras Rob</span></span></li></ol>
+<p class="tp-why"><b>Why Carc Brothers:</b> Fastest recent speed figures in the field. Barn does well with last-out winners. Returns from a layoff.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span> <b>Write Off Jerry</b><br>Went off at long odds last time out but rates as a real contender here. Barn does well with route runners.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>Alw 20000s</b><span>1 mile &middot; Dirt &middot; Post 3:56 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Snide</span><span class="tp-pk-conn">Lezcano J &middot; Rice Linda</span></span></li></ol>
+<p class="tp-why"><b>Why Snide:</b> Fastest recent speed figures in the field. Figures moving forward. Returns from a layoff.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Brunch With Amy</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>1 mile &middot; Dirt &middot; Post 4:29 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Georgia Magic</span><span class="tp-pk-conn">Franco M &middot; Schauer Steven I</span></span></li></ol>
+<p class="tp-why"><b>Why Georgia Magic:</b> Fastest recent speed figures in the field. Top-percentage trainer and jockey.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Kinetic</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r10">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>10</span>
+<span class="tp-ri"><b>Alw 55000s</b><span>1 1/16 miles &middot; Turf &middot; Post 5:02 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Hammerhead</span><span class="tp-pk-conn">Fresu A &middot; Kantarmaci Mertkan</span></span></li></ol>
+<p class="tp-why"><b>Why Hammerhead:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>Paros</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-bel-2026-10-17-r11">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>11</span>
+<span class="tp-ri"><b>Alw 16000s</b><span>7 furlongs &middot; Dirt &middot; Post 5:35 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Secured Landing</span><span class="tp-pk-conn">Carmouche K &middot; Rice Linda</span></span></li></ol>
+<p class="tp-why"><b>Why Secured Landing:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span> <b>Tapwrits Temper</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details><details class="tp-track">
+<summary><span class="tp-sum-name">Gulfstream Park</span>
+<span class="tp-sum-meta">10 races &middot; First post 12:20 local</span><span class="tp-sum-bb"><small>Best Bet</small>R2 &middot; Unpredictable</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/gulfstream-park-picks/2026-10-17/" target="_top">Open the Gulfstream Park card page &rarr;</a><div class="tp-race" id="tp-gp-2026-10-17-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Md Sp Wt 50k</b><span>5 furlongs &middot; Turf &middot; Post 12:20 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Tizoc</span><span class="tp-pk-conn">Meneses M &middot; Gutierrez Fausto</span></span></li></ol>
+<p class="tp-why"><b>Why Tizoc:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race tp-is-best" id="tp-gp-2026-10-17-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Md 12500</b><span>5 furlongs &middot; All-Weather &middot; Post 12:50 &middot; 9 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#ffffff;color:#111" aria-label="Program number 2">2</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Unpredictable</span><span class="tp-pk-conn">Husbands M J &middot; Joseph Saffie A Jr</span></span></li></ol>
+<p class="tp-why"><b>Why Unpredictable:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Soc 28500</b><span>1 mile &middot; Turf &middot; Post 1:21 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Bail Us Out</span><span class="tp-pk-conn">Herrera D A &middot; Dibona Robert S</span></span></li></ol>
+<p class="tp-why"><b>Why Bail Us Out:</b> Fastest recent speed figures in the field. Barn does well with last-out winners.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>War Warrior</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Md Sp Wt 50k</b><span>7 furlongs &middot; Dirt &middot; Post 1:53 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Golden Decree</span><span class="tp-pk-conn">Ocasio J &middot; Dibona Robert S</span></span></li></ol>
+<p class="tp-why"><b>Why Golden Decree:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>Clm 10000N2L</b><span>1 mile 70 yds &middot; All-Weather &middot; Post 2:25 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Lodato</span><span class="tp-pk-conn">Vasquez M A &middot; Hurtak Daniel C</span></span></li></ol>
+<p class="tp-why"><b>Why Lodato:</b> Fastest recent speed figures in the field. Proven on the surface.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span> <b>Sponge Time</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Md 35000</b><span>5 furlongs &middot; Turf &middot; Post 2:58 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">I&#x27;m Not Tell You</span><span class="tp-pk-conn">Gonzalez E &middot; Ramsey Nolan</span></span></li></ol>
+<p class="tp-why"><b>Why I&#x27;m Not Tell You:</b> Among the fastest on recent figures. Figures moving forward.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>Clm 10000</b><span>1 mile 70 yds &middot; All-Weather &middot; Post 3:30 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">World Traveler</span><span class="tp-pk-conn">Camacho S &middot; Barboza Victor Jr</span></span></li></ol>
+<p class="tp-why"><b>Why World Traveler:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Terrie T</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Figures moving forward.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>Md Sp Wt 50k</b><span>6 furlongs &middot; Dirt &middot; Post 4:04 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Expectations</span><span class="tp-pk-conn">Torrealba J &middot; Biancone Patrick L</span></span></li></ol>
+<p class="tp-why"><b>Why Expectations:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>OC 25k/N1X</b><span>6 furlongs &middot; Dirt &middot; Post 4:36 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Practically Dark</span><span class="tp-pk-conn">Husbands M J &middot; Joseph Saffie A Jr</span></span></li></ol>
+<p class="tp-why"><b>Why Practically Dark:</b> Fastest recent speed figures in the field. Barn does well with last-out winners. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-17-r10">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>10</span>
+<span class="tp-ri"><b>Clm 17500N2L</b><span>1 mile &middot; Turf &middot; Post 5:08 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Dream Dancer</span><span class="tp-pk-conn">Reyes L &middot; D&#x27;Angelo Jose F</span></span></li></ol>
+<p class="tp-why"><b>Why Dream Dancer:</b> Fastest recent speed figures in the field. Takes a drop in class.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Give Me Options</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details><details class="tp-track">
+<summary><span class="tp-sum-name">Keeneland</span>
+<span class="tp-sum-meta">10 races &middot; First post 1:00 local</span><span class="tp-sum-bb"><small>Best Bet</small>R7 &middot; Deep Flame</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/keeneland-picks/2026-10-17/" target="_top">Open the Keeneland card page &rarr;</a><div class="tp-race" id="tp-kee-2026-10-17-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Clm 20000N2L</b><span>6 furlongs &middot; Dirt &middot; Post 1:00 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Trouble Time</span><span class="tp-pk-conn">Gaffalione T &middot; Vaccarezza Nicholas</span></span></li></ol>
+<p class="tp-why"><b>Why Trouble Time:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span> <b>L Rankin</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Md 30000</b><span>6 furlongs &middot; Dirt &middot; Post 1:32 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Ardennes</span><span class="tp-pk-conn">Jimenez A &middot; Kordenbrock Matt</span></span></li></ol>
+<p class="tp-why"><b>Why Ardennes:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Ginger Money</b><br>Went off at long odds last time out but rates as a real contender here. Quickest early horse in a dirt sprint.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Mussume, J Z&#x27;s Not Again, Saffron Rouge, Capability</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Alw 12500s</b><span>6 &frac12; furlongs &middot; Dirt &middot; Post 2:04 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Halfway Joking</span><span class="tp-pk-conn">Gaffalione T &middot; Jacobson David</span></span></li></ol>
+<p class="tp-why"><b>Why Halfway Joking:</b> Figures moving forward. Quickest early horse in a dirt sprint.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Md Sp Wt 110k</b><span>1 1/16 miles &middot; Turf &middot; Post 2:36 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Sucker for Looks</span><span class="tp-pk-conn">Velazquez J R &middot; Robson Lauren</span></span></li></ol>
+<p class="tp-why"><b>Why Sucker for Looks:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Emma&#x27;s Justice, Majorbrowniepoints, Breezy, Speak for Yourself</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>OC 80k/N2X</b><span>6 furlongs &middot; Dirt &middot; Post 3:08 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Creole Chrome</span><span class="tp-pk-conn">Gaffalione T &middot; Sharp Joe</span></span></li></ol>
+<p class="tp-why"><b>Why Creole Chrome:</b> Among the fastest on recent figures. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span> <b>Ship Ship Hooray</b><br>Went off at long odds last time out but rates as a real contender here. Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Md Sp Wt 110k</b><span>6 furlongs &middot; Dirt &middot; Post 3:40 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Decimation</span><span class="tp-pk-conn">Saez L &middot; Asmussen Steven M</span></span></li></ol>
+<p class="tp-why"><b>Why Decimation:</b> Fastest recent speed figures in the field. Looks like the lone early speed and can control the pace. Returns from a layoff.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Midnight Max, Just Plain Eugene, Epic Journey, Twillo</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race tp-is-best" id="tp-kee-2026-10-17-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>Perryville Stakes (Grade 3)</b><span>7 furlongs &middot; Dirt &middot; Post 4:12 &middot; 12 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#a4d65e;color:#111" aria-label="Program number 12">12</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Deep Flame</span><span class="tp-pk-conn">Ortiz I Jr &middot; Cox Brad H</span></span></li></ol>
+<p class="tp-why"><b>Why Deep Flame:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>Alw 140000N3X</b><span>1 1/16 miles &middot; Turf &middot; Post 4:44 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Hear the Queen</span><span class="tp-pk-conn">Ortiz I Jr &middot; Cox Brad H</span></span></li></ol>
+<p class="tp-why"><b>Why Hear the Queen:</b> Among the fastest on recent figures. Top-percentage trainer and jockey.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span> <b>Bojaca Blessing</b><br>Went off at long odds last time out but rates as a real contender here. Fastest recent speed figures in the field. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Lexus Raven Run Stakes (Grade 2)</b><span>7 furlongs &middot; Dirt &middot; Post 5:16 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#8a8d8f;color:#c8102e" aria-label="Program number 11">11</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Movie Night</span><span class="tp-pk-conn">Prat F &middot; Walden William</span></span></li></ol>
+<p class="tp-why"><b>Why Movie Night:</b> Figures moving forward. Top-percentage trainer and jockey.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-17-r10">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>10</span>
+<span class="tp-ri"><b>Alw 120000N1X</b><span>5 &frac12; furlongs &middot; Turf &middot; Post 5:48 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Twirling Claire</span><span class="tp-pk-conn">Saez L &middot; Foley Gregory D</span></span></li></ol>
+<p class="tp-why"><b>Why Twirling Claire:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span> <b>Ms. Jay Dee Em</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Pedigree suits the distance.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Solemn Vow, She Wants War, Balright, Lady Revenge</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details><details class="tp-track">
+<summary><span class="tp-sum-name">Santa Anita</span>
+<span class="tp-sum-meta">9 races &middot; First post 1:00 local</span><span class="tp-sum-bb"><small>Best Bet</small>R8 &middot; Dancing Thru Fire</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/santa-anita-picks/2026-10-17/" target="_top">Open the Santa Anita card page &rarr;</a><div class="tp-race" id="tp-sa-2026-10-17-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Md Sp Wt 65k</b><span>1 mile &middot; Turf &middot; Post 1:00 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Brazoria</span><span class="tp-pk-conn">Rosario J &middot; Mandella Richard</span></span></li></ol>
+<p class="tp-why"><b>Why Brazoria:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span> <b>Chair&#x27;s Coin</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Soc 37000C</b><span>6 furlongs &middot; Dirt &middot; Post 1:33 &middot; 5 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Gettinby</span><span class="tp-pk-conn">Hernandez J J &middot; Williams Sean</span></span></li></ol>
+<p class="tp-why"><b>Why Gettinby:</b> Fastest recent speed figures in the field. Barn does well with sprinters.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Lure Stakes</b><span>1 mile &middot; Turf &middot; Post 2:06 &middot; 5 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#ffffff;color:#111" aria-label="Program number 2">2</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Artislas</span><span class="tp-pk-conn">Hernandez J J &middot; Mullins Jeff</span></span></li></ol>
+<p class="tp-why"><b>Why Artislas:</b> Among the fastest on recent figures. Top-percentage trainer and jockey.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>Astronomer</b><br>Went off at long odds last time out but rates as a real contender here. Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Clm 16000N3L</b><span>1 mile &middot; Dirt &middot; Post 2:39 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Photogenic</span><span class="tp-pk-conn">Rosario J &middot; Powell Leonard</span></span></li></ol>
+<p class="tp-why"><b>Why Photogenic:</b> Fastest recent speed figures in the field. Takes a drop in class.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span> <b>Sei Bella</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Proven on the surface. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>Md Sp Wt 65k</b><span>1 mile &middot; Turf &middot; Post 3:09 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Is That You Wing</span><span class="tp-pk-conn">Ayuso A &middot; Blacker Dan</span></span></li></ol>
+<p class="tp-why"><b>Why Is That You Wing:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span> <b>Bottled in Bond</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Soc 50000N2L</b><span>6 furlongs &middot; Dirt &middot; Post 3:39 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Imnosurething</span><span class="tp-pk-conn">Ayuso A &middot; Eurton Peter</span></span></li></ol>
+<p class="tp-why"><b>Why Imnosurething:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>Soc 50000N2L</b><span>1 mile &middot; Turf &middot; Post 4:09 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Timayyyy</span><span class="tp-pk-conn">Van Dyke D &middot; Papaprodromou George</span></span></li></ol>
+<p class="tp-why"><b>Why Timayyyy:</b> Among the fastest on recent figures. Closer who should get a fast pace to run at.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>Moonlit Sonata</b><br>Went off at long odds last time out but rates as a real contender here. Barn does well with horses coming back in 31-60 days.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race tp-is-best" id="tp-sa-2026-10-17-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>Md 12500</b><span>5 &frac12; furlongs &middot; Dirt &middot; Post 4:39 &middot; 9 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Dancing Thru Fire</span><span class="tp-pk-conn">Payeras E &middot; Rivera Sally P</span></span></li></ol>
+<p class="tp-why"><b>Why Dancing Thru Fire:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Blame the Track</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-17-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Clm 32000</b><span>1 mile &middot; Turf &middot; Post 5:09 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Malibu Coast</span><span class="tp-pk-conn">Kimura K &middot; O&#x27;Neill Doug</span></span></li></ol>
+<p class="tp-why"><b>Why Malibu Coast:</b> Figures moving forward. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span> <b>Mary&#x27;s Boy Bolt</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Takes a drop in class. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details></div><div class="tp-dayblock" data-day="2026-10-18" hidden><h2 class="tp-dayhead">Sunday, October 18</h2><details class="tp-track">
+<summary><span class="tp-sum-name">Gulfstream Park</span>
+<span class="tp-sum-meta">9 races &middot; First post 12:20 local</span><span class="tp-sum-bb"><small>Best Bet</small>R7 &middot; Rosie&#x27;s Roadster</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/gulfstream-park-picks/2026-10-18/" target="_top">Open the Gulfstream Park card page &rarr;</a><div class="tp-race" id="tp-gp-2026-10-18-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Clm 10000N2L</b><span>5 &frac12; furlongs &middot; All-Weather &middot; Post 12:20 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Tie It With a Bow</span><span class="tp-pk-conn">Martinez C &middot; Ramirez Luis M</span></span></li></ol>
+<p class="tp-why"><b>Why Tie It With a Bow:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>Fantasy World</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Md 35000</b><span>5 furlongs &middot; Turf &middot; Post 12:50 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">More Power to You</span><span class="tp-pk-conn">Herrera D A &middot; Casse Mark</span></span></li></ol>
+<p class="tp-why"><b>Why More Power to You:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Md 17500</b><span>5 &frac12; furlongs &middot; All-Weather &middot; Post 1:20 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">The Sazerac</span><span class="tp-pk-conn">Camacho S &middot; David Carlos A</span></span></li></ol>
+<p class="tp-why"><b>Why The Sazerac:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span> <b>Hot Rod</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Clm 35000B</b><span>6 &frac12; furlongs &middot; Dirt &middot; Post 1:51 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Golden Valley</span><span class="tp-pk-conn">Reyes L &middot; De La Cerda Armando</span></span></li></ol>
+<p class="tp-why"><b>Why Golden Valley:</b> Fastest recent speed figures in the field. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>OC 25k/N1X</b><span>5 furlongs &middot; Turf &middot; Post 2:23 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#ffffff;color:#111" aria-label="Program number 2">2</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Quereme Pass</span><span class="tp-pk-conn">Leon S &middot; D&#x27;Angelo Jose F</span></span></li></ol>
+<p class="tp-why"><b>Why Quereme Pass:</b> Fastest recent speed figures in the field. Takes a drop in class. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Clm 10000B</b><span>1 mile 70 yds &middot; All-Weather &middot; Post 2:57 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Oxar</span><span class="tp-pk-conn">Reyes L &middot; Barboza Victor Jr</span></span></li></ol>
+<p class="tp-why"><b>Why Oxar:</b> Among the fastest on recent figures. Barn does well with first start off the claim.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Dorotea Dream</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Proven on the surface. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race tp-is-best" id="tp-gp-2026-10-18-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>OC 75k/NC</b><span>6 furlongs &middot; Dirt &middot; Post 3:31 &middot; 7 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Rosie&#x27;s Roadster</span><span class="tp-pk-conn">Vasquez M A &middot; Jackson Gary G</span></span></li></ol>
+<p class="tp-why"><b>Why Rosie&#x27;s Roadster:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>OC 25k/N1X</b><span>6 furlongs &middot; Dirt &middot; Post 4:04 &middot; 9 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Kip the Distance</span><span class="tp-pk-conn">Martinez C &middot; Rodriguez Angel M</span></span></li></ol>
+<p class="tp-why"><b>Why Kip the Distance:</b> Figures moving forward. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-gp-2026-10-18-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Clm 17500B</b><span>1 mile &middot; Turf &middot; Post 4:35 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Bluff</span><span class="tp-pk-conn">Vasquez M A &middot; Dibona Robert S</span></span></li></ol>
+<p class="tp-why"><b>Why Bluff:</b> Fastest recent speed figures in the field. Barn does well with claimers. Returns from a layoff.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>David Pepperman</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details><details class="tp-track">
+<summary><span class="tp-sum-name">Keeneland</span>
+<span class="tp-sum-meta">9 races &middot; First post 1:00 local</span><span class="tp-sum-bb"><small>Best Bet</small>R1 &middot; Carol&#x27;s Melody</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/keeneland-picks/2026-10-18/" target="_top">Open the Keeneland card page &rarr;</a><div class="tp-race tp-is-best" id="tp-kee-2026-10-18-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Clm 62500B</b><span>7 furlongs &middot; Dirt &middot; Post 1:00 &middot; 7 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Carol&#x27;s Melody</span><span class="tp-pk-conn">Ortiz J L &middot; Kenneally Eddie</span></span></li></ol>
+<p class="tp-why"><b>Why Carol&#x27;s Melody:</b> Fastest recent speed figures in the field. Barn does well with claimers.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Turkish Pistachio</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>Clm 20000B</b><span>1 1/16 miles &middot; Dirt &middot; Post 1:32 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Parking Lot Pours</span><span class="tp-pk-conn">Torres C A &middot; Silva Miguel Angel</span></span></li></ol>
+<p class="tp-why"><b>Why Parking Lot Pours:</b> Figures moving forward. Proven on the surface.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span> <b>Spun Up</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Barn does well with turf-to-dirt switches.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Clm 16000</b><span>1 1/8 miles &middot; Dirt &middot; Post 2:04 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Excel Calculator</span><span class="tp-pk-conn">Ortiz I Jr &middot; Sharp Joe</span></span></li></ol>
+<p class="tp-why"><b>Why Excel Calculator:</b> Fastest recent speed figures in the field. Barn does well with claimers.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span> <b>Sugoi</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>Md 30000</b><span>6 &frac12; furlongs &middot; Dirt &middot; Post 2:36 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Lookism</span><span class="tp-pk-conn">Antongrgi III W &middot; Caramori Caio</span></span></li></ol>
+<p class="tp-why"><b>Why Lookism:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span> <b>Lindenborg</b><br>Went off at long odds last time out but rates as a real contender here. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>Alw 140000N3X</b><span>1 1/16 miles &middot; Turf &middot; Post 3:08 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Covert Law</span><span class="tp-pk-conn">Alvarado J &middot; David Carlos A</span></span></li></ol>
+<p class="tp-why"><b>Why Covert Law:</b> Figures moving forward. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span> <b>Green Light</b><br>Went off at long odds last time out but rates as a real contender here. Figures have risen three straight races. Fired a bullet workout recently.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Md Sp Wt 110k</b><span>6 furlongs &middot; Dirt &middot; Post 3:40 &middot; 11 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#6a2c91;color:#fff" aria-label="Program number 10">10</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Appeals to Me</span><span class="tp-pk-conn">Ortiz I Jr &middot; Cox Brad H</span></span></li></ol>
+<p class="tp-why"><b>Why Appeals to Me:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Blazing Sunset</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Pedigree suits the distance.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>Rood &amp; Riddle Dowager Stakes (Grade 3)</b><span>1 1/2 miles &middot; Turf &middot; Post 4:12 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Pretty Tapit</span><span class="tp-pk-conn">Ortiz J L &middot; Sharp Joe</span></span></li></ol>
+<p class="tp-why"><b>Why Pretty Tapit:</b> Fastest recent speed figures in the field. Figures moving forward.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span> <b>Fionn</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Top-percentage trainer and jockey.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>Clm 40000N2L</b><span>6 furlongs &middot; Dirt &middot; Post 4:44 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Mandy&#x27;s Man Can</span><span class="tp-pk-conn">Rodriguez W A &middot; Lobo Paulo H</span></span></li></ol>
+<p class="tp-why"><b>Why Mandy&#x27;s Man Can:</b> Among the fastest on recent figures. Figures moving forward. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-kee-2026-10-18-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Md Sp Wt 110k</b><span>1 1/16 miles &middot; Turf &middot; Post 5:16 &middot; 12 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Time in Motion</span><span class="tp-pk-conn">Concepcion A &middot; Walden William</span></span></li></ol>
+<p class="tp-why"><b>Why Time in Motion:</b> Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span> <b>Epic Roll</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Figures moving forward.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Arrival Time, Platinum Power, Yalta, Silver Jewel</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details><details class="tp-track">
+<summary><span class="tp-sum-name">Santa Anita</span>
+<span class="tp-sum-meta">9 races &middot; First post 1:00 local</span><span class="tp-sum-bb"><small>Best Bet</small>R2 &middot; Angel Baby</span>
+<span class="tp-chev" aria-hidden="true"></span></summary>
+<div class="tp-races"><a class="tp-full" href="https://picks.tracksideprofits.com/santa-anita-picks/2026-10-18/" target="_top">Open the Santa Anita card page &rarr;</a><div class="tp-race" id="tp-sa-2026-10-18-r1">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
+<span class="tp-ri"><b>Md 50000</b><span>6 &frac12; furlongs &middot; Turf &middot; Post 1:00 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Velvet Reign</span><span class="tp-pk-conn">Jaramillo E &middot; O&#x27;Neill Doug</span></span></li></ol>
+<p class="tp-why"><b>Why Velvet Reign:</b> Among the fastest on recent figures. Barn does well with maiden claimers.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span> <b>Tokala</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Pedigree suits the distance.</p><p class="tp-ae">Also eligible, runs only if there are scratches: I&#x27;m Lovestruck</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race tp-is-best" id="tp-sa-2026-10-18-r2">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>2</span>
+<span class="tp-ri"><b>OC 50k/N1X</b><span>1 mile &middot; Dirt &middot; Post 1:30 &middot; 5 starters</span></span>
+<span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Angel Baby</span><span class="tp-pk-conn">Kimura K &middot; Mullins Jeff</span></span></li></ol>
+<p class="tp-why"><b>Why Angel Baby:</b> Fastest recent speed figures in the field. Figures have risen three straight races. Returns from a layoff.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span> <b>Medjugorje</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Barn does well with allowance runners.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r3">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>3</span>
+<span class="tp-ri"><b>Soc 50000N2L</b><span>6 furlongs &middot; Turf &middot; Post 2:00 &middot; 6 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0b4ea2;color:#fff" aria-label="Program number 3">3</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Queen Bay</span><span class="tp-pk-conn">Berrios Hector I &middot; Callaghan Simon</span></span></li></ol>
+<p class="tp-why"><b>Why Queen Bay:</b> Among the fastest on recent figures. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#ffffff;color:#111" aria-label="Program number 2">2</span> <b>Kintrigue</b><br>Went off at long odds last time out but rates as a real contender here. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r4">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>4</span>
+<span class="tp-ri"><b>OC 20k/N1X</b><span>6 furlongs &middot; Dirt &middot; Post 2:30 &middot; 6 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Supernal</span><span class="tp-pk-conn">Ayuso A &middot; Ellis Ronald W</span></span></li></ol>
+<p class="tp-why"><b>Why Supernal:</b> Figures moving forward. Barn does well with dirt runners.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r5">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>5</span>
+<span class="tp-ri"><b>Soc 37000C</b><span>6 furlongs &middot; Turf &middot; Post 3:00 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#3fbfbf;color:#111" aria-label="Program number 9">9</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Regal Patriot</span><span class="tp-pk-conn">Jaramillo E &middot; O&#x27;Neill Doug</span></span></li></ol>
+<p class="tp-why"><b>Why Regal Patriot:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span> <b>Double Jab</b><br>Went off at long odds last time out but rates as a real contender here. Figures moving forward. Takes a drop in class. Returns from a layoff.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r6">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>6</span>
+<span class="tp-ri"><b>Md Sp Wt 65k</b><span>6 furlongs &middot; Dirt &middot; Post 3:30 &middot; 6 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#ffffff;color:#111" aria-label="Program number 2">2</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Zuzu&#x27;s Classic Gal</span><span class="tp-pk-conn">Lezcano A &middot; Glatt Mark</span></span></li></ol>
+<p class="tp-why"><b>Why Zuzu&#x27;s Classic Gal:</b> Fastest recent speed figures in the field. Quickest early horse in a dirt sprint.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span> <b>Anya</b><br>Went off at long odds last time out but rates as a real contender here. Takes a drop in class.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r7">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>7</span>
+<span class="tp-ri"><b>OC 50k/N1X</b><span>1 1/4 miles &middot; Turf &middot; Post 4:00 &middot; 8 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Divisible By</span><span class="tp-pk-conn">Rosario J &middot; Drysdale Neil</span></span></li></ol>
+<p class="tp-why"><b>Why Divisible By:</b> Fastest recent speed figures in the field. Figures have risen three straight races.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#f2c500;color:#111" aria-label="Program number 4">4</span> <b>Stamp My Passport</b><br>Went off at long odds last time out but rates as a real contender here. Among the fastest on recent figures. Proven on the surface.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r8">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>8</span>
+<span class="tp-ri"><b>OC 20k/N1X</b><span>6 furlongs &middot; Dirt &middot; Post 4:30 &middot; 7 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#0a7d3b;color:#fff" aria-label="Program number 5">5</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Danzing Flyer</span><span class="tp-pk-conn">Hernandez J J &middot; Williams Sean</span></span></li></ol>
+<p class="tp-why"><b>Why Danzing Flyer:</b> Among the fastest on recent figures. Figures have risen three straight races.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div><div class="tp-race" id="tp-sa-2026-10-18-r9">
+<div class="tp-rh"><span class="tp-rn"><small>Race</small>9</span>
+<span class="tp-ri"><b>Md Sp Wt 65k</b><span>1 mile &middot; Turf &middot; Post 5:00 &middot; 10 starters</span></span>
+<span class="tp-tags"></span></div>
+<ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f49ac1;color:#111" aria-label="Program number 8">8</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Tiger Luck</span><span class="tp-pk-conn">Rosario J &middot; Yakteen Tim</span></span></li></ol>
+<p class="tp-why"><b>Why Tiger Luck:</b> Among the fastest on recent figures. Pedigree suits the distance.</p><p class="tp-value"><span class="tp-vtag">Value play</span><span class="tp-cloth" style="background:#111111;color:#f2c500" aria-label="Program number 6">6</span> <b>Main Impact</b><br>Went off at long odds last time out but rates as a real contender here. Fastest recent speed figures in the field. Pedigree suits the distance.</p><p class="tp-ae">Also eligible, runs only if there are scratches: Thirsty Eterna, Bel Air Blintzcess</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+</details></div>
+<div class="tp-ctas">
+<div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">Free &middot; every Friday</span>
+<h2>The Wagering <span>Lab.</span></h2>
+<p class="tp-cta-copy">Two curated race breakdowns every Friday before the weekend's biggest races, plus our free betting tracker and handicapping scoring tool.</p>
+<form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate>
+<label for="tp-lab-email">Email address</label>
+<input id="tp-lab-email" name="email_address" type="email" autocomplete="email" placeholder="Email address" required>
+<button type="submit">Join free</button>
+</form>
+<p class="tp-lab-msg" role="status" aria-live="polite"></p>
+<span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
+<div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
+<h2>Trackside <span>Edge.</span></h2>
+<p class="tp-cta-copy">Want a person behind the picks? Members get four hand-curated plays every Friday, all 12 full-card Blueprints and the private member community.</p>
+<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
+<span class="tp-cta-fine">$29.99 per month.</span></div>
+</div>
+
+<div class="tp-fine"><p>Picks are made before scratches and late changes. If a selection scratches, move to the next pick. Post times are local track time. Win estimates are the software's, not guarantees.</p>
+<p>There are no guaranteed winners. Past results do not guarantee future results. Wager responsibly. If you or someone you know has a gambling problem, call 1-800-GAMBLER.</p>
+<p>Updated Oct 17, 2026</p></div>
+</div>
+<script>
+(function(){var root=document.currentScript?document.currentScript.closest('.tp-picks'):null;root=root||document.querySelector('.tp-picks');if(!root)return;
+var btns=root.querySelectorAll('.tp-day'),blocks=root.querySelectorAll('.tp-dayblock');
+function show(d){btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.day===d?'true':'false')});blocks.forEach(function(x){x.hidden=x.dataset.day!==d})}
+btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.day)})});
+var today=new Date();var iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
+var lf=root.querySelector('.tp-lab-form');if(lf){lf.addEventListener('submit',function(ev){ev.preventDefault();var inp=lf.querySelector('input'),btn=lf.querySelector('button'),msg=root.querySelector('.tp-lab-msg');var em=(inp.value||'').trim();
+if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.className='tp-lab-msg err';msg.textContent='Enter a valid email address.';inp.focus();return;}
+btn.disabled=true;msg.className='tp-lab-msg';msg.textContent='Signing you up...';var fd=new FormData();fd.append('email_address',em);
+fetch('https://app.kit.com/forms/'+lf.dataset.kitForm+'/subscriptions',{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){return r.json()}).then(function(j){
+if(j&&j.status==='success'){msg.className='tp-lab-msg ok';msg.textContent='You\'re in! Check your email to confirm your subscription.';lf.reset();}
+else{msg.className='tp-lab-msg err';msg.textContent='That didn\'t go through. Check your email address and try again.';}
+}).catch(function(){msg.className='tp-lab-msg err';msg.textContent='Connection problem. Try again in a moment.';}).then(function(){btn.disabled=false});});}
+var days=[].map.call(btns,function(b){return b.dataset.day});var pick=days.filter(function(d){return d>=iso})[0]||days[days.length-1];if(pick)show(pick);})();
+</script>
+</div>
