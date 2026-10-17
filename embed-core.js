@@ -21,7 +21,7 @@ function fit(force){try{
   setS(host,'marginLeft',(-Math.round(p.left))+'px');setS(host,'width',vw+'px');setS(host,'maxWidth','none');
 }catch(e){}}
 function onResize(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;fit(false)})}
-fetch('https://picks.tracksideprofits.com/fragment.html?v='+Date.now()).then(function(r){return r.text()}).then(function(t){
+fetch((host.getAttribute('data-tp-src')||'https://picks.tracksideprofits.com/fragment.html')+'?v='+Date.now()).then(function(r){return r.text()}).then(function(t){
 host.innerHTML=t;host.querySelectorAll('script').forEach(function(old){var s=document.createElement('script');s.textContent=old.textContent;old.replaceWith(s)});
 fit(true);setTimeout(function(){fit(true)},400);window.addEventListener('resize',onResize,{passive:true});
 }).catch(function(){host.innerHTML='<p>Picks are loading slowly. Refresh the page in a moment.</p>'});})();
