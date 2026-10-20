@@ -117,6 +117,13 @@
 .tp-lab-form button:focus-visible{outline:3px solid var(--tp-gold);outline-offset:2px}
 .tp-lab-form button[disabled]{opacity:.6;cursor:wait}
 .tp-lab-msg{margin:0;font-size:.92rem;font-weight:500}
+.tp-labband{margin:4px 0 14px;display:flex;flex-wrap:wrap;gap:14px 22px;align-items:center;background:#fbf5df;border:1px solid var(--tp-gold);border-radius:14px;padding:18px 20px}
+.tp-labband-t{flex:1 1 300px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.tp-labband-t .tp-eyebrow{color:var(--tp-gold-dk);font-weight:700}
+.tp-labband-t b{font-size:1.2rem;line-height:1.2}
+.tp-labband-t>span:last-child{color:var(--tp-muted);font-size:.95rem}
+.tp-labband-f{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.tp-labband .tp-cta-act{margin:0;min-height:0}
 .tp-lab-msg:empty{display:none}
 .tp-lab-msg.ok{color:var(--tp-hi)} .tp-lab-msg.err{color:#b3261e}
 .tp-mr{border:2px solid var(--tp-gold);border-radius:14px;background:#fffdf5;padding:18px 18px 14px;display:flex;flex-direction:column;gap:12px}
@@ -233,6 +240,15 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 .sp-stat{background:var(--tp-grey);border-radius:12px;padding:14px;display:flex;flex-direction:column}
 .sp-stat b{font-size:1.8rem;font-variant-numeric:tabular-nums} .sp-stat span{font-size:.78rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tp-muted)}
 .tp-race{scroll-margin-top:12px}
+.sp-lab{background:#fbf5df;border:1px solid var(--tp-gold);border-radius:14px;padding:18px 20px;display:flex;flex-wrap:wrap;gap:12px 20px;align-items:center}
+.sp-lab>div:first-child{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:4px}
+.sp-lab .sp-edge-k{color:var(--tp-gold-dk)}
+.sp-lab h2{margin:0;font-size:1.3rem;text-transform:uppercase}
+.sp-lab p{margin:0;color:var(--tp-muted);font-size:.95rem}
+.sp-lab-f{flex:1 1 320px;min-width:0;display:flex;flex-direction:column;gap:6px}
+.sp-lab .tp-cta-act{margin:0;min-height:0}
+.sp-lab p.sp-lab-edge{flex:1 1 100%;border-top:1px solid rgba(0,0,0,.1);padding-top:10px;font-size:.9rem}
+.sp-lab-edge a{color:var(--tp-ink);font-weight:700}
 .sp-edge{background:var(--tp-black);color:#fff;border-radius:14px;padding:18px 20px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
 .sp-edge div{flex:1 1 380px;min-width:0;display:flex;flex-direction:column;gap:4px}
 .sp-edge-k{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-gold)}
@@ -255,13 +271,8 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 <div class="tp-ctas">
 <div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">Free &middot; every Friday</span>
 <h2>The Wagering <span>Lab.</span></h2>
-<p class="tp-cta-copy">Two curated race breakdowns every Friday before the weekend's biggest races, plus our free betting tracker and handicapping scoring tool.</p>
-<form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate>
-<label for="tp-lab-email">Email address</label>
-<input id="tp-lab-email" name="email_address" type="email" autocomplete="email" placeholder="Email address" required>
-<button type="submit">Join free</button>
-</form>
-<p class="tp-lab-msg" role="status" aria-live="polite"></p>
+<p class="tp-cta-copy">Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p>
+<form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-cta">Email address</label><input id="tp-lab-cta" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p>
 <span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
 <div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
 <h2>Trackside <span>Edge.</span></h2>
@@ -291,12 +302,12 @@ var btns=root.querySelectorAll('.tp-day'),blocks=root.querySelectorAll('.tp-dayb
 function show(d){btns.forEach(function(b){b.setAttribute('aria-pressed',b.dataset.day===d?'true':'false')});blocks.forEach(function(x){x.hidden=x.dataset.day!==d})}
 btns.forEach(function(b){b.addEventListener('click',function(){show(b.dataset.day)})});
 var today=new Date();var iso=today.getFullYear()+'-'+String(today.getMonth()+1).padStart(2,'0')+'-'+String(today.getDate()).padStart(2,'0');
-var lf=root.querySelector('.tp-lab-form');if(lf){lf.addEventListener('submit',function(ev){ev.preventDefault();var inp=lf.querySelector('input'),btn=lf.querySelector('button'),msg=root.querySelector('.tp-lab-msg');var em=(inp.value||'').trim();
+root.querySelectorAll('.tp-lab-form').forEach(function(lf){lf.addEventListener('submit',function(ev){ev.preventDefault();var inp=lf.querySelector('input'),btn=lf.querySelector('button'),msg=lf.nextElementSibling;var em=(inp.value||'').trim();
 if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.className='tp-lab-msg err';msg.textContent='Enter a valid email address.';inp.focus();return;}
 btn.disabled=true;msg.className='tp-lab-msg';msg.textContent='Signing you up...';var fd=new FormData();fd.append('email_address',em);
 fetch('https://app.kit.com/forms/'+lf.dataset.kitForm+'/subscriptions',{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){return r.json()}).then(function(j){
 if(j&&j.status==='success'){msg.className='tp-lab-msg ok';msg.textContent='You\'re in! Check your email to confirm your subscription.';lf.reset();}
 else{msg.className='tp-lab-msg err';msg.textContent='That didn\'t go through. Check your email address and try again.';}
-}).catch(function(){msg.className='tp-lab-msg err';msg.textContent='Connection problem. Try again in a moment.';}).then(function(){btn.disabled=false});});}
+}).catch(function(){msg.className='tp-lab-msg err';msg.textContent='Connection problem. Try again in a moment.';}).then(function(){btn.disabled=false});});});
 var days=[].map.call(btns,function(b){return b.dataset.day});var pick=days.filter(function(d){return d>=iso})[0]||days[days.length-1];if(pick)show(pick);})();
 </script></div></body></html>
