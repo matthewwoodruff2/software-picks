@@ -1103,7 +1103,7 @@ root.querySelectorAll('.tp-lab-form').forEach(function(lf){lf.addEventListener('
 if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){msg.className='tp-lab-msg err';msg.textContent='Enter a valid email address.';inp.focus();return;}
 btn.disabled=true;msg.className='tp-lab-msg';msg.textContent='Signing you up...';var fd=new FormData();fd.append('email_address',em);
 fetch('https://app.kit.com/forms/'+lf.dataset.kitForm+'/subscriptions',{method:'POST',body:fd,headers:{Accept:'application/json'}}).then(function(r){return r.json()}).then(function(j){
-if(j&&j.status==='success'){msg.className='tp-lab-msg ok';msg.textContent='You\'re in! Check your email to confirm your subscription.';lf.reset();}
+if(j&&j.status==='success'){msg.className='tp-lab-msg ok';msg.textContent='You\'re in! Your first plays arrive Friday.';lf.reset();}
 else{msg.className='tp-lab-msg err';msg.textContent='That didn\'t go through. Check your email address and try again.';}
 }).catch(function(){msg.className='tp-lab-msg err';msg.textContent='Connection problem. Try again in a moment.';}).then(function(){btn.disabled=false});});});
 var days=[].map.call(btns,function(b){return b.dataset.day});var pick=days.filter(function(d){return d>=iso})[0]||days[days.length-1];if(pick)show(pick);})();
