@@ -66,6 +66,8 @@
 .tp-pk-conn{color:var(--tp-muted);font-size:.84rem;overflow-wrap:anywhere}
 .tp-pk-pct{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
 .tp-pk-pct b{font-size:1.1rem;font-variant-numeric:tabular-nums}
+.tp-pk-pct small{white-space:nowrap}
+.tp-pk-fair{color:var(--tp-gold-dk);font-weight:700}
 .tp-pk-pct small{font-size:.68rem;color:var(--tp-muted);text-transform:uppercase;letter-spacing:.05em}
 .tp-top .tp-pk-pct b{color:var(--tp-gold-dk)}
 .tp-why{margin:0;font-size:.94rem}
@@ -78,6 +80,15 @@
 .tp-edge-lock::before{content:"";position:absolute;left:1px;top:-8px;width:6px;height:6px;border:2px solid var(--tp-gold);border-bottom:0;border-radius:6px 6px 0 0}
 .tp-hint a{color:var(--tp-gold-dk);font-weight:500}
 .tp-vmin{display:inline-block;margin-left:6px;font-size:.78rem;font-weight:700;color:var(--tp-gold-dk);white-space:nowrap}
+.tp-ol{margin:2px 0 0;font-size:.86rem;border-top:1px dashed var(--tp-line);padding-top:8px;display:flex;flex-direction:column;gap:4px}
+.tp-ol-k{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-gold-dk)}
+.tp-ol-l{display:flex;flex-wrap:wrap;gap:6px 14px}
+@media (max-width:540px){.tp-ol-l{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:6px 10px}.tp-ol-i{min-width:0;font-size:.8rem}.tp-ol-i span.tp-oln{overflow:hidden;text-overflow:ellipsis}}
+.tp-ol-i{display:inline-flex;align-items:center;gap:5px;white-space:nowrap}
+.tp-ol-i b{flex-shrink:0}
+.tp-oln{min-width:0}
+.tp-ol-i .tp-cloth{min-width:20px;height:20px;font-size:.72rem}
+.tp-ol small{color:var(--tp-muted);font-size:.76rem}
 .tp-value{margin:0;font-size:.92rem;background:#fbf5df;border-radius:10px;padding:10px 12px;line-height:1.55}
 .tp-value .tp-cloth{min-width:26px;height:26px;font-size:.85rem;vertical-align:middle}
 .tp-vtag{font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--tp-gold-dk);margin-right:8px}
@@ -277,7 +288,7 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 <span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
 <div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
 <h2>Trackside <span>Edge.</span></h2>
-<p class="tp-cta-copy">The full software card for every race at every track we cover, every day: top three, win estimates, pace notes and confidence. Plus multi-race tickets, four hand-curated plays every Friday, all 12 full-card Blueprints and the member community.</p>
+<p class="tp-cta-copy">The full software card for every race at every track we cover, every day: top three, win estimates, the TracksideProfits Odds Line, pace notes and confidence. Plus multi-race tickets, four hand-curated plays every Friday, all 12 full-card Blueprints and the member community.</p>
 <div class="tp-cta-act"><a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
 <span class="tp-cta-fine">$29.99 per month. Cancel anytime.</span></div>
 <div class="tp-cta tp-cta-bp"><span class="tp-eyebrow">Full-card Blueprint &middot; Keeneland · Saturday, Oct 31</span>
