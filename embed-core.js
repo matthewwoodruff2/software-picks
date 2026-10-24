@@ -19,6 +19,7 @@ function fit(force){try{
     var cw=sec.querySelector('.content-wrapper');setS(cw,'paddingTop','0px');setS(cw,'paddingBottom','0px');}
   var p=host.parentElement.getBoundingClientRect();
   setS(host,'marginLeft',(-Math.round(p.left))+'px');setS(host,'width',vw+'px');setS(host,'maxWidth','none');
+  var bl=host.parentElement.querySelectorAll('.tp-bleed');for(var i=0;i<bl.length;i++){setS(bl[i],'marginLeft',(-Math.round(p.left))+'px');setS(bl[i],'width',vw+'px');setS(bl[i],'maxWidth','none');}
 }catch(e){}}
 function onResize(){if(queued)return;queued=true;requestAnimationFrame(function(){queued=false;fit(false)})}
 // Edge members page: the picks file is encrypted; the unlock key lives only in the members-only code block.
