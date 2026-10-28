@@ -19,7 +19,7 @@ function msg(t,b){host.outerHTML='<div class="dp-msg"><h1>'+t+'</h1><p>'+b+'</p>
 if(h.length!==2||!/^[A-Za-z0-9_-]+$/.test(h[0])){msg('Day Pass link needed','Open the link from your purchase email to see your cards.');return}
 var src='https://picks.tracksideprofits.com/p/'+h[0]+'/picks.json';
 fetch(src+'?v='+Date.now(),{method:'HEAD'}).then(function(r){
- if(!r.ok){msg('This Day Pass has ended','Each Day Pass covers the day you bought it and the next race day. Grab a new one, or get every day with Trackside Edge.');return}
+ if(!r.ok){msg('This Day Pass has ended','Each Day Pass covers the day you bought it and the next day. Grab a new one, or get every day with Trackside Edge.');return}
  host.setAttribute('data-tp-src',src);host.setAttribute('data-tp-key',h[1]);
  document.getElementById('dp-up').hidden=false;
  var s=document.createElement('script');s.src='https://picks.tracksideprofits.com/embed-core.js?v='+Date.now();document.body.appendChild(s);
