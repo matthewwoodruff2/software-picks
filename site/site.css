@@ -1,0 +1,35 @@
+/* TracksideProfits site polish (loaded on every tracksideprofits.com page from Code Injection > Header).
+   Source: picks-engine/site_assets/site.css, published to picks.tracksideprofits.com/site/site.css */
+
+/* 1. Header: no outline box or drop-shadow band; it sits flush on the page */
+.header-border{border:0!important}
+.header-dropshadow{box-shadow:none!important;display:none!important}
+
+/* 2. Homepage "Four Ways": grid lines up with the section heading */
+html body #te .te-paths{max-width:none;margin-left:0;margin-right:0}
+
+/* 3. Homepage reviews: equal-height cards, no orphan card on the last row */
+html body #te .te-rv-grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:14px}
+html body #te .te-rv{padding:18px 18px 20px}
+html body #te .te-rv p{font-size:15.5px;line-height:1.5}
+html body #te .te-rv-about{margin-top:auto}
+@media (max-width:1180px){html body #te .te-rv-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){html body #te .te-rv-grid{grid-template-columns:1fr}}
+
+/* 4. One footer: the Squarespace footer and the homepage link directory are replaced by the site footer */
+html.tp-foot-ready footer.sections, html.tp-foot-ready #footer-sections{display:none!important}
+html.tp-foot-ready #te .te-dir, html.tp-foot-ready #te .te-dir + .te-fine{display:none!important}
+.tp-trackrow.tp-sitefoot{padding-top:44px;border-top:4px solid #D4AF37}
+.tp-sf-top{display:grid;grid-template-columns:minmax(220px,1.3fr) repeat(4,minmax(0,1fr));gap:28px;padding-bottom:30px;margin-bottom:26px;border-bottom:1px solid #262626}
+.tp-sf-brand a.tp-sf-logo{display:inline-flex;align-items:center;gap:12px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.02em;font-size:20px;text-transform:uppercase}
+.tp-sf-brand a.tp-sf-logo span{color:#D4AF37}
+.tp-sf-brand img{width:46px;height:46px;border-radius:6px}
+.tp-sf-brand p{color:#b5b5b5;font-size:14px;line-height:1.55;margin:12px 0 14px;max-width:300px}
+.tp-sf-yt{display:inline-flex;align-items:center;gap:8px;border:1.5px solid #D4AF37;color:#D4AF37!important;border-radius:300px;padding:7px 14px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none!important}
+.tp-sf-col h3{color:#D4AF37;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:6px 0 14px}
+.tp-sf-col ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.tp-sf-col a{color:#e8e8e8;text-decoration:none;font-size:15px;border-bottom:1px solid transparent}
+.tp-sf-col a:hover{border-bottom-color:#D4AF37}
+.tp-sf-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:26px;padding-top:20px;border-top:1px solid #262626;color:#8f8f8f;font-size:12.5px;line-height:1.5}
+@media (max-width:900px){.tp-sf-top{grid-template-columns:1fr 1fr}.tp-sf-brand{grid-column:1/-1}}
+@media (max-width:480px){.tp-sf-top{grid-template-columns:1fr}}
