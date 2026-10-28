@@ -15,7 +15,7 @@
 <p class="dp-up" id="dp-up" hidden>Want every race day, plus our hand-picked member plays? <a href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a>.</p>
 <script>(function(){
 var h=location.hash.slice(1).split('.'),host=document.getElementById('tp-software-picks');
-function msg(t,b){host.outerHTML='<div class="dp-msg"><h1>'+t+'</h1><p>'+b+'</p><a class="dp-btn" href="https://tracksideprofits.kit.com/products/edge-day-pass">Get a Race Day Pass, $10</a><a class="dp-btn alt" href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a></div>'}
+function msg(t,b){host.outerHTML='<div class="dp-msg"><h1>'+t+'</h1><p>'+b+'</p><a class="dp-btn" href="https://tracksideprofits.kit.com/products/race-day-pass">Get a Race Day Pass, $10</a><a class="dp-btn alt" href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a></div>'}
 if(h.length!==2||!/^[A-Za-z0-9_-]+$/.test(h[0])){msg('Race Day Pass link needed','Open the link from your purchase email to see your cards.');return}
 var src='https://picks.tracksideprofits.com/p/'+h[0]+'/picks.json';
 fetch(src+'?v='+Date.now(),{method:'HEAD'}).then(function(r){
