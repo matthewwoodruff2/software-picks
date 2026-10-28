@@ -50,7 +50,8 @@
   // A dark full-width band that opens a page (like the homepage hero) starts right under the header, with no white strip.
   function flush() {
     var inner = document.querySelector(".header-inner");
-    var first = document.querySelector("#sections > section:first-child .te-bleed, #sections > section:first-child .tp-bleed");
+    var sec = document.querySelector("section.page-section");
+    var first = sec && sec.querySelector(".te-bleed, .tp-bleed");
     if (!inner || !first) return;
     var bg = getComputedStyle(first).backgroundColor.match(/\d+/g);
     if (!bg || (+bg[0] + +bg[1] + +bg[2]) > 150 || (bg[3] !== undefined && +bg[3] === 0)) return;   // dark bands only
