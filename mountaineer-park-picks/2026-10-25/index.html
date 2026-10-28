@@ -92,12 +92,19 @@
 .tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:stretch}
 .tp-cta{border-radius:14px;padding:24px;display:grid;grid-template-rows:auto auto 1fr auto auto auto;gap:10px;min-width:0}
 .tp-cta-lab{background:var(--tp-grey);border:1px solid var(--tp-line)}
-.tp-cta-bp{background:#fbf5df;border:1px solid var(--tp-gold)}
+.tp-cta-bp{background:#fbf5df;border:1px solid var(--tp-gold);grid-column:1/-1}
+@media (min-width:860px){.tp-cta-bp{grid-template-columns:1fr auto;grid-template-rows:auto auto auto;column-gap:32px}.tp-cta-bp>*{grid-column:1}.tp-cta-bp .tp-cta-act{grid-column:2;grid-row:1/3;align-self:center;justify-self:end}.tp-cta-bp .tp-cta-fine{grid-column:2;grid-row:3;justify-self:end}}
 .tp-cta.tp-cta-bp .tp-eyebrow{color:var(--tp-gold-dk)}
 .tp-cta.tp-cta-bp h2 span{color:var(--tp-gold-dk)}
 .tp-cta-bp .tp-cta-act a{display:inline-block;background:var(--tp-black);color:#fff;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
 .tp-cta-bp s{color:var(--tp-muted)}
 .tp-cta-edge{background:var(--tp-black);color:#fff;border:1px solid var(--tp-black)}
+.tp-cta-pass{background:#fff;border:2px solid var(--tp-gold)}
+.tp-cta.tp-cta-pass .tp-eyebrow,.tp-cta.tp-cta-pass h2 span{color:var(--tp-gold-dk)}
+.tp-cta-pass .tp-cta-act a{display:inline-block;background:var(--tp-gold);color:#000;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-passbar{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--tp-black);color:#e6e6e6;border-radius:12px;padding:12px 16px;font-size:.92rem}
+.tp-passbar span{flex:1 1 260px;min-width:0}.tp-passbar b{color:var(--tp-gold)}
+.tp-passbar a{background:var(--tp-gold);color:#000;border-radius:300px;padding:9px 18px;font-weight:500;text-decoration:none;text-transform:uppercase;font-size:.82rem;white-space:nowrap}
 .tp-cta .tp-eyebrow{font-weight:700}
 .tp-cta-lab .tp-eyebrow{color:var(--tp-gold-dk)}
 .tp-cta h2{margin:0;font-size:1.6rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
@@ -332,22 +339,27 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 <h2 class="sp-h2">More picks for Sunday, October 25</h2><div class="sp-links"><a href="/belmont-park-picks/2026-10-25/">Belmont Park picks</a><a href="/camarero-race-track-picks/2026-10-25/">Camarero Race Track picks</a><a href="/churchill-downs-picks/2026-10-25/">Churchill Downs picks</a><a href="/gulfstream-park-picks/2026-10-25/">Gulfstream Park picks</a><a href="/laurel-park-picks/2026-10-25/">Laurel Park picks</a><a href="/parx-racing-picks/2026-10-25/">Parx Racing picks</a><a href="/santa-anita-picks/2026-10-25/">Santa Anita picks</a><a href="/woodbine-picks/2026-10-25/">Woodbine picks</a></div>
 <h2 class="sp-h2">Mountaineer Park picks archive</h2><div class="sp-links"><a href="/mountaineer-park-picks/2026-10-27/">Tue, Oct 27</a><a href="/mountaineer-park-picks/2026-10-26/">Mon, Oct 26</a><a href="/mountaineer-park-picks/2026-10-25/">Sun, Oct 25</a><a href="/mountaineer-park-picks/2026-10-20/">Tue, Oct 20</a><a href="/mountaineer-park-picks/2026-10-19/">Mon, Oct 19</a><a href="/mountaineer-park-picks/2026-10-18/">Sun, Oct 18</a></div>
 <section class="sp-faq"><h2 class="sp-h2">Mountaineer Park picks FAQ</h2><details class="sp-faq-i"><summary>Are these Mountaineer Park picks free?</summary><p>Yes. Every Mountaineer Park card gets a free top pick for every race, a value play with the minimum odds worth taking, and the Best Bet of the day. <a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a> members also get the top three in every race with win estimates, pace notes, confidence ratings and multi-race tickets.</p></details><details class="sp-faq-i"><summary>When are Mountaineer Park picks posted?</summary><p>Our Mountaineer Park picks go up before the card, once entries are out, usually a day or more ahead. <a href="/mountaineer-park-picks/">This page</a> always shows the current or next Mountaineer Park card, and every past card stays in the archive below.</p></details><details class="sp-faq-i"><summary>How are the Mountaineer Park picks made?</summary><p>Every horse is rated by the TracksideProfits handicapping model: speed figures, current form and the likely pace first, then trainer and jockey, distance and surface fit and pedigree, then class, layoffs and workouts.</p></details><details class="sp-faq-i"><summary>What does &quot;Bet at 6-1 or higher&quot; mean on a value play?</summary><p>It is the lowest price at which the value play is worth a bet based on our win estimate. If the horse is shorter than that at post time, the value is gone.</p></details><details class="sp-faq-i"><summary>What if one of the picks scratches?</summary><p>Move to the next pick in that race. Picks are made before scratches and late changes, so always check the final field before you bet.</p></details></section>
-<div class="tp-ctas">
+<div class="tp-ctas"><div class="tp-cta tp-cta-bp"><span class="tp-eyebrow">Full-card Blueprint &middot; Keeneland · Fri.–Sat., Oct 30–31</span>
+<h2>Breeders&#x27; Cup <span>Blueprint.</span></h2>
+<p class="tp-cta-copy">40+ hours of research compressed into what matters for every race: pace maps, key stats and angles, track trends and the last meet's biases, and horse-by-horse notes. Then the picks and tickets to attack the day.</p>
+<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/store/p/breeders-cup-betting-blueprint" target="_top">Get the Blueprint</a></div>
+<span class="tp-cta-fine">$29.99. All 14 races, Friday and Saturday.</span></div>
 <div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">Free &middot; every Friday</span>
 <h2>The Wagering <span>Lab.</span></h2>
 <p class="tp-cta-copy">Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p>
 <form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-cta">Email address</label><input id="tp-lab-cta" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p>
 <span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
+<div class="tp-cta tp-cta-pass"><span class="tp-eyebrow">One-time &middot; no subscription</span>
+<h2>Race Day <span>Pass.</span></h2>
+<p class="tp-cta-copy">The full software card for every race at every track, today and tomorrow: the top three with win estimates, value plays, pace notes and confidence. Perfect for a big Saturday.</p>
+<div class="tp-cta-act"><a href="https://tracksideprofits.kit.com/products/edge-day-pass" target="_top">Get the Race Day Pass</a></div>
+<span class="tp-cta-fine">$10 one-time. Instant access after checkout.</span></div>
 <div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
 <h2>Trackside <span>Edge.</span></h2>
 <p class="tp-cta-copy">The full software card for every race at every track we cover, every day: top three, win estimates, pace notes and confidence. Plus multi-race tickets, four hand-curated plays every Friday, all 12 full-card Blueprints and the member community.</p>
 <div class="tp-cta-act"><a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
 <span class="tp-cta-fine">$29.99 per month. Cancel anytime.</span></div>
-<div class="tp-cta tp-cta-bp"><span class="tp-eyebrow">Full-card Blueprint &middot; Keeneland · Fri.–Sat., Oct 30–31</span>
-<h2>Breeders&#x27; Cup <span>Blueprint.</span></h2>
-<p class="tp-cta-copy">40+ hours of research compressed into what matters for every race: pace maps, key stats and angles, track trends and the last meet's biases, and horse-by-horse notes. Then the picks and tickets to attack the day.</p>
-<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/store/p/breeders-cup-betting-blueprint" target="_top">Get the Blueprint</a></div>
-<span class="tp-cta-fine">$29.99. All 14 races, Friday and Saturday.</span></div></div>
+</div>
 
 <div class="tp-fine"><p>Picks are made before scratches and late changes. If a selection scratches, move to the next pick. Post times are local track time. Win estimates are the software's, not guarantees.</p>
 <p>Must be 21+ to wager.</p>

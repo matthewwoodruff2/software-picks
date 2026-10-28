@@ -92,12 +92,19 @@
 .tp-ctas{margin-top:18px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:14px;align-items:stretch}
 .tp-cta{border-radius:14px;padding:24px;display:grid;grid-template-rows:auto auto 1fr auto auto auto;gap:10px;min-width:0}
 .tp-cta-lab{background:var(--tp-grey);border:1px solid var(--tp-line)}
-.tp-cta-bp{background:#fbf5df;border:1px solid var(--tp-gold)}
+.tp-cta-bp{background:#fbf5df;border:1px solid var(--tp-gold);grid-column:1/-1}
+@media (min-width:860px){.tp-cta-bp{grid-template-columns:1fr auto;grid-template-rows:auto auto auto;column-gap:32px}.tp-cta-bp>*{grid-column:1}.tp-cta-bp .tp-cta-act{grid-column:2;grid-row:1/3;align-self:center;justify-self:end}.tp-cta-bp .tp-cta-fine{grid-column:2;grid-row:3;justify-self:end}}
 .tp-cta.tp-cta-bp .tp-eyebrow{color:var(--tp-gold-dk)}
 .tp-cta.tp-cta-bp h2 span{color:var(--tp-gold-dk)}
 .tp-cta-bp .tp-cta-act a{display:inline-block;background:var(--tp-black);color:#fff;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
 .tp-cta-bp s{color:var(--tp-muted)}
 .tp-cta-edge{background:var(--tp-black);color:#fff;border:1px solid var(--tp-black)}
+.tp-cta-pass{background:#fff;border:2px solid var(--tp-gold)}
+.tp-cta.tp-cta-pass .tp-eyebrow,.tp-cta.tp-cta-pass h2 span{color:var(--tp-gold-dk)}
+.tp-cta-pass .tp-cta-act a{display:inline-block;background:var(--tp-gold);color:#000;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-passbar{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--tp-black);color:#e6e6e6;border-radius:12px;padding:12px 16px;font-size:.92rem}
+.tp-passbar span{flex:1 1 260px;min-width:0}.tp-passbar b{color:var(--tp-gold)}
+.tp-passbar a{background:var(--tp-gold);color:#000;border-radius:300px;padding:9px 18px;font-weight:500;text-decoration:none;text-transform:uppercase;font-size:.82rem;white-space:nowrap}
 .tp-cta .tp-eyebrow{font-weight:700}
 .tp-cta-lab .tp-eyebrow{color:var(--tp-gold-dk)}
 .tp-cta h2{margin:0;font-size:1.6rem;line-height:1.1;font-weight:700;text-transform:uppercase;letter-spacing:-.01em}
@@ -284,7 +291,7 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 <dl class="sp-glance"><div class="sp-g"><dt>Races</dt><dd class="sp-g-big">8</dd></div><div class="sp-g"><dt>Surfaces</dt><dd>8 Dirt</dd></div><div class="sp-g"><dt>First post</dt><dd class="sp-g-big">7:00<small>local time</small></dd></div><a class="sp-g" href="#tp-ct-2026-10-28-r4"><dt>Top purse &middot; Race 4</dt><dd>Alw 38900NC</dd></a><a class="sp-g sp-g-best" href="#tp-ct-2026-10-28-r8"><dt>Best Bet &middot; Race 8</dt><dd><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span>Keep &#x27;Em Honest</span></dd><small>Tops this field on recent speed</small></a><a class="sp-g sp-g-val" href="#tp-ct-2026-10-28-r5"><dt>Value play &middot; Race 5</dt><dd><span class="tp-cloth" style="background:#c8102e;color:#fff" aria-label="Program number 1">1</span><span>Youthinkthatsfunny</span></dd><small>Bet at 10-1 or higher</small></a></dl>
 
 
-<section class="sp-lab"><div><span class="sp-edge-k">Free &middot; The Wagering Lab</span><h2>2 hand-picked plays every week, free</h2><p>Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p></div><div class="sp-lab-f"><form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-box">Email address</label><input id="tp-lab-box" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p></div><p class="sp-lab-edge">Want the full card for every race? <a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a> members get the top three with win estimates, pace notes, confidence ratings and multi-race tickets.</p></section>
+<section class="sp-lab"><div><span class="sp-edge-k">Free &middot; The Wagering Lab</span><h2>2 hand-picked plays every week, free</h2><p>Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p></div><div class="sp-lab-f"><form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-box">Email address</label><input id="tp-lab-box" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p></div><p class="sp-lab-edge">Want the full card for every race? Get today&rsquo;s full cards at every track with a <a href="https://tracksideprofits.kit.com/products/edge-day-pass">Race Day Pass ($10, one-time)</a>, or every day with <a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a>.</p></section>
 <h2 class="sp-h2">Charles Town picks, race by race</h2>
 <div class="tp-races sp-races"><div class="tp-race" id="tp-ct-2026-10-28-r1">
 <div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
@@ -326,28 +333,33 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 <span class="tp-ri"><b>Md 5000</b><span>4 &frac12; furlongs &middot; Dirt &middot; Post 10:17 &middot; 7 starters</span></span>
 <span class="tp-tags"><span class="tp-tag tp-tag-best">Best Bet</span></span></div>
 <ol class="tp-list"><li class="tp-pick tp-top"><span class="tp-cloth" style="background:#f37021;color:#111" aria-label="Program number 7">7</span><span class="tp-pk"><span class="tp-pk-lbl">Top pick</span><span class="tp-pk-name">Keep &#x27;Em Honest</span><span class="tp-pk-conn">Davis J A &middot; Housel Tamara</span></span></li></ol>
-<p class="tp-why"><b>Why Keep &#x27;Em Honest:</b> Tops this field on recent speed. Last start was a clear jump forward for him. Quickest from the gate in a dirt sprint that tends to favor speed.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Trackside Edge:</b> full top three with win estimates, pace notes and confidence for this race.</span> <a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Unlock</a></p></div></div>
+<p class="tp-why"><b>Why Keep &#x27;Em Honest:</b> Tops this field on recent speed. Last start was a clear jump forward for him. Quickest from the gate in a dirt sprint that tends to favor speed.</p><p class="tp-edge-up"><span class="tp-edge-lock" aria-hidden="true"></span><span><b>Full card:</b> the top three with win estimates, pace notes and confidence for every race here and at every other track today.</span> <a href="https://tracksideprofits.kit.com/products/edge-day-pass" target="_top">Race Day Pass $10</a></p></div></div>
 
 
 <h2 class="sp-h2">More picks for Wednesday, October 28</h2><div class="sp-links"><a href="/belmont-park-picks/">Belmont Park picks</a><a href="/churchill-downs-picks/">Churchill Downs picks</a><a href="/delta-downs-picks/">Delta Downs picks</a><a href="/finger-lakes-picks/">Finger Lakes picks</a><a href="/horseshoe-indianapolis-picks/">Horseshoe Indianapolis picks</a><a href="/mahoning-valley-picks/">Mahoning Valley picks</a><a href="/parx-racing-picks/">Parx Racing picks</a><a href="/penn-national-picks/">Penn National picks</a><a href="/remington-park-picks/">Remington Park picks</a></div>
 <h2 class="sp-h2">Charles Town picks archive</h2><div class="sp-links"><a href="/charles-town-picks/2026-10-29/">Thu, Oct 29</a><a href="/charles-town-picks/2026-10-28/">Wed, Oct 28</a><a href="/charles-town-picks/2026-10-24/">Sat, Oct 24</a><a href="/charles-town-picks/2026-10-23/">Fri, Oct 23</a><a href="/charles-town-picks/2026-10-21/">Wed, Oct 21</a></div>
 <section class="sp-faq"><h2 class="sp-h2">Charles Town picks FAQ</h2><details class="sp-faq-i"><summary>Are these Charles Town picks free?</summary><p>Yes. Every Charles Town card gets a free top pick for every race, a value play with the minimum odds worth taking, and the Best Bet of the day. <a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a> members also get the top three in every race with win estimates, pace notes, confidence ratings and multi-race tickets.</p></details><details class="sp-faq-i"><summary>When are Charles Town picks posted?</summary><p>Our Charles Town picks go up before the card, once entries are out, usually a day or more ahead. <a href="/charles-town-picks/">This page</a> always shows the current or next Charles Town card, and every past card stays in the archive below.</p></details><details class="sp-faq-i"><summary>How are the Charles Town picks made?</summary><p>Every horse is rated by the TracksideProfits handicapping model: speed figures, current form and the likely pace first, then trainer and jockey, distance and surface fit and pedigree, then class, layoffs and workouts.</p></details><details class="sp-faq-i"><summary>What does &quot;Bet at 6-1 or higher&quot; mean on a value play?</summary><p>It is the lowest price at which the value play is worth a bet based on our win estimate. If the horse is shorter than that at post time, the value is gone.</p></details><details class="sp-faq-i"><summary>What if one of the picks scratches?</summary><p>Move to the next pick in that race. Picks are made before scratches and late changes, so always check the final field before you bet.</p></details></section>
-<div class="tp-ctas">
+<div class="tp-ctas"><div class="tp-cta tp-cta-bp"><span class="tp-eyebrow">Full-card Blueprint &middot; Keeneland · Fri.–Sat., Oct 30–31</span>
+<h2>Breeders&#x27; Cup <span>Blueprint.</span></h2>
+<p class="tp-cta-copy">40+ hours of research compressed into what matters for every race: pace maps, key stats and angles, track trends and the last meet's biases, and horse-by-horse notes. Then the picks and tickets to attack the day.</p>
+<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/store/p/breeders-cup-betting-blueprint" target="_top">Get the Blueprint</a></div>
+<span class="tp-cta-fine">$29.99. All 14 races, Friday and Saturday.</span></div>
 <div class="tp-cta tp-cta-lab"><span class="tp-eyebrow">Free &middot; every Friday</span>
 <h2>The Wagering <span>Lab.</span></h2>
 <p class="tp-cta-copy">Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p>
 <form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-cta">Email address</label><input id="tp-lab-cta" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p>
 <span class="tp-cta-fine">No credit card. Unsubscribe anytime.</span></div>
+<div class="tp-cta tp-cta-pass"><span class="tp-eyebrow">One-time &middot; no subscription</span>
+<h2>Race Day <span>Pass.</span></h2>
+<p class="tp-cta-copy">The full software card for every race at every track, today and tomorrow: the top three with win estimates, value plays, pace notes and confidence. Perfect for a big Saturday.</p>
+<div class="tp-cta-act"><a href="https://tracksideprofits.kit.com/products/edge-day-pass" target="_top">Get the Race Day Pass</a></div>
+<span class="tp-cta-fine">$10 one-time. Instant access after checkout.</span></div>
 <div class="tp-cta tp-cta-edge"><span class="tp-eyebrow">Premium membership</span>
 <h2>Trackside <span>Edge.</span></h2>
 <p class="tp-cta-copy">The full software card for every race at every track we cover, every day: top three, win estimates, pace notes and confidence. Plus multi-race tickets, four hand-curated plays every Friday, all 12 full-card Blueprints and the member community.</p>
 <div class="tp-cta-act"><a href="https://www.tracksideprofits.com/trackside-edge" target="_top">Join Trackside Edge</a></div>
 <span class="tp-cta-fine">$29.99 per month. Cancel anytime.</span></div>
-<div class="tp-cta tp-cta-bp"><span class="tp-eyebrow">Full-card Blueprint &middot; Keeneland · Fri.–Sat., Oct 30–31</span>
-<h2>Breeders&#x27; Cup <span>Blueprint.</span></h2>
-<p class="tp-cta-copy">40+ hours of research compressed into what matters for every race: pace maps, key stats and angles, track trends and the last meet's biases, and horse-by-horse notes. Then the picks and tickets to attack the day.</p>
-<div class="tp-cta-act"><a href="https://www.tracksideprofits.com/store/p/breeders-cup-betting-blueprint" target="_top">Get the Blueprint</a></div>
-<span class="tp-cta-fine">$29.99. All 14 races, Friday and Saturday.</span></div></div>
+</div>
 
 <div class="tp-fine"><p>Picks are made before scratches and late changes. If a selection scratches, move to the next pick. Post times are local track time. Win estimates are the software's, not guarantees.</p>
 <p>Must be 21+ to wager.</p>
