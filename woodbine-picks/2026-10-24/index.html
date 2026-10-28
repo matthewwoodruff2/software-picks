@@ -102,6 +102,7 @@
 .tp-cta-pass{background:#fff;border:2px solid var(--tp-gold)}
 .tp-cta.tp-cta-pass .tp-eyebrow,.tp-cta.tp-cta-pass h2 span{color:var(--tp-gold-dk)}
 .tp-cta-pass .tp-cta-act a{display:inline-block;background:var(--tp-gold);color:#000;border-radius:300px;padding:12px 24px;font-weight:500;text-transform:uppercase;text-decoration:none;font-size:.9rem}
+.tp-pvstrip{margin:0;font-size:.92rem;color:var(--tp-muted)}.tp-pvstrip a{color:var(--tp-gold-dk);font-weight:500}
 .tp-passbar{margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;background:var(--tp-black);color:#e6e6e6;border-radius:12px;padding:12px 16px;font-size:.92rem}
 .tp-passbar span{flex:1 1 260px;min-width:0}.tp-passbar b{color:var(--tp-gold)}
 .tp-passbar a{background:var(--tp-gold);color:#000;border-radius:300px;padding:9px 18px;font-weight:500;text-decoration:none;text-transform:uppercase;font-size:.82rem;white-space:nowrap}
@@ -159,6 +160,25 @@
 .tp-fine p{margin:0}
 @media (max-width:540px){.tp-rh{grid-template-columns:auto 1fr}.tp-tags{grid-column:1/-1;flex-direction:row;justify-content:flex-start}}
 @media (prefers-reduced-motion:reduce){.tp-chev::after{transition:none}}
+
+.pv-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--tp-line);border:1px solid var(--tp-line);border-radius:12px;overflow:hidden;margin:4px 0 6px}
+.pv-strip div{background:#fff;padding:12px 14px}.pv-strip b{display:block;font-size:1.15rem}.pv-strip span{font-size:.8rem;color:var(--tp-muted);text-transform:uppercase;letter-spacing:.05em}
+.pv-short{background:var(--tp-black);color:#e6e6e6;border-radius:14px;padding:20px 22px;margin:0 0 18px}
+.pv-art .pv-short h2{margin:0 0 10px;color:#fff;font-size:1.15rem;text-transform:uppercase;letter-spacing:.02em}.pv-short h2 span{color:var(--tp-gold)}
+.pv-short dl{margin:0;display:grid;grid-template-columns:max-content 1fr;gap:8px 16px}.pv-short dt{color:var(--tp-gold);font-weight:700;font-size:.9rem}.pv-short dd{margin:0}
+.pv-art{max-width:780px}.pv-art p{font-size:1.05rem;line-height:1.7;margin:0 0 14px}
+.pv-art h2{margin:28px 0 8px;font-size:clamp(1.4rem,3.4vw,1.8rem);text-transform:uppercase;letter-spacing:-.01em;line-height:1.1}
+.pv-art h2 small{display:block;font-size:.8rem;color:var(--tp-gold-dk);letter-spacing:.08em;margin-bottom:4px}
+.pv-tbl{width:100%;border-collapse:collapse;font-size:.95rem;margin:6px 0 4px}.pv-tbl th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tp-muted);border-bottom:2px solid var(--tp-black);padding:8px}
+.pv-tbl td{padding:9px 8px;border-bottom:1px solid var(--tp-line);vertical-align:top}.pv-tbl td small{display:block;color:var(--tp-muted)}
+.pv-tblw{overflow-x:auto}
+.pv-chips{display:flex;flex-wrap:wrap;gap:8px;margin:2px 0 12px}.pv-chips span{background:var(--tp-grey);border-radius:8px;padding:6px 10px;font-size:.85rem}.pv-chips b{display:block;font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--tp-muted)}
+.pv-picks{border:2px solid var(--tp-gold);border-radius:14px;padding:18px 20px;margin:12px 0}.pv-picks ol{margin:6px 0 0;padding-left:22px}.pv-picks li{margin:6px 0;font-size:1.02rem}
+.pv-bp{background:#fbf5df;border:1px solid var(--tp-gold);border-radius:14px;padding:18px 20px;margin:12px 0}
+.pv-bp a,.pv-cta a{display:inline-block;margin-top:8px;background:var(--tp-black);color:#fff;border-radius:300px;padding:11px 22px;text-decoration:none;font-weight:500;text-transform:uppercase;font-size:.85rem}
+.pv-more{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:10px}.pv-more a{display:block;border:1px solid var(--tp-line);border-radius:12px;padding:14px;text-decoration:none;color:var(--tp-ink)}
+.pv-more a b{display:block}.pv-more a span{font-size:.85rem;color:var(--tp-muted)}
+.pv-by{font-size:.9rem;color:var(--tp-muted);margin:0}
 
 .sp-bar{background:#000;color:#fff;text-align:center;font-size:.9rem;padding:8px max(16px,env(safe-area-inset-right,0px)) 8px max(16px,env(safe-area-inset-left,0px))}
 .sp-bar-pill{display:inline-block;border:1.5px solid var(--tp-gold);color:var(--tp-gold);border-radius:300px;padding:1px 10px;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-right:6px}
@@ -292,6 +312,7 @@ a.sp-g:hover{border-color:var(--tp-gold)}
 
 
 <section class="sp-lab"><div><span class="sp-edge-k">Free &middot; The Wagering Lab</span><h2>2 hand-picked plays every week, free</h2><p>Two highly selective plays every week with full analysis, in your inbox every Friday, plus free cheat sheets for every major race day. Every pick tracked publicly.</p></div><div class="sp-lab-f"><form class="tp-lab-form tp-cta-act" data-kit-form="9140538" novalidate><label for="tp-lab-box">Email address</label><input id="tp-lab-box" name="email_address" type="email" autocomplete="email" placeholder="Email address" required><button type="submit">Join free</button></form><p class="tp-lab-msg" role="status" aria-live="polite"></p></div><p class="sp-lab-edge">Want the full card for every race? <a href="https://www.tracksideprofits.com/trackside-edge">Trackside Edge</a> members get the top three with win estimates, pace notes, confidence ratings and multi-race tickets.</p></section>
+
 <h2 class="sp-h2">Woodbine picks, race by race</h2>
 <div class="tp-races sp-races"><div class="tp-race" id="tp-wo-2026-10-24-r1">
 <div class="tp-rh"><span class="tp-rn"><small>Race</small>1</span>
