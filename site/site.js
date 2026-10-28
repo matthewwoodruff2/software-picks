@@ -47,7 +47,20 @@
     });
   }
 
-  function run() { try { footer(); } catch (e) {} try { prices(); } catch (e) {} }
+  // A dark full-width band that opens a page (like the homepage hero) starts right under the header, with no white strip.
+  function flush() {
+    var inner = document.querySelector(".header-inner");
+    var first = document.querySelector("#sections > section:first-child .te-bleed, #sections > section:first-child .tp-bleed");
+    if (!inner || !first) return;
+    var bg = getComputedStyle(first).backgroundColor.match(/\d+/g);
+    if (!bg || (+bg[0] + +bg[1] + +bg[2]) > 150 || (bg[3] !== undefined && +bg[3] === 0)) return;   // dark bands only
+    first.style.marginTop = "";
+    var gap = first.getBoundingClientRect().top - inner.getBoundingClientRect().bottom;
+    if (gap > 0 && gap < 90) first.style.marginTop = (-gap) + "px";
+  }
+
+  function run() { try { footer(); } catch (e) {} try { prices(); } catch (e) {} try { flush(); } catch (e) {} }
+  window.addEventListener("resize", function () { try { flush(); } catch (e) {} });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
   window.addEventListener("load", run);
 })();
