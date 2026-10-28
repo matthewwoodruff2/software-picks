@@ -5,16 +5,16 @@
   function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function cards(items){
     return '<div class="te-posts">'+items.map(function(i){
-      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111;display:flex;align-items:flex-end;padding:14px;color:#D4AF37;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px">'+esc(i.track)+' &middot; '+esc(i.day)+'</span>'+
+      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111 url('+esc(i.image||"")+') center/cover no-repeat"></span>'+
              '<span class="te-post-body"><span class="te-post-date">Race preview &middot; '+esc(i.date_label)+'</span><strong>'+esc(i.title)+'</strong></span></a>';
     }).join("")+'</div>';
   }
   function blogBlock(items){
     var css='<style>.tpv{max-width:1240px;margin:0 auto 28px;padding:0 4vw}.tpv h2{font-size:clamp(22px,3vw,30px);text-transform:uppercase;margin:0 0 6px}.tpv p{margin:0 0 14px;color:#555}'+
-      '.tpv-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.tpv-g a{display:block;border:1px solid #e3e3e3;border-top:4px solid #D4AF37;border-radius:12px;padding:16px;text-decoration:none;color:#111;background:#fff}'+
+      '.tpv-g{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}.tpv-g a{display:block;overflow:hidden;border:1px solid #e3e3e3;border-radius:12px;padding:16px;text-decoration:none;color:#111;background:#fff}'+
       '.tpv-g a span{display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:#8A6D12;margin-bottom:6px}.tpv-g a b{font-size:17px;line-height:1.3}.tpv-all{display:inline-block;margin-top:12px;color:#8A6D12;font-weight:600}</style>';
     return css+'<section class="tpv" aria-label="Race previews"><h2>This Week&rsquo;s Race Previews</h2><p>The field, how the race sets up and our picks for the biggest races.</p><div class="tpv-g">'+
-      items.map(function(i){return '<a href="'+esc(i.url)+'"><span>'+esc(i.track)+' &middot; '+esc(i.date_label)+'</span><b>'+esc(i.title)+'</b></a>';}).join("")+
+      items.map(function(i){return '<a href="'+esc(i.url)+'">'+(i.image?'<img src="'+esc(i.image)+'" alt="" loading="lazy" style="display:block;width:calc(100% + 32px);margin:-16px -16px 12px;aspect-ratio:1200/630;object-fit:cover">':'')+'<span>'+esc(i.track)+' &middot; '+esc(i.date_label)+'</span><b>'+esc(i.title)+'</b></a>';}).join("")+
       '</div><a class="tpv-all" href="'+BASE+'">All race previews &rarr;</a></section>';
   }
   function run(){
