@@ -34,4 +34,4 @@ html.tp-foot-ready #te .te-dir, html.tp-foot-ready #te .te-dir + .te-fine{displa
 .tp-sf-col a:hover{border-bottom-color:#D4AF37}
 .tp-sf-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:26px;padding-top:20px;border-top:1px solid #262626;color:#8f8f8f;font-size:12.5px;line-height:1.5}
 @media (max-width:900px){.tp-sf-top{grid-template-columns:1fr 1fr}.tp-sf-brand{grid-column:1/-1}}
-@media (max-width:480px){.tp-sf-top{grid-template-columns:1fr}}
+@media (max-width:480px){.tp-sf-top{gap:22px 18px}}
