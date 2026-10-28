@@ -7,6 +7,8 @@
 
 /* 2. Homepage "Four Ways": grid lines up with the section heading */
 html body #te .te-paths{max-width:none;margin-left:0;margin-right:0}
+html body #te .te-path .te-path-price{margin-top:auto}
+html body #te .te-path .te-path-price + .te-btn{margin-top:0}
 
 /* 3. Homepage reviews: equal-height cards, no orphan card on the last row */
 html body #te .te-rv-grid{grid-template-columns:repeat(5,minmax(0,1fr));align-items:stretch;gap:14px}
