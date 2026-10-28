@@ -55,13 +55,14 @@
     if (!inner || !first) return;
     var bg = getComputedStyle(first).backgroundColor.match(/\d+/g);
     if (!bg || (+bg[0] + +bg[1] + +bg[2]) > 150 || (bg[3] !== undefined && +bg[3] === 0)) return;   // dark bands only
-    first.style.marginTop = "";
+    var cur = parseFloat(first.style.marginTop) || 0;
     var gap = first.getBoundingClientRect().top - inner.getBoundingClientRect().bottom;
-    if (gap > 0 && gap < 90) first.style.marginTop = (-gap) + "px";
+    var m = cur - gap;
+    if (m <= 0 && m > -120 && Math.abs(gap) > 0.5) first.style.marginTop = m + "px";
   }
 
   function run() { try { footer(); } catch (e) {} try { prices(); } catch (e) {} try { flush(); } catch (e) {} }
   window.addEventListener("resize", function () { try { flush(); } catch (e) {} });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
-  window.addEventListener("load", run);
+  window.addEventListener("load", function () { run(); setTimeout(flush, 600); setTimeout(flush, 2000); });
 })();
