@@ -1,6 +1,6 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow">
-<title>Edge Day Pass | TracksideProfits</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
+<title>Race Day Pass | TracksideProfits</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap">
 <style>body{margin:0;background:#fff;font-family:Roboto,"Helvetica Neue",Arial,sans-serif;color:#111}
 .dp-bar{background:#000;color:#fff;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:12px max(16px,calc((100% - 1240px)/2))}
 .dp-bar a{color:#fff;text-decoration:none;font-weight:700;letter-spacing:.02em}.dp-bar a span{color:#d4af37}
@@ -10,16 +10,16 @@
 .dp-btn{display:inline-block;margin:6px;padding:12px 22px;border-radius:300px;background:#d4af37;color:#000;font-weight:700;text-decoration:none}
 .dp-btn.alt{background:#000;color:#fff}
 .dp-up{max-width:1240px;margin:0 auto;padding:18px 24px 40px;color:#555;font-size:.95rem}.dp-up a{color:#8a6d12;font-weight:700}</style></head>
-<body><div class="dp-bar"><a href="https://www.tracksideprofits.com">Trackside<span>Profits</span></a><span class="dp-pill">Edge Day Pass</span></div>
+<body><div class="dp-bar"><a href="https://www.tracksideprofits.com">Trackside<span>Profits</span></a><span class="dp-pill">Race Day Pass</span></div>
 <div id="tp-software-picks"></div>
 <p class="dp-up" id="dp-up" hidden>Want every race day, plus our hand-picked member plays? <a href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a>.</p>
 <script>(function(){
 var h=location.hash.slice(1).split('.'),host=document.getElementById('tp-software-picks');
-function msg(t,b){host.outerHTML='<div class="dp-msg"><h1>'+t+'</h1><p>'+b+'</p><a class="dp-btn" href="https://tracksideprofits.kit.com/products/edge-day-pass">Get a Day Pass, $10</a><a class="dp-btn alt" href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a></div>'}
-if(h.length!==2||!/^[A-Za-z0-9_-]+$/.test(h[0])){msg('Day Pass link needed','Open the link from your purchase email to see your cards.');return}
+function msg(t,b){host.outerHTML='<div class="dp-msg"><h1>'+t+'</h1><p>'+b+'</p><a class="dp-btn" href="https://tracksideprofits.kit.com/products/edge-day-pass">Get a Race Day Pass, $10</a><a class="dp-btn alt" href="https://www.tracksideprofits.com/trackside-edge">Join Trackside Edge</a></div>'}
+if(h.length!==2||!/^[A-Za-z0-9_-]+$/.test(h[0])){msg('Race Day Pass link needed','Open the link from your purchase email to see your cards.');return}
 var src='https://picks.tracksideprofits.com/p/'+h[0]+'/picks.json';
 fetch(src+'?v='+Date.now(),{method:'HEAD'}).then(function(r){
- if(!r.ok){msg('This Day Pass has ended','Each Day Pass covers the day you bought it and the next day. Grab a new one, or get every day with Trackside Edge.');return}
+ if(!r.ok){msg('This Race Day Pass has ended','Each Race Day Pass covers the day you bought it and the next day. Grab a new one, or get every day with Trackside Edge.');return}
  host.setAttribute('data-tp-src',src);host.setAttribute('data-tp-key',h[1]);
  document.getElementById('dp-up').hidden=false;
  var s=document.createElement('script');s.src='https://picks.tracksideprofits.com/embed-core.js?v='+Date.now();document.body.appendChild(s);
