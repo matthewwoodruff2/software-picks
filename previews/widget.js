@@ -5,7 +5,7 @@
   function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function cards(items){
     return '<div class="te-posts">'+items.map(function(i){
-      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111 url('+esc(i.image||"")+') center/cover no-repeat"></span>'+
+      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111 url('+esc(i.image||"")+') left center/cover no-repeat"></span>'+
              '<span class="te-post-body"><span class="te-post-date">Race preview &middot; '+esc(i.date_label)+'</span><strong>'+esc(i.title)+'</strong></span></a>';
     }).join("")+'</div>';
   }
