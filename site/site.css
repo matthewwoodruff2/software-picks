@@ -22,7 +22,7 @@ html body #te .te-rv-about{margin-top:auto}
 html.tp-foot-ready footer.sections, html.tp-foot-ready #footer-sections{display:none!important}
 html.tp-foot-ready #te .te-dir, html.tp-foot-ready #te .te-dir + .te-fine{display:none!important}
 .tp-trackrow.tp-sitefoot{padding-top:44px;border-top:4px solid #D4AF37}
-.tp-sf-top{display:grid;grid-template-columns:300px repeat(4,minmax(0,1fr));gap:28px 32px;padding-bottom:30px;margin-bottom:26px;border-bottom:1px solid #262626}
+.tp-sf-top{display:grid;grid-template-columns:340px repeat(4,minmax(0,1fr));gap:28px 32px;padding-bottom:30px;margin-bottom:26px;border-bottom:1px solid #262626}
 .tp-sf-brand{padding-right:24px}
 .tp-sf-brand a.tp-sf-logo{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.02em;font-size:16px;text-transform:uppercase;white-space:nowrap}
 .tp-sf-brand a.tp-sf-logo span{color:#D4AF37}
