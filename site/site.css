@@ -22,12 +22,12 @@ html body #te .te-rv-about{margin-top:auto}
 html.tp-foot-ready footer.sections, html.tp-foot-ready #footer-sections{display:none!important}
 html.tp-foot-ready #te .te-dir, html.tp-foot-ready #te .te-dir + .te-fine{display:none!important}
 .tp-trackrow.tp-sitefoot{padding-top:44px;border-top:4px solid #D4AF37}
-.tp-sf-top{display:grid;grid-template-columns:minmax(230px,1.25fr) repeat(4,minmax(0,1fr));gap:28px;padding-bottom:30px;margin-bottom:26px;border-bottom:1px solid #262626}
-.tp-sf-brand{padding-right:48px}
+.tp-sf-top{display:grid;grid-template-columns:300px repeat(4,minmax(0,1fr));gap:28px 32px;padding-bottom:30px;margin-bottom:26px;border-bottom:1px solid #262626}
+.tp-sf-brand{padding-right:24px}
 .tp-sf-brand a.tp-sf-logo{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:800;letter-spacing:.02em;font-size:16px;text-transform:uppercase;white-space:nowrap}
 .tp-sf-brand a.tp-sf-logo span{color:#D4AF37}
 .tp-sf-brand img{width:36px;height:36px;border-radius:5px}
-.tp-sf-brand p{color:#b5b5b5;font-size:13px;line-height:1.55;margin:12px 0 14px;max-width:250px}
+.tp-sf-brand p{color:#b5b5b5;font-size:13px;line-height:1.55;margin:12px 0 14px;max-width:260px}
 .tp-sf-yt{display:inline-flex;align-items:center;gap:8px;border:1.5px solid #D4AF37;color:#D4AF37!important;border-radius:300px;padding:6px 12px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none!important}
 .tp-sf-col h3{color:#D4AF37;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin:6px 0 14px}
 .tp-sf-col ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
