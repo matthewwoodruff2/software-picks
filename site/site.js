@@ -47,25 +47,8 @@
     });
   }
 
-  // A dark full-width band that opens a page (like the homepage hero) starts right under the header, with no white strip.
-  function flush() {
-    var inner = document.querySelector(".header-inner");
-    var sec = document.querySelector("section.page-section");
-    var first = sec && sec.querySelector(".te-bleed, .tp-bleed");
-    if (!inner || !first) return;
-    var bg = getComputedStyle(first).backgroundColor.match(/\d+/g);
-    if (!bg || (+bg[0] + +bg[1] + +bg[2]) > 150 || (bg[3] !== undefined && +bg[3] === 0)) return;   // dark bands only
-    // fill the strip with the band's own background, without moving its content
-    first.style.marginTop = ""; first.style.paddingTop = "";
-    var gap = first.getBoundingClientRect().top - inner.getBoundingClientRect().bottom;
-    if (!(gap > 0.5 && gap < 90)) return;
-    var pad = parseFloat(getComputedStyle(first).paddingTop) || 0;
-    first.style.marginTop = (-gap) + "px";
-    first.style.paddingTop = (pad + gap) + "px";
-  }
-
-  function run() { try { footer(); } catch (e) {} try { prices(); } catch (e) {} try { flush(); } catch (e) {} }
-  window.addEventListener("resize", function () { try { flush(); } catch (e) {} });
+  function run() { try { footer(); } catch (e) {} try { prices(); } catch (e) {} }
+  window.addEventListener("resize", function () { });
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();
-  window.addEventListener("load", function () { run(); setTimeout(flush, 600); setTimeout(flush, 2000); });
+  window.addEventListener("load", run);
 })();
