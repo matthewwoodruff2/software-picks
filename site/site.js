@@ -19,7 +19,7 @@
     }).join("");
     var top = document.createElement("div");
     top.className = "tp-sf-top";
-    top.innerHTML = '<div class="tp-sf-brand"><a class="tp-sf-logo" href="/"><img src="' + LOGO + '" alt="" width="46" height="46">Trackside<span>Profits</span></a>' +
+    top.innerHTML = '<div class="tp-sf-brand"><a class="tp-sf-logo" href="/"><img src="' + LOGO + '" alt="" width="36" height="36">Trackside<span>Profits</span></a>' +
       "<p>Wagering-first horse racing coverage: free daily picks, big-race previews and Blueprints, and every result tracked.</p>" +
       '<a class="tp-sf-yt" href="' + YT + '" target="_blank" rel="noopener">&#9654; Watch on YouTube</a></div>' + cols;
     row.insertBefore(top, row.firstChild);
