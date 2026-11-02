@@ -2,7 +2,7 @@
 // <div id="tp-software-picks"></div><script src="https://picks.tracksideprofits.com/embed.js"></script>
 // Only renders on tracksideprofits.com (and Squarespace's editor preview).
 (function(){var host=document.getElementById('tp-software-picks');if(!host)return;
-var h=location.hostname;if(!/(^|\.)tracksideprofits\.com$/.test(h)&&!/\.squarespace\.com$/.test(h)){host.innerHTML='<p><a href="https://www.tracksideprofits.com/todays-picks">See TracksideProfits Software Picks</a></p>';return;}
+var h=location.hostname;if(!/(^|\.)tracksideprofits\.com$/.test(h)&&!/\.squarespace\.com$/.test(h)){host.innerHTML='<p><a href="https://picks.tracksideprofits.com/">See TracksideProfits Software Picks</a></p>';return;}
 // Sit flush under the site header and run edge to edge, like the other pages.
 // Skipped inside the Squarespace editor (framed), only reacts to real width changes,
 // at most once per frame, and only writes a style when its value changes.
