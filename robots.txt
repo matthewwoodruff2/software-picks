@@ -3,4 +3,5 @@ Allow: /
 Disallow: /e/
 Disallow: /p/
 Disallow: /pass/
+Disallow: /fragment.html
 Sitemap: https://picks.tracksideprofits.com/sitemap.xml
