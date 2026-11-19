@@ -36,3 +36,9 @@ html.tp-foot-ready #te .te-dir, html.tp-foot-ready #te .te-dir + .te-fine{displa
 .tp-sf-bottom{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px 24px;margin-top:26px;padding-top:20px;border-top:1px solid #262626;color:#8f8f8f;font-size:12.5px;line-height:1.5}
 @media (max-width:900px){.tp-sf-top{grid-template-columns:1fr 1fr}.tp-sf-brand{grid-column:1/-1;padding-right:0}}
 @media (max-width:480px){.tp-sf-top{gap:22px 18px}}
+
+/* 5. Pages built from one code block (Road to the Derby, Results, hubs...): the section is exactly as tall as
+   its content. Squarespace's layout grid reserves a fixed height for the block, which left thousands of
+   pixels of empty space under the content on wide screens. Not applied in the editor. */
+body:not(.sqs-edit-mode-active) .fluid-engine:has(.sqs-code-container):not(:has(> .fe-block ~ .fe-block)){grid-template-rows:auto!important;min-height:0!important}
+body:not(.sqs-edit-mode-active) .fluid-engine:has(.sqs-code-container):not(:has(> .fe-block ~ .fe-block)) > .fe-block{grid-row:1/2!important}
