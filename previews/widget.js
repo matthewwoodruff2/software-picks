@@ -5,7 +5,7 @@
   function esc(t){return String(t==null?"":t).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function cards(items){
     return '<div class="te-posts">'+items.map(function(i){
-      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111 url('+esc(i.image||"")+') center 40%/cover no-repeat"></span>'+
+      return '<a class="te-post" href="'+esc(i.url)+'"><span class="te-post-img" style="background:#111 url('+esc(i.image||"")+') '+esc(i.pos||"center 40%")+'/cover no-repeat"></span>'+
              '<span class="te-post-body"><span class="te-post-date">Race preview &middot; '+esc(i.date_label)+'</span><strong>'+esc(i.title)+'</strong></span></a>';
     }).join("")+'</div>';
   }
@@ -38,7 +38,7 @@
       '<button type="button" class="tpv-nav tpv-next" aria-label="Earlier race previews" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg></button></div></section>';
   }
   function blogCards(items){
-    return items.map(function(i){return '<a class="tpv-c" href="'+esc(i.url)+'"><span class="tpv-img">'+(i.image?'<img src="'+esc(i.image)+'" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\''+esc(i.card||"")+'\'">':'')+'</span>'+
+    return items.map(function(i){return '<a class="tpv-c" href="'+esc(i.url)+'"><span class="tpv-img">'+(i.image?'<img src="'+esc(i.image)+'"'+(i.pos?' style="object-position:'+esc(i.pos)+'"':'')+' alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.onerror=null;this.src=\''+esc(i.card||"")+'\'">':'')+'</span>'+
         '<span class="tpv-d"><b>Race preview</b> &middot; '+esc(i.date_label)+' &middot; '+esc(i.track)+'</span><span class="tpv-t">'+esc(i.title)+'</span>'+
         (i.description?'<span class="tpv-x">'+esc(i.description)+'</span>':'')+'<span class="tpv-m">Read the preview</span></a>';}).join("");
   }
@@ -63,7 +63,9 @@
       var all=(f.all&&f.all.length)?f.all:(f.upcoming&&f.upcoming.length?f.upcoming:f.recent||[]);
       var items=all.slice(0,3);
       if(!items.length) return;
-      hosts.forEach(function(h){var t=h.querySelector("[data-tp-previews-list]")||h; t.innerHTML=cards(items); h.hidden=false;});
+      hosts.forEach(function(h){var t=h.querySelector("[data-tp-previews-list]")||h; t.innerHTML=cards(items); h.hidden=false;
+        /* round arrows to page back through earlier previews (pager lives in site.js, loaded on every page) */
+        var n=0;(function pg(){if(window.TPPager){window.TPPager(t,all,cards);}else if(n++<40){setTimeout(pg,250);}})();});
       if(onBlog && !document.querySelector(".tpv")){
         var list=document.querySelector(".blog-list, .blog-basic-grid, .blog-side-by-side-wrapper, .blog-alternating-side-by-side-wrapper, .blog-single-column, .blog-masonry");
         if(list){var d=document.createElement("div"); d.innerHTML=blogBlock(); list.parentNode.insertBefore(d,list); pager(d,all);}
