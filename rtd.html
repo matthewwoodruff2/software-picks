@@ -881,7 +881,7 @@ html,body{overflow-x:clip}
     var sc = art.querySelector('.scale');
     if (sc && !sc.classList.contains('v3-sc')) {
       var ds = sc.children, mx2 = 0, j; for (j = 0; j < ds.length; j++) mx2 = Math.max(mx2, parseFloat(txt(ds[j].querySelector('b'))) || 0);
-      if (mx2) { for (j = 0; j < ds.length; j++) ds[j].style.setProperty('--h', ((parseFloat(txt(ds[j].querySelector('b'))) || 0) / mx2).toFixed(3)); ds[j].style.setProperty('--d', (j * 140) + 'ms'); sc.classList.add('v3-sc'); reveal(sc); }
+      if (mx2) { for (j = 0; j < ds.length; j++) { ds[j].style.setProperty('--h', ((parseFloat(txt(ds[j].querySelector('b'))) || 0) / mx2).toFixed(3)); ds[j].style.setProperty('--d', (j * 140) + 'ms'); } sc.classList.add('v3-sc'); reveal(sc); }
     }
   } catch (e) {}
 
