@@ -1,0 +1,927 @@
+<!-- ROAD TO THE KENTUCKY DERBY HUB: this whole file lives in ONE Code Block on the page /kentucky-derby/road-to-the-derby.
+     Weekly updates replace only the parts between the TP:NAME and /TP:NAME comment markers, plus dateModified in the JSON-LD. -->
+<style>
+#tpb{--g:#D4AF37;--gd:#8A6D12;--k:#0B0B0B;--ink:#1C1C1C;--mu:#555;--ln:rgba(0,0,0,.12);--bg2:#F4F2EC;
+  font-family:var(--body-font-font-family,"Roboto"),Roboto,"Helvetica Neue",Arial,sans-serif;color:#111;font-size:19px;line-height:1.7;max-width:780px;margin:0 auto;-webkit-font-smoothing:antialiased}
+#tpb *,#tpb *::before,#tpb *::after{box-sizing:border-box}
+#tpb :where(h1,h2,h3,p,ul,ol,li,table){margin:0;padding:0}
+#tpb :where(h2,h3){font-family:inherit;color:#0B0B0B;letter-spacing:-.02em;line-height:1.15}
+#tpb a{color:inherit}
+#tpb p{margin:0 0 1.1em}
+#tpb h2{font-size:clamp(28px,4vw,38px);font-weight:700;text-transform:uppercase;margin:2.2em 0 .6em;scroll-margin-top:90px}
+#tpb .kick{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gd);margin:clamp(56px,8vw,84px) 0 10px;line-height:1.3}#tpb .kick+h2{margin-top:0;scroll-margin-top:130px}
+#tpb h3{font-size:22px;font-weight:700;margin:1.4em 0 .4em}
+#tpb strong{font-weight:700}
+#tpb .lead{font-size:20px;color:#222}
+/* hero */
+#tpb .rc{background:var(--k);color:#fff;overflow:hidden;border-top:8px solid var(--g);margin-bottom:28px}
+#tpb .rc-top{padding:26px 28px 22px}
+#tpb .rc-eyebrow{display:block;font-size:13px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+#tpb h1.rc-title{font-family:inherit;font-size:clamp(34px,6vw,70px);font-weight:800;line-height:1.02;text-transform:uppercase;letter-spacing:-.02em;color:#fff;margin:0}
+#tpb .rc-title span{color:var(--g)}
+#tpb .rc-sub{color:#D9D9D9;font-size:19px;max-width:720px;margin:16px 0 0}
+#tpb .rc-facts{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.14)}
+#tpb .rc-facts div{padding:14px 16px;border-right:1px solid rgba(255,255,255,.14)}
+#tpb .rc-facts div:last-child{border-right:0}
+#tpb .rc-facts b{display:block;font-size:19px;color:#fff;line-height:1.2}
+#tpb .rc-facts span{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#B5B5B5}
+/* update box */
+#tpb .qp{border:2px solid var(--k);border-radius:14px;padding:24px 26px;margin:0 0 30px;background:#fff}
+#tpb .qp-h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+#tpb .qp-h b{font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+#tpb .qp-h span{font-size:15px;color:var(--mu)}
+#tpb .qp ul{list-style:none;display:grid;gap:10px;margin:0 0 6px}
+#tpb .qp li{position:relative;padding-left:22px;font-size:18px}
+#tpb .qp li::before{content:"";position:absolute;left:2px;top:.62em;width:9px;height:9px;border-radius:50%;background:var(--g)}
+#tpb .toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+#tpb .toc a{font-size:15px;font-weight:500;text-decoration:none;padding:9px 14px;border-radius:300px;border:1px solid var(--ln);background:#fff}
+#tpb .toc a:hover{border-color:var(--g)}
+/* tables */
+#tpb .tw{overflow-x:auto;margin:18px 0 10px;border:1px solid var(--ln);border-radius:12px;-webkit-overflow-scrolling:touch}
+#tpb table{width:100%;border-collapse:collapse;font-size:17px;min-width:520px}
+#tpb th{text-align:left;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);padding:12px 14px;border-bottom:2px solid var(--k);background:var(--bg2)}
+#tpb td{padding:12px 14px;border-bottom:1px solid var(--ln);vertical-align:top}
+#tpb tr:last-child td{border-bottom:0}
+#tpb td.n{font-weight:800;width:52px}
+#tpb td.pts{font-weight:800;text-align:right;white-space:nowrap}
+#tpb th.pts{text-align:right}
+#tpb td.dt{white-space:nowrap;font-weight:600}
+#tpb tr.top td{background:#FBF6E5}
+#tpb tr.top td:nth-child(2){font-weight:700}
+#tpb tr.cut td{background:var(--k);color:var(--g);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 14px;text-align:center}
+#tpb tr.grp td{background:var(--k);color:var(--g);font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:9px 14px}
+#tpb tr.done td{color:#444}
+#tpb tr.next td{background:#FBF6E5;font-weight:600}
+#tpb .tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 8px;border-radius:300px;background:var(--g);color:#000;margin-left:6px;vertical-align:2px}
+#tpb .cap{font-size:15px;color:var(--mu);margin:8px 0 0;line-height:1.5}
+/* cards */
+#tpb .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:18px 0 10px}
+#tpb .card{border:2px solid var(--k);border-radius:14px;padding:18px 20px;background:#fff}
+#tpb .card .k{display:block;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--gd)}
+#tpb .card b{display:block;font-size:23px;font-weight:800;text-transform:uppercase;line-height:1.15;margin:4px 0 4px}
+#tpb .card .who{display:block;font-size:15px;color:var(--mu);margin-bottom:8px}
+#tpb .card p{margin:0;font-size:17px;line-height:1.55;color:#222}
+#tpb .card.dk{background:var(--k);color:#fff;border-color:var(--k)}
+#tpb .card.dk b{color:#fff}#tpb .card.dk .k{color:var(--g)}#tpb .card.dk .who{color:#B5B5B5}#tpb .card.dk p{color:#E6E6E6}
+/* rank list */
+#tpb .final{background:var(--k);color:#fff;border-radius:14px;padding:28px 26px;margin:20px 0}
+#tpb .final h3{color:var(--g);margin:0 0 16px;font-size:14px;letter-spacing:.14em;text-transform:uppercase}
+#tpb .final ol{list-style:none;display:grid;gap:16px}
+#tpb .final li{display:grid;grid-template-columns:34px 1fr;gap:4px 12px;align-items:baseline}
+#tpb .final li > span{color:var(--g);font-size:22px;font-weight:800}
+#tpb .final li b{font-size:22px;font-weight:800;text-transform:uppercase}
+#tpb .final li small{grid-column:2;font-size:16px;color:#C9C9C9;line-height:1.5}
+/* notes, steps, faq, cta */
+#tpb .note{border-radius:12px;background:var(--bg2);padding:18px 20px;margin:22px 0;font-size:17px}
+#tpb .note b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);margin-bottom:6px}
+#tpb .steps{list-style:none;counter-reset:s;display:grid;gap:14px;margin:16px 0}
+#tpb .steps li{counter-increment:s;position:relative;padding-left:52px;font-size:18px}
+#tpb .steps li::before{content:counter(s);position:absolute;left:0;top:0;width:36px;height:36px;border-radius:50%;background:var(--k);color:var(--g);font-weight:800;display:flex;align-items:center;justify-content:center;font-size:17px}
+#tpb .scale{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0}
+#tpb .scale div{border:1px solid var(--ln);border-radius:10px;padding:12px;text-align:center;background:#fff}
+#tpb .scale b{display:block;font-size:24px;font-weight:800}
+#tpb .scale span{display:block;font-size:13px;color:var(--mu);line-height:1.35}
+#tpb details{border-bottom:1px solid var(--ln);padding:16px 0}
+#tpb summary{cursor:pointer;font-size:19px;font-weight:700;list-style:none;position:relative;padding-right:36px}
+#tpb summary::-webkit-details-marker{display:none}
+#tpb summary::after{content:"+";position:absolute;right:4px;top:-2px;font-size:26px;color:var(--gd)}
+#tpb details[open] summary::after{content:"\2212"}
+#tpb details p{margin:10px 0 0;font-size:18px}
+#tpb .cta{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:34px 0 10px}
+#tpb .cta a{display:block;text-decoration:none;border-radius:14px;padding:22px;border:2px solid var(--k);background:#fff}
+#tpb .cta a.d{background:var(--k);color:#fff}
+#tpb .cta b{display:block;font-size:21px;line-height:1.2;margin:6px 0 6px}
+#tpb .cta span{display:block;font-size:16px;opacity:.85;line-height:1.45}
+#tpb .cta em{font-style:normal;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gd)}
+#tpb .cta a.d em{color:var(--g)}
+#tpb .cta i{font-style:normal;display:inline-block;margin-top:12px;font-size:15px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;padding:12px 18px;border-radius:300px;background:var(--g);color:#000}
+#tpb .related{display:flex;flex-wrap:wrap;gap:10px;margin:14px 0}
+#tpb .related a{font-size:16px;font-weight:600;text-decoration:none;padding:10px 16px;border-radius:10px;border:1px solid var(--ln);background:#fff}
+#tpb .related a:hover{border-color:var(--g)}
+#tpb .fine{font-size:14px;color:#666;margin-top:22px;line-height:1.55}
+#tpb .fine a{color:#444}
+@media (max-width:640px){
+  #tpb{font-size:18px}
+  #tpb .rc-facts{grid-template-columns:1fr 1fr}
+  #tpb .rc-facts div:nth-child(2){border-right:0}
+  #tpb .rc-facts div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.14)}
+  #tpb .cards,#tpb .cta{grid-template-columns:1fr}
+  #tpb .scale{grid-template-columns:repeat(3,1fr)}
+  #tpb .qp{padding:20px 16px}
+}
+#tpb p a,#tpb .cap a{text-decoration:underline;text-underline-offset:3px;font-weight:600}
+@media (max-width:640px){#tpb table{min-width:0;font-size:15px}#tpb th,#tpb td{padding:10px 8px}#tpb td.n{width:34px}#tpb table:has(th:nth-child(5)){min-width:560px}#tpb .tw:has(th:nth-child(5))+.cap::before{content:"Swipe the table sideways to see every column. ";font-weight:600}}
+/* hero photo */
+#tpb > .rc .rc-top.has-photo{display:grid;grid-template-columns:1.1fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+#tpb .rc-photo{margin:0;border-radius:12px;overflow:hidden}
+#tpb .rc-photo img{display:block;width:100%;height:auto;aspect-ratio:16/10;object-fit:cover;object-position:50% 50%;border-radius:12px;border:1px solid rgba(212,175,55,.45)}
+@media (max-width:820px){#tpb > .rc .rc-top.has-photo{grid-template-columns:1fr}#tpb .rc-photo{max-width:620px}}
+/* wall-to-wall layout */
+html,body{overflow-x:clip}
+#tpb{width:100vw !important;max-width:none !important;position:relative;left:50%;margin-left:-50vw !important;margin-right:0 !important;overflow:hidden}
+#tpb > *{width:min(780px,calc(100% - 40px));margin-left:auto !important;margin-right:auto !important}
+#tpb > .qp,#tpb > .tw,#tpb > .cards,#tpb > .cta,#tpb > .final{width:min(1000px,calc(100% - 40px))}
+#tpb > .rc{width:100%;border-radius:0;margin-top:0}
+#tpb > .rc .rc-top{padding:clamp(48px,7vw,96px) max(20px,calc((100% - 1000px)/2)) clamp(28px,4vw,44px)}
+#tpb > .rc .rc-facts{padding:0 max(0px,calc((100% - 1000px)/2))}
+#tpb > .fine{margin-bottom:0 !important}
+@media (max-width:640px){#tpb > .rc .rc-facts{padding:0}}
+/* ===== v2 additions (Nov. 19, 2026) ===== */
+#tpb{overflow:clip !important}
+#tpb .by{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;margin:18px 0 0;font-size:15px;color:#BDBDBD}
+#tpb .by a{color:#fff;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+#tpb .by span+span::before{content:"\00b7";margin-right:14px;color:#777}
+#tpb .next3{list-style:none;display:grid;gap:8px;margin:16px 0 0;padding:14px 0 0;border-top:1px solid var(--ln)}
+#tpb .next3 li{display:grid;grid-template-columns:120px 1fr auto;gap:10px;font-size:16px;align-items:baseline}
+#tpb .next3 b{font-weight:700}
+#tpb .next3 .d{font-weight:700;color:var(--gd);font-size:14px;letter-spacing:.04em;text-transform:uppercase}
+#tpb .next3 .p{font-size:14px;color:var(--mu);white-space:nowrap}
+#tpb .next3-h{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-top:16px}
+/* sticky jump bar */
+#tpb-jump{position:fixed;left:0;right:0;top:0;z-index:9990;background:#0B0B0B;border-bottom:2px solid #D4AF37;transform:translateY(-120%);transition:transform .2s ease;font-family:var(--body-font-font-family,"Roboto"),Roboto,Arial,sans-serif}
+#tpb-jump.on{transform:none}
+#tpb-jump .in{display:flex;gap:6px;overflow-x:auto;padding:9px max(14px,calc((100% - 1000px)/2));scrollbar-width:none;-webkit-overflow-scrolling:touch}
+#tpb-jump .in::-webkit-scrollbar{display:none}
+#tpb-jump a{flex:0 0 auto;color:#E6E6E6;text-decoration:none;font-size:14px;font-weight:600;padding:7px 12px;border-radius:300px;border:1px solid rgba(255,255,255,.18);white-space:nowrap}
+#tpb-jump a.cur{background:#D4AF37;border-color:#D4AF37;color:#000}
+/* leaderboard extras */
+#tpb td.chg,#tpb th.chg{width:46px;text-align:center;white-space:nowrap;font-weight:700}
+#tpb td.chg .up{color:#1F7A3A}#tpb td.chg .dn{color:#B3261E}#tpb td.chg .nw{font-size:11px;letter-spacing:.08em;color:var(--gd)}
+#tpb td.from{font-size:15px;color:var(--mu)}
+#tpb tr.bub td{background:#F7F7F7}
+#tpb tr.cut td{line-height:1.4}
+#tpb tr.cut2 td{background:#2A2A2A;color:#E6E6E6}
+#tpb .lb:not(.show-fo) .fo{display:none}
+#tpb td.fo,#tpb th.fo{text-align:right;white-space:nowrap}
+#tpb .legend{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--mu);margin:8px 0 0}
+#tpb .legend i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:6px;border:1px solid var(--ln)}
+#tpb td.t5{font-size:15px;color:#333;min-width:240px}
+#tpb td.dist{white-space:nowrap}
+/* winners' points */
+#tpb .wp{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:14px 0 8px}
+#tpb .wp div{border:1px solid var(--ln);border-radius:10px;padding:10px 12px;background:#fff}
+#tpb .wp b{display:block;font-size:20px;font-weight:800}
+#tpb .wp span{display:block;font-size:14px;color:var(--mu);line-height:1.35}
+#tpb .wp div.lo{border-color:#B8921F;background:#FBF6E5}
+/* glossary */
+#tpb details.gl{border:2px solid var(--k);border-radius:14px;padding:16px 20px;margin:22px 0;background:#fff}
+#tpb details.gl summary{font-size:18px}
+#tpb dl{margin:12px 0 0;display:grid;gap:10px}
+#tpb dt{font-weight:700;font-size:17px}
+#tpb dd{margin:0 0 4px;font-size:17px;color:#333}
+/* trail email signup */
+#tpb .sig{width:min(1000px,calc(100% - 40px));background:var(--k);color:#fff;border-radius:14px;padding:clamp(22px,3vw,32px);margin:30px auto !important;display:grid;grid-template-columns:1.2fr 1fr;gap:18px 28px;align-items:center;border-top:6px solid var(--g)}
+#tpb .sig .k{display:block;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--g);margin-bottom:6px}
+#tpb .sig b{display:block;font-size:clamp(22px,2.6vw,28px);line-height:1.15;text-transform:uppercase;font-weight:800}
+#tpb .sig p{margin:8px 0 0;color:#D9D9D9;font-size:17px;line-height:1.5}
+#tpb .sig form{display:flex;flex-wrap:wrap;gap:10px}
+#tpb .sig input{flex:1 1 220px;font-size:18px;padding:14px 16px;border-radius:10px;border:2px solid #fff;min-width:0}
+#tpb .sig button{flex:0 0 auto;font-size:15px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:15px 20px;border:0;border-radius:300px;background:var(--g);color:#000;cursor:pointer}
+#tpb .sig .ok{grid-column:1/-1;margin:0;color:#D4AF37;font-weight:600}
+#tpb .sig .fine2{font-size:13px;color:#9A9A9A;margin:8px 0 0;flex-basis:100%}
+#tpb .trust{border-radius:12px;background:var(--bg2);padding:18px 20px;margin:26px 0 0;font-size:16px;line-height:1.55}
+#tpb .trust b{display:block;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gd);margin-bottom:6px}
+#tpb .mv{font-style:normal;font-size:13px;font-weight:700;letter-spacing:.06em;margin-left:8px;vertical-align:3px}
+#tpb .mv.up{color:#7BD88F}#tpb .mv.dn{color:#FF8A80}
+@media (max-width:820px){#tpb .sig{grid-template-columns:1fr}}
+@media (max-width:640px){#tpb .next3 li{grid-template-columns:1fr;gap:0}#tpb .next3 .p{white-space:normal}}
+@media print{
+  #tpb-jump,#tpb .sig,#tpb .cta,#tpb .toc,.tp-sitefoot,#tp-bar,#tp-float,header#header{display:none !important}
+  #tpb{width:auto !important;left:0 !important;margin:0 !important;font-size:12pt}
+  #tpb > *{width:100% !important}
+  #tpb .rc{background:#fff !important;color:#000 !important;border-top:3px solid #000}
+  #tpb .rc *{color:#000 !important}
+  #tpb .rc-photo{display:none}
+  #tpb .tw{overflow:visible;border:0}
+  #tpb table{min-width:0 !important;font-size:10pt}
+  #tpb tr{break-inside:avoid}
+  #tpb details{display:block}
+  #tpb details > *{display:block}
+  #tpb a{text-decoration:none}
+}
+#tpb .qp .next3 li{padding-left:0;font-size:16px}
+#tpb .qp .next3 li::before{content:none}
+#tpb > .legend{width:min(1000px,calc(100% - 40px))}
+#tpb .lb tr.top td:nth-child(2){font-weight:700}
+#tpb .lb tr.top td:nth-child(3){font-weight:700}
+@media (max-width:640px){#tpb table.lb{min-width:640px}}
+</style>
+<style id="tpb-v3">
+/* ===== v3 visual upgrade (Nov. 20, 2026): bands, hero, charts. Remove this block + the bd wrappers to return to v2. ===== */
+/* --- section bands: break the long white column into distinct chapters --- */
+#tpb > .bd{width:100% !important;padding:clamp(56px,7vw,92px) 0;position:relative}
+#tpb .bd > *{width:min(780px,calc(100% - 40px));margin-left:auto !important;margin-right:auto !important}
+#tpb .bd > .tw,#tpb .bd > .cards,#tpb .bd > .cta,#tpb .bd > .final,#tpb .bd > .legend,#tpb .bd > .v3-chart,#tpb .bd > .wpc{width:min(1000px,calc(100% - 40px))}
+#tpb .bd > .kick:first-child{margin-top:0}
+#tpb .bd > :last-child{margin-bottom:0}
+#tpb .bd-tint{background:#F4F2EC}
+#tpb .bd-white{background:#fff}
+#tpb .bd-white + .bd-white{padding-top:0}
+#tpb .bd-dark{background:#0B0B0B radial-gradient(ellipse 70% 60% at 85% 0%,rgba(212,175,55,.13),rgba(212,175,55,0) 70%);color:#E6E6E6}
+#tpb .bd-dark h2{color:#fff}
+#tpb .bd-dark .kick{color:var(--g)}
+#tpb .bd-dark p a{color:#fff}
+#tpb .bd-dark .cap{color:#A9A9A9}
+/* --- headings: gold rule on the section labels --- */
+#tpb .kick{display:flex;align-items:center;gap:12px}
+#tpb .kick::before{content:"";width:28px;height:3px;background:var(--g);flex:none}
+#tpb .bd > h2{font-size:clamp(30px,4.2vw,44px);font-weight:800;letter-spacing:-.025em}
+
+/* --- hero: bigger photo that runs to the edge, title nudged right --- */
+#tpb .rc{border-top-width:6px;background:#0B0B0B radial-gradient(ellipse 60% 80% at 0% 100%,rgba(212,175,55,.10),rgba(212,175,55,0) 70%)}
+#tpb .rc-photo img{aspect-ratio:3/2;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+#tpb .by span+span::before{content:none}
+#tpb .by span+span::after{content:none}
+#tpb .by span:not(:first-child)::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--g);margin-right:8px;vertical-align:middle}
+#tpb .v3-cd{display:inline-flex;align-items:baseline;gap:8px;margin:22px 0 0;padding:9px 16px 9px 14px;border:1px solid rgba(212,175,55,.5);border-radius:300px;font-size:15px;color:#E6E6E6;line-height:1.2}
+#tpb .v3-cd b{font-size:20px;color:var(--g);font-weight:800;font-variant-numeric:tabular-nums}
+@media (min-width:1024px){
+  #tpb > .rc .rc-top.has-photo{grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(36px,4vw,60px);
+    padding-left:max(20px,calc((100% - 1180px)/2));padding-right:max(20px,calc((100% - 1180px)/2))}
+  #tpb h1.rc-title{font-size:clamp(44px,4.4vw,70px)}
+  #tpb .rc-photo img{aspect-ratio:4/3}
+  #tpb > .rc .rc-facts{padding:0 max(0px,calc((100% - 1180px)/2))}
+}
+@media (max-width:820px){#tpb .rc-photo{max-width:none}}
+#tpb .rc-facts{background:rgba(255,255,255,.03)}
+#tpb .rc-facts div{padding:18px 18px}
+#tpb .rc-facts b{font-size:21px}
+
+/* --- this week box --- */
+#tpb .qp{border:1px solid var(--ln);border-top:4px solid var(--k);border-radius:12px;box-shadow:0 22px 44px -30px rgba(0,0,0,.35);padding:26px 28px}
+#tpb .qp-h b{display:flex;align-items:center;gap:10px}
+#tpb .qp-h b::before{content:"";width:9px;height:9px;border-radius:50%;background:#1F7A3A;box-shadow:0 0 0 4px rgba(31,122,58,.18)}
+#tpb .toc a{transition:border-color .15s,background-color .15s}
+#tpb .toc a:hover{background:#FBF6E5}
+
+/* --- tables: cleaner, card-like --- */
+#tpb .tw{background:#fff;border-radius:12px;box-shadow:0 20px 40px -32px rgba(0,0,0,.4)}
+#tpb th{background:#0B0B0B;color:#D9D9D9;border-bottom:0;padding:13px 14px}
+#tpb tbody tr:not(.cut):not(.grp):hover td{background-color:#FBF6E5}
+#tpb tr.grp td{background:#1C1C1C}
+#tpb td.n{font-variant-numeric:tabular-nums}
+#tpb .lb tr.top td.n span.v3-rk{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:var(--g);color:#000;font-size:15px}
+/* points bars inside the leaderboard */
+#tpb td.pts.v3-bar{min-width:150px}
+#tpb td.pts.v3-bar .v3-w{display:flex;align-items:center;justify-content:flex-end;gap:10px}
+#tpb td.pts.v3-bar .v3-t{flex:1;max-width:110px;height:8px;border-radius:4px;background:rgba(0,0,0,.07);overflow:hidden;display:flex;justify-content:flex-start}
+#tpb td.pts.v3-bar .v3-t i{display:block;height:100%;border-radius:4px;background:linear-gradient(90deg,#B8921F,#D4AF37);width:var(--w);transform-origin:left;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+#tpb td.pts.v3-bar .v3-n{min-width:26px;text-align:right}
+#tpb .v3-pre td.pts.v3-bar .v3-t i{transform:scaleX(0)}
+
+/* --- shared chart frame --- */
+#tpb .v3-chart{background:#fff;border:1px solid var(--ln);border-radius:12px;padding:20px 22px 14px;margin:20px auto 8px;box-shadow:0 20px 40px -32px rgba(0,0,0,.4)}
+#tpb .v3-ch{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:6px 18px;margin-bottom:8px}
+#tpb .v3-ch b{font-size:15px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+#tpb .v3-ch span{font-size:14px;color:var(--mu)}
+#tpb .v3-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#tpb .v3-chart svg{display:block;width:100%;height:auto;min-width:720px;overflow:visible}
+#tpb .v3-chart text{font-family:inherit;font-size:12px;fill:#666}
+#tpb .v3-key{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:14px;color:var(--mu);margin:6px 0 0}
+#tpb .v3-key i{display:inline-block;width:11px;height:11px;border-radius:50%;margin-right:6px;vertical-align:-1px}
+#tpb .v3-stem{transition:transform .8s cubic-bezier(.2,.7,.2,1);transform-box:fill-box;transform-origin:bottom}
+#tpb .v3-pre .v3-stem{transform:scaleY(0)}
+#tpb .v3-fade{transition:opacity .5s ease,transform .5s cubic-bezier(.2,.7,.2,1);transform-box:fill-box;transform-origin:center}
+#tpb .v3-pre .v3-fade{opacity:0;transform:scale(.4)}
+#tpb .v3-txt{transition:opacity .6s ease}
+#tpb .v3-pre .v3-txt{opacity:0}
+
+/* --- top 5: big editorial ranking on the dark band --- */
+#tpb .bd-dark .final{background:rgba(255,255,255,.03);border:1px solid rgba(212,175,55,.3);padding:30px clamp(20px,3vw,34px)}
+#tpb .bd-dark .final ol{gap:0}
+#tpb .bd-dark .final li{grid-template-columns:64px 1fr;padding:18px 0;border-top:1px solid rgba(255,255,255,.1)}
+#tpb .bd-dark .final li:first-child{border-top:0;padding-top:4px}
+#tpb .bd-dark .final li > span{font-size:44px;line-height:.9;font-weight:800;color:transparent;-webkit-text-stroke:1.5px var(--g)}
+#tpb .bd-dark .final li:first-child > span{color:var(--g);-webkit-text-stroke:0}
+#tpb .bd-dark .final li b{font-size:clamp(22px,2.6vw,28px)}
+#tpb .bd-dark .final li small{font-size:16.5px}
+
+/* --- cards: same treatment as the homepage coverage cards --- */
+#tpb .card{border:1px solid var(--ln);border-top:3px solid var(--k);border-radius:10px;box-shadow:0 18px 36px -30px rgba(0,0,0,.4)}
+#tpb .card.dk{border-top-color:var(--g)}
+#tpb .cta a{border:1px solid var(--ln);border-top:3px solid var(--k);border-radius:12px}
+#tpb .cta a.d{border-color:var(--k);border-top-color:var(--g)}
+#tpb details.gl{border:1px solid var(--ln);border-left:4px solid var(--g);border-radius:10px}
+#tpb .note,#tpb .trust{background:#fff;border:1px solid var(--ln);border-left:4px solid var(--g)}
+#tpb .bd-white .trust{background:#F4F2EC}
+#tpb .related a{border-radius:300px}
+
+/* --- points scale as a bar chart --- */
+#tpb .scale.v3-sc{align-items:end;gap:10px}
+#tpb .scale.v3-sc div{display:flex;flex-direction:column;justify-content:flex-end;padding:0;border:0;background:none;text-align:left}
+#tpb .scale.v3-sc div::before{content:"";display:block;height:calc(var(--h) * 150px + 6px);border-radius:6px 6px 0 0;background:linear-gradient(180deg,#D4AF37,#B8921F);margin-bottom:10px;transition:height .9s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0ms)}
+#tpb .scale.v3-sc.v3-pre div::before{height:6px}
+#tpb .scale.v3-sc b{font-size:26px;line-height:1}
+#tpb .scale.v3-sc span{margin-top:4px;min-height:2.8em}
+
+/* --- winners' points chart replaces the tile grid visually (tiles stay in the page for readers and search engines) --- */
+#tpb .wp.v3-sr{position:absolute !important;width:1px !important;height:1px !important;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0 !important}
+
+@media (max-width:640px){
+  #tpb .bd > h2{font-size:clamp(28px,8vw,34px)}
+  #tpb .bd-dark .final li{grid-template-columns:48px 1fr}
+  #tpb .bd-dark .final li > span{font-size:34px}
+  #tpb .scale.v3-sc{grid-template-columns:repeat(5,1fr);gap:6px}
+  #tpb .scale.v3-sc div::before{height:calc(var(--h) * 110px + 6px)}
+  #tpb .scale.v3-sc b{font-size:20px}
+  #tpb .scale.v3-sc span{font-size:11.5px;min-height:4.2em}
+  #tpb td.pts.v3-bar{min-width:96px}
+  #tpb td.pts.v3-bar .v3-t{max-width:56px}
+}
+@media (prefers-reduced-motion:reduce){#tpb .v3-fade,#tpb .v3-txt,#tpb .v3-stem,#tpb td.pts.v3-bar .v3-t i,#tpb .scale.v3-sc div::before{transition:none !important}}
+@media print{#tpb .v3-chart,#tpb .v3-cd{display:none !important}#tpb .wp.v3-sr{position:static !important;width:auto !important;height:auto !important;clip:auto}#tpb > .bd{padding:0}}
+</style>
+
+<div id="tpb">
+
+<header class="rc">
+  <div class="rc-top has-photo">
+    <div>
+    <span class="rc-eyebrow">Kentucky Derby 153 · <!--TP:UPDATED-->Updated Friday, Nov. 20, 2026<!--/TP:UPDATED--></span>
+    <h1 class="rc-title">Road to the <span>Kentucky Derby</span> 2027</h1>
+    <p class="rc-sub">The points leaderboard, every prep race and its points, full results, the horses to watch, and Future Wager dates. Updated every week until the Derby on May 1.</p>
+    <p class="by"><span>By <a href="/about">Tom</a>, TracksideProfits</span><span>42 years handicapping</span><span>Sourced from Churchill Downs' official results</span></p>
+    </div>
+    <figure class="rc-photo"><img src="https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/cb4e9068-d073-497b-af9a-456cbbf76ff1/LEX_033-derbyturn4tb.JPG?format=1500w" srcset="https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/cb4e9068-d073-497b-af9a-456cbbf76ff1/LEX_033-derbyturn4tb.JPG?format=750w 750w, https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/cb4e9068-d073-497b-af9a-456cbbf76ff1/LEX_033-derbyturn4tb.JPG?format=1000w 1000w, https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/cb4e9068-d073-497b-af9a-456cbbf76ff1/LEX_033-derbyturn4tb.JPG?format=1500w 1500w" sizes="(max-width:1023px) 92vw, 54vw" decoding="async" width="1500" height="843" alt="Horses break from the starting gate in the Kentucky Derby at Churchill Downs" fetchpriority="high"></figure>
+  </div>
+  <div class="rc-facts">
+    <div><b>Sat., May 1, 2027</b><span>Derby day</span></div>
+    <div><b>Churchill Downs</b><span>Louisville, Ky.</span></div>
+    <div><b>1¼ miles</b><span>20-horse field</span></div>
+    <div><b><!--TP:NEXTFACT-->Nov. 28<!--/TP:NEXTFACT--></b><span>Next points race</span></div>
+  </div>
+</header>
+
+<section class="qp" aria-label="This week on the Derby trail">
+  <div class="qp-h"><b>This week on the trail</b><span><!--TP:WEEKDATE-->Week of Nov. 16<!--/TP:WEEKDATE--></span></div>
+  <!--TP:WEEK-->
+  <ul>
+    <li><strong>Hughes leads with 40 points.</strong> He's unbeaten in five starts and won the Breeders' Cup Juvenile by 2¼ lengths over American History.</li>
+    <li><strong>No points races since Oct. 30.</strong> The trail picks back up Saturday, Nov. 28, with the Kentucky Jockey Club at Churchill Downs and the Cattleya in Japan.</li>
+    <li><strong>Salahudin may run back.</strong> Bob Baffert has said he's considering the Kentucky Jockey Club for the Juvenile third-place finisher.</li>
+    <li><strong>Coach Pope and Mystik Bayou have targets.</strong> Kenny McPeek told DRF that Coach Pope, 4th in the Juvenile, is pointing to the Kentucky Jockey Club, and Mystik Bayou is likely for the Remsen on Dec. 5.</li>
+    <li><strong>Future Wager Pool 2</strong> runs Nov. 26–29, along with the only Sire Future Wager of the year.</li>
+  </ul>
+  <!--/TP:WEEK-->
+  <span class="next3-h">Coming up</span>
+  <!--TP:NEXT3-->
+  <ul class="next3">
+    <li><span class="d">Sat., Nov. 28</span><span><b>Kentucky Jockey Club</b> · Churchill Downs</span><span class="p">10-5-3-2-1 pts</span></li>
+    <li><span class="d">Sat., Nov. 28</span><span><b>Cattleya</b> · Tokyo (Japan Road)</span><span class="p">10-5-3-2-1 pts</span></li>
+    <li><span class="d">Sat., Dec. 5</span><span><b>Remsen</b> · Belmont Park</span><span class="p">10-5-3-2-1 pts</span></li>
+  </ul>
+  <!--/TP:NEXT3-->
+  <nav class="toc" aria-label="On this page">
+    <a href="#leaderboard">Points leaderboard</a>
+    <a href="#results">Results so far</a>
+    <a href="#schedule">Prep schedule</a>
+    <a href="#contenders">Our top 5</a>
+    <a href="#watch">Up-and-comers</a>
+    <a href="#intl">Japan &amp; Europe</a>
+    <a href="#how">How qualifying works</a>
+    <a href="#futures">Future Wager</a>
+    <a href="#faq">FAQ</a>
+  </nav>
+</section>
+
+<section class="bd bd-tint" aria-label="Points leaderboard">
+<p class="kick">Standings</p><h2 id="leaderboard">Kentucky Derby points leaderboard</h2>
+<p>Every horse with qualifying points for the 2027 Kentucky Derby, and the races where each one earned them. The top 17 on the final leaderboard get a spot in the starting gate; the other three spots are held for invitees from Japan and Europe/Middle East.</p>
+<!--TP:LEADERBOARD-->
+<div class="tw">
+<table class="lb">
+  <thead><tr><th scope="col">#</th><th scope="col" class="chg" title="Change since last week's update">+/−</th><th scope="col">Horse</th><th scope="col">Trainer</th><th scope="col">Points earned in</th><th scope="col" class="pts">Points</th><th scope="col" class="fo">Fair odds</th></tr></thead>
+  <tbody>
+    <tr class="top"><td class="n">1</td><td class="chg">—</td><td>Hughes</td><td>Bob Baffert</td><td class="from">BC Juvenile 30 · American Pharoah 10</td><td class="pts">40</td><td class="fo"></td></tr>
+    <tr class="top"><td class="n">2</td><td class="chg">—</td><td>American History</td><td>Todd Pletcher</td><td class="from">BC Juvenile 15 · Breeders' Futurity 10</td><td class="pts">25</td><td class="fo"></td></tr>
+    <tr class="top"><td class="n">3</td><td class="chg">—</td><td>Salahudin</td><td>Bob Baffert</td><td class="from">Iroquois 10 · BC Juvenile 9</td><td class="pts">19</td><td class="fo"></td></tr>
+    <tr><td class="n">4</td><td class="chg">—</td><td>Coach Pope</td><td>Kenny McPeek</td><td class="from">BC Juvenile 6 · Breeders' Futurity 5</td><td class="pts">11</td><td class="fo"></td></tr>
+    <tr><td class="n">5</td><td class="chg">—</td><td>U.S.S. Valor</td><td>Shug McGaughey</td><td class="from">Champagne 10</td><td class="pts">10</td><td class="fo"></td></tr>
+    <tr><td class="n">6</td><td class="chg">—</td><td>Jas</td><td>Steve Asmussen</td><td class="from">Street Sense 10</td><td class="pts">10</td><td class="fo"></td></tr>
+    <tr><td class="n">7</td><td class="chg">—</td><td>He Is No Lie</td><td>Doug O'Neill</td><td class="from">Iroquois 5</td><td class="pts">5</td><td class="fo"></td></tr>
+    <tr><td class="n">8</td><td class="chg">—</td><td>Gaudreau</td><td>Chad Brown</td><td class="from">Champagne 5</td><td class="pts">5</td><td class="fo"></td></tr>
+    <tr><td class="n">9</td><td class="chg">—</td><td>Net Par</td><td>Antonio Garcia</td><td class="from">American Pharoah 5</td><td class="pts">5</td><td class="fo"></td></tr>
+    <tr><td class="n">10</td><td class="chg">—</td><td>Staunch</td><td>Brendan Walsh</td><td class="from">Street Sense 5</td><td class="pts">5</td><td class="fo"></td></tr>
+    <tr><td class="n">11</td><td class="chg">—</td><td>Q B Rocket</td><td>Brad Cox</td><td class="from">Breeders' Futurity 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">12</td><td class="chg">—</td><td>Damavand</td><td>Todd Pletcher</td><td class="from">BC Juvenile 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">13</td><td class="chg">—</td><td>Club Reign</td><td>Whit Beckman</td><td class="from">Champagne 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">14</td><td class="chg">—</td><td>Imperial Honor</td><td>Bob Baffert</td><td class="from">American Pharoah 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">15</td><td class="chg">—</td><td>Caribbean Life</td><td>William Walden</td><td class="from">Iroquois 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">16</td><td class="chg">—</td><td>Mystik Bayou</td><td>Kenny McPeek</td><td class="from">Street Sense 3</td><td class="pts">3</td><td class="fo"></td></tr>
+    <tr><td class="n">17</td><td class="chg">—</td><td>Real Goodbar</td><td>Kenny McPeek</td><td class="from">Iroquois 2</td><td class="pts">2</td><td class="fo"></td></tr>
+    <tr class="cut"><td colspan="7">Top 17 get a spot · 18–20 get in only if a Japan or Europe invitation goes unused</td></tr>
+    <tr class="bub"><td class="n">18</td><td class="chg">—</td><td>Blessed Flyer</td><td>Michael Tomlinson</td><td class="from">Street Sense 2</td><td class="pts">2</td><td class="fo"></td></tr>
+    <tr class="bub"><td class="n">19</td><td class="chg">—</td><td>Domus</td><td>Bob Baffert</td><td class="from">American Pharoah 2</td><td class="pts">2</td><td class="fo"></td></tr>
+    <tr class="bub"><td class="n">20</td><td class="chg">—</td><td>Title Worthy</td><td>Dallas Stewart</td><td class="from">Breeders' Futurity 2</td><td class="pts">2</td><td class="fo"></td></tr>
+    <tr class="cut cut2"><td colspan="7">Outside the 20 · up to four also-eligibles wait in line for a scratch</td></tr>
+    <tr><td class="n">21</td><td class="chg">—</td><td>Earth Song</td><td>Jorge Delgado</td><td class="from">Champagne 2</td><td class="pts">2</td><td class="fo"></td></tr>
+    <tr><td class="n">22</td><td class="chg">—</td><td>Johnny Hockey</td><td>Antonio Arriaga</td><td class="from">Champagne 1</td><td class="pts">1</td><td class="fo"></td></tr>
+    <tr><td class="n">23</td><td class="chg">—</td><td>Jaded</td><td>Mark Casse</td><td class="from">Breeders' Futurity 1</td><td class="pts">1</td><td class="fo"></td></tr>
+    <tr><td class="n">24</td><td class="chg">—</td><td>Real Gone</td><td>Patrick Biancone</td><td class="from">Iroquois 1</td><td class="pts">1</td><td class="fo"></td></tr>
+    <tr><td class="n">25</td><td class="chg">—</td><td>Emancipate</td><td>Bob Baffert</td><td class="from">American Pharoah 1</td><td class="pts">1</td><td class="fo"></td></tr>
+    <tr><td class="n">26</td><td class="chg">—</td><td>Card Man</td><td>Chad Brown</td><td class="from">Street Sense 1</td><td class="pts">1</td><td class="fo"></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="cap">Standings after six points races, through the Breeders' Cup Juvenile on Oct. 30, 2026. Horses tied on points are ranked by earnings in non-restricted stakes, the official tiebreaker. The +/− column shows moves since the previous weekly update and starts with the first update after the Kentucky Jockey Club.</p>
+<!--/TP:LEADERBOARD-->
+<div class="legend"><span><i style="background:#FBF6E5"></i>Top 3</span><span><i style="background:#F7F7F7"></i>On the bubble (18–20)</span><span><i style="background:#0B0B0B"></i>Cut lines</span></div>
+</section>
+
+<section class="sig" id="update" aria-label="Get the Monday Derby trail update">
+  <div>
+    <span class="k">Free · Every Monday</span>
+    <b>Get this page in your inbox</b>
+    <p>One short email after each weekend through the Derby: who won, how the leaderboard moved, the horses to watch and what's next.</p>
+  </div>
+  <form data-kit="10212208" data-tag="26150120" action="https://app.kit.com/forms/10212208/subscriptions" method="post">
+    <input type="email" name="email_address" required placeholder="Your email address" aria-label="Email address" autocomplete="email">
+    <input type="hidden" name="tags[]" value="26150120">
+    <button type="submit">Send it to me</button>
+    <p class="fine2">Unsubscribe anytime.</p>
+  </form>
+  <p class="ok" hidden>Almost done: check your inbox for a confirmation email. Already on our list? You're all set.</p>
+</section>
+
+<section class="bd bd-white" aria-label="Results so far">
+<p class="kick">Results</p><h2 id="results">Points races run so far</h2>
+<!--TP:RESULTS-->
+<div class="tw">
+<table>
+  <thead><tr><th scope="col">Date</th><th scope="col">Race</th><th scope="col">Winner (trainer)</th><th scope="col">2nd–5th</th><th scope="col" class="pts">Points</th></tr></thead>
+  <tbody>
+    <tr><td class="dt">Oct. 30</td><td>Breeders' Cup Juvenile (G1)<br><span class="cap">Keeneland · 1 1/16 mi</span></td><td><strong>Hughes</strong> (Bob Baffert)</td><td class="t5">American History, Salahudin, Coach Pope, Damavand</td><td class="pts">30-15-9-6-3</td></tr>
+    <tr><td class="dt">Oct. 25</td><td>Street Sense (G3)<br><span class="cap">Churchill Downs · 1 1/16 mi</span></td><td><strong>Jas</strong> (Steve Asmussen)</td><td class="t5">Staunch, Mystik Bayou, Blessed Flyer, Card Man</td><td class="pts">10-5-3-2-1</td></tr>
+    <tr><td class="dt">Oct. 3</td><td>Breeders' Futurity (G1)<br><span class="cap">Keeneland · 1 1/16 mi</span></td><td><strong>American History</strong> (Todd Pletcher)</td><td class="t5">Coach Pope, Q B Rocket, Title Worthy, Jaded</td><td class="pts">10-5-3-2-1</td></tr>
+    <tr><td class="dt">Oct. 3</td><td>American Pharoah (G1)<br><span class="cap">Santa Anita · 1 1/16 mi</span></td><td><strong>Hughes</strong> (Bob Baffert)</td><td class="t5">Net Par, Imperial Honor, Domus, Emancipate</td><td class="pts">10-5-3-2-1</td></tr>
+    <tr><td class="dt">Oct. 3</td><td>Champagne (G1)<br><span class="cap">Belmont Park · 1 mi</span></td><td><strong>U.S.S. Valor</strong> (Shug McGaughey)</td><td class="t5">Gaudreau, Club Reign, Earth Song, Johnny Hockey</td><td class="pts">10-5-3-2-1</td></tr>
+    <tr><td class="dt">Sept. 12</td><td>Iroquois (G3)<br><span class="cap">Churchill Downs · 1 mi</span></td><td><strong>Salahudin</strong> (Bob Baffert)</td><td class="t5">He Is No Lie, Caribbean Life, Real Goodbar, Real Gone</td><td class="pts">10-5-3-2-1</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="cap">Newest first. Official order of finish from Churchill Downs. Points are for 1st through 5th in order.</p>
+<!--/TP:RESULTS-->
+</section>
+
+<section class="bd bd-tint" aria-label="Prep schedule">
+<p class="kick">Every prep, every point</p><h2 id="schedule">2026-27 Kentucky Derby prep schedule</h2>
+<p>All North American points races, with dates, distances and the points paid to the top five. Our free race previews for the stakes are on the <a href="https://picks.tracksideprofits.com/previews/">picks page</a>.</p>
+<!--TP:SCHEDULE-->
+<div class="tw">
+<table>
+  <thead><tr><th scope="col">Date</th><th scope="col">Race</th><th scope="col">Track</th><th scope="col">Distance</th><th scope="col">Points (1st–5th)</th><th scope="col">Winner</th></tr></thead>
+  <tbody>
+    <tr class="grp"><td colspan="6">Fall 2026</td></tr>
+    <tr class="done"><td class="dt">Sept. 12</td><td>Iroquois</td><td>Churchill Downs</td><td class="dist">1 mi</td><td>10-5-3-2-1</td><td>Salahudin</td></tr>
+    <tr class="done"><td class="dt">Oct. 3</td><td>Champagne</td><td>Belmont Park</td><td class="dist">1 mi</td><td>10-5-3-2-1</td><td>U.S.S. Valor</td></tr>
+    <tr class="done"><td class="dt">Oct. 3</td><td>American Pharoah</td><td>Santa Anita</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>Hughes</td></tr>
+    <tr class="done"><td class="dt">Oct. 3</td><td>Breeders' Futurity</td><td>Keeneland</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>American History</td></tr>
+    <tr class="done"><td class="dt">Oct. 25</td><td>Street Sense</td><td>Churchill Downs</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>Jas</td></tr>
+    <tr class="done"><td class="dt">Oct. 30</td><td>Breeders' Cup Juvenile</td><td>Keeneland</td><td class="dist">1 1/16 mi</td><td>30-15-9-6-3</td><td>Hughes</td></tr>
+    <tr class="next"><td class="dt">Nov. 28</td><td>Kentucky Jockey Club <span class="tag">Next</span></td><td>Churchill Downs</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr class="grp"><td colspan="6">December 2026</td></tr>
+    <tr><td class="dt">Dec. 5</td><td>Remsen</td><td>Belmont Park</td><td class="dist">1 1/8 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr><td class="dt">Dec. 12</td><td>Los Alamitos Futurity</td><td>Los Alamitos</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr><td class="dt">Dec. 19</td><td>Gun Runner</td><td>Fair Grounds</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr><td class="dt">Dec. 19</td><td>Remington Springboard Mile</td><td>Remington Park</td><td class="dist">1 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr class="grp"><td colspan="6">January 2027</td></tr>
+    <tr><td class="dt">Jan. 2</td><td>Smarty Jones</td><td>Oaklawn Park</td><td class="dist">1 1/16 mi</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr><td class="dt">Jan. 16</td><td>Leonatus <span class="tag">New</span></td><td>Turfway Park</td><td class="dist">TBA (synthetic)</td><td>10-5-3-2-1</td><td>—</td></tr>
+    <tr><td class="dt">Jan. 16</td><td>Withers</td><td>Belmont Park</td><td class="dist">1 1/8 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Jan. 16</td><td>Lecomte</td><td>Fair Grounds</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Jan. 23</td><td>Holy Bull</td><td>Gulfstream Park</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr class="grp"><td colspan="6">February 2027</td></tr>
+    <tr><td class="dt">Feb. 6</td><td>Sam F. Davis</td><td>Tampa Bay Downs</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 6</td><td>Robert B. Lewis</td><td>Santa Anita</td><td class="dist">1 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 6</td><td>Southwest</td><td>Oaklawn Park</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 13</td><td>Risen Star</td><td>Fair Grounds</td><td class="dist">1 1/8 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 20</td><td>John Battaglia Memorial</td><td>Turfway Park</td><td class="dist">1 1/16 mi (synthetic)</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 20</td><td>Gotham</td><td>Belmont Park</td><td class="dist">1 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 21</td><td>Sunland Park Derby</td><td>Sunland Park</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+    <tr><td class="dt">Feb. 27</td><td>Fountain of Youth</td><td>Gulfstream Park</td><td class="dist">1 1/16 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr class="grp"><td colspan="6">March 2027</td></tr>
+    <tr><td class="dt">Mar. 6</td><td>Tampa Bay Derby</td><td>Tampa Bay Downs</td><td class="dist">1 1/16 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 6</td><td>San Felipe</td><td>Santa Anita</td><td class="dist">1 1/16 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 13</td><td>Virginia Derby</td><td>Colonial Downs</td><td class="dist">1 1/8 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 13</td><td>Rebel</td><td>Oaklawn Park</td><td class="dist">1 1/16 mi</td><td>50-25-15-10-5</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 20</td><td>Louisiana Derby</td><td>Fair Grounds</td><td class="dist">1 3/16 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 20</td><td>Jeff Ruby Steaks</td><td>Turfway Park</td><td class="dist">1 1/8 mi (synthetic)</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Mar. 27</td><td>Florida Derby</td><td>Gulfstream Park</td><td class="dist">1 1/8 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr class="grp"><td colspan="6">April 2027</td></tr>
+    <tr><td class="dt">Apr. 3</td><td>Santa Anita Derby</td><td>Santa Anita</td><td class="dist">1 1/8 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Apr. 3</td><td>Blue Grass</td><td>Keeneland</td><td class="dist">1 1/8 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Apr. 3</td><td>Wood Memorial</td><td>Belmont Park</td><td class="dist">1 1/8 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Apr. 10</td><td>Arkansas Derby</td><td>Oaklawn Park</td><td class="dist">1 1/8 mi</td><td>100-50-25-15-10</td><td>—</td></tr>
+    <tr><td class="dt">Apr. 10</td><td>Lexington</td><td>Keeneland</td><td class="dist">1 1/16 mi</td><td>20-10-6-4-2</td><td>—</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="cap">Dates and points from Churchill Downs' official 2026-27 Road to the Kentucky Derby schedule. Distances for races already run are as run; for upcoming races they're from last season's official schedule and are confirmed when each race is carded. Dates can change; we update this table every week.</p>
+<!--/TP:SCHEDULE-->
+</section>
+
+<section class="bd bd-dark" aria-label="Our top 5">
+<p class="kick">Our view</p><h2 id="contenders">Tom's Kentucky Derby top 5</h2>
+<p>Points tell you who's in. This is who we think can win. Read the full breakdown in <a href="/blog/top-5-2027-kentucky-derby-contenders">Who can beat Hughes?</a></p>
+<!--TP:TOP5-->
+<div class="final">
+  <h3>Ranked by chance to win on May 1 · as of Nov. 18</h3>
+  <ol>
+    <li><span>1</span><b>Hughes</b><small>Bob Baffert · 5 for 5, three Grade 1 wins, the most points. Still the horse to beat.</small></li>
+    <li><span>2</span><b>U.S.S. Valor</b><small>Shug McGaughey · Won the Champagne by 6½ lengths, then skipped the Breeders' Cup to point to May. Possible return Jan. 23 at Gulfstream.</small></li>
+    <li><span>3</span><b>American History</b><small>Todd Pletcher · Won the Breeders' Futurity and closed into 2nd behind Hughes in the Juvenile. Reported to be aiming for the Holy Bull.</small></li>
+    <li><span>4</span><b>The Good Life</b><small>Brad Cox · 2 for 2, won the Grade 1 Hopeful on the lead. Given time off; back at 3. Has to prove himself around two turns.</small></li>
+    <li><span>5</span><b>Inshallah</b><small>John Sadler · $2.1 million colt from Flightline's first crop who won his debut at Del Mar on Aug. 15. His next start will tell us a lot.</small></li>
+  </ol>
+</div>
+<p class="cap">When Tom changes his list, ▲ and ▼ show which horses moved since the last update.</p>
+<!--/TP:TOP5-->
+</section>
+
+<section class="bd bd-white" aria-label="Up-and-comers">
+<p class="kick">Not on the board yet</p><h2 id="watch">Up-and-comers to watch</h2>
+<p>Most Derby winners don't look like Derby winners in November. These maiden winners have no points yet but are bred and bought to get there.</p>
+<!--TP:WATCH-->
+<div class="cards">
+  <div class="card"><span class="k">Eddie Kenneally</span><b>Endrush</b><span class="who">Won maiden race Sept. 10</span><p>Ranked third among all Derby prospects in America's Best Racing's Nov. 9 Rookie Rankings, ahead of several stakes winners.</p></div>
+  <div class="card"><span class="k">Chad Brown</span><b>Bletchley</b><span class="who">Won debut at Belmont Nov. 6</span><p>Gun Runner colt who sold for $1.55 million as a yearling and won his first start by 7¾ lengths.</p></div>
+  <div class="card"><span class="k">Steve Asmussen</span><b>Powerline</b><span class="who">Won maiden race Oct. 31</span><p>A $1.8 million yearling who has been highly regarded for a long time. Asmussen also trains Street Sense winner Jas.</p></div>
+  <div class="card"><span class="k">Brad Cox</span><b>Fools Rush In</b><span class="who">Won maiden race Oct. 25</span><p>Back on the work tab at Churchill Downs with a half-mile in :48.40, his first timed workout since the win.</p></div>
+</div>
+<p class="cap">We add horses here as they break through and move them up to the leaderboard once they earn points.</p>
+<!--/TP:WATCH-->
+</section>
+
+<section class="bd bd-white" aria-label="Japan and Europe">
+<p class="kick">Overseas routes</p><h2 id="intl">Japan and Europe/Middle East</h2>
+<p>Up to three Derby spots are held for international horses: up to two from the Euro/Middle East series, which ends with the UAE Derby on Mar. 27, and one from Japan. If an invitation isn't accepted, the spot goes back to the American leaderboard.</p>
+<!--TP:INTL-->
+<div class="cards">
+  <div class="card"><span class="k">Euro/Middle East leaders</span><b>Noble Exhibit · 13</b><span class="who">Aidan O'Brien</span><p>Next: Haffner 10 (O'Brien), Amusingly 10 (Francis-Henri Graffard), Giant Sequoia 10 (O'Brien), Burning Up 7 (Karl Burke). Series ends with the UAE Derby on Mar. 27 (100-60-30-15-10).</p></div>
+  <div class="card"><span class="k">Japan road</span><b>Starts Nov. 28</b><span class="who">No points awarded yet</span><p>Four races: Cattleya (Nov. 28), Zen-Nippon Nisai Yushun (Dec. 16), Hyacinth (Feb. 21) and Fukuryu (Mar. 27).</p></div>
+</div>
+<!--/TP:INTL-->
+</section>
+
+<section class="bd bd-tint" aria-label="How qualifying works">
+<p class="kick">The rules</p><h2 id="how">How horses qualify for the Kentucky Derby</h2>
+<ol class="steps">
+  <li><strong>The top five finishers in each points race earn points.</strong> The bigger the race and the closer to May, the more it's worth.</li>
+  <li><strong>The top 17 on the final leaderboard get a spot.</strong> Three more spots are held for invitees: up to two from the Euro/Middle East series and one from Japan. Any invitation that isn't used goes to the next horse on the American leaderboard.</li>
+  <li><strong>Ties are broken by earnings</strong> in non-restricted stakes races, then lifetime earnings, then a draw.</li>
+  <li><strong>Up to four also-eligibles</strong> wait in line in case a horse in the field drops out before the scratch deadline.</li>
+</ol>
+<div class="scale" aria-label="Points scales">
+  <div><b>10</b><span>Fall and early-winter preps</span></div>
+  <div><b>20</b><span>Second-tier winter and spring preps</span></div>
+  <div><b>30</b><span>Breeders' Cup Juvenile</span></div>
+  <div><b>50</b><span>Major preps, Feb.–Mar.</span></div>
+  <div><b>100</b><span>The final big preps, Mar.–Apr.</span></div>
+</div>
+<p class="cap">Points to the winner. Second through fifth earn a sliding share, shown in the schedule above.</p>
+
+<h3>How many points it takes</h3>
+<p>There's no magic number, and points aren't everything. Here's what every Derby winner had since the points system started in 2013.</p>
+<div class="wp" aria-label="Kentucky Derby winners and their qualifying points">
+  <div><b>60</b><span>2026 · Golden Tempo</span></div>
+  <div><b>110</b><span>2025 · Sovereignty</span></div>
+  <div><b>46</b><span>2024 · Mystik Dan</span></div>
+  <div><b>50</b><span>2023 · Mage</span></div>
+  <div class="lo"><b>21</b><span>2022 · Rich Strike (drew in from the also-eligible list)</span></div>
+  <div><b>52</b><span>2021 · Mandaloun</span></div>
+  <div class="lo"><b>200</b><span>2020 · Authentic (most ever)</span></div>
+  <div><b>50</b><span>2019 · Country House</span></div>
+  <div><b>100</b><span>2018 · Justify</span></div>
+  <div><b>100</b><span>2017 · Always Dreaming</span></div>
+  <div><b>130</b><span>2016 · Nyquist</span></div>
+  <div><b>160</b><span>2015 · American Pharoah</span></div>
+  <div><b>150</b><span>2014 · California Chrome</span></div>
+  <div><b>150</b><span>2013 · Orb</span></div>
+</div>
+<p class="cap">Since 2019, six of the eight Derby winners came in with 60 points or fewer. In 2026, the last horses into the field had 25 points, and one of them, Ocelli, finished 3rd at 70-1.</p>
+
+<details class="gl">
+  <summary>New to the Derby trail? 8 terms in plain English</summary>
+  <dl>
+    <dt>Points race (prep race)</dt><dd>A race on the official Road to the Kentucky Derby. Only the top five finishers earn points.</dd>
+    <dt>Championship Series</dt><dd>The 16 biggest points races, from mid-February to mid-April. Most pay 50 or 100 points to the winner.</dd>
+    <dt>Leaderboard</dt><dd>The running points total for every horse. The final leaderboard in April sets the Derby field.</dd>
+    <dt>Also-eligible</dt><dd>A horse just outside the 20 who draws into the race if someone scratches before the deadline.</dd>
+    <dt>Grade (G1, G2, G3)</dt><dd>The class of a stakes race. Grade 1 is the top level.</dd>
+    <dt>Synthetic</dt><dd>An all-weather surface instead of dirt. Turfway Park's points races are run on it.</dd>
+    <dt>Triple Crown nomination</dt><dd>To run in the Derby, a horse must be nominated to the Triple Crown. Late nominations cost more.</dd>
+    <dt>Future Wager</dt><dd>A bet on the Derby placed months ahead at fixed odds. No refunds if your horse doesn't run.</dd>
+  </dl>
+</details>
+
+</section>
+<section class="bd bd-white" aria-label="Future Wager">
+<p class="kick">Bet it early</p><h2 id="futures">Kentucky Derby Future Wager dates</h2>
+<!--TP:FUTURES-->
+<div class="tw">
+<table>
+  <thead><tr><th scope="col">Pool</th><th scope="col">Dates</th><th scope="col">Also offered</th></tr></thead>
+  <tbody>
+    <tr class="done"><td class="n">1</td><td>Oct. 28–30, 2026 (closed)</td><td>U.S.S. Valor was the top individual choice at 6-1; Hughes 8-1</td></tr>
+    <tr class="next"><td class="n">2</td><td>Nov. 26–29, 2026 <span class="tag">Next</span></td><td>Sire Future Wager</td></tr>
+    <tr><td class="n">3</td><td>Jan. 15–17, 2027</td><td>—</td></tr>
+    <tr><td class="n">4</td><td>Feb. 12–14, 2027</td><td>—</td></tr>
+    <tr><td class="n">5</td><td>Mar. 12–14, 2027</td><td>Kentucky Oaks Future Wager</td></tr>
+    <tr><td class="n">6</td><td>Apr. 1–3, 2027</td><td>Kentucky Oaks Future Wager</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="cap">Pools 2–6 open at noon on the first day and close at 6 p.m. on the last day, per Churchill Downs. There are no refunds in the Future Wager if your horse doesn't run.</p>
+<!--/TP:FUTURES-->
+
+<div class="cta">
+  <a class="d" href="#update"><em>Free · Every Monday</em><b>Get the Derby trail update by email</b><span>The weekend's results, the new leaderboard and the horses to watch, in one short email every Monday.</span><i>Sign up free</i></a>
+  <a href="/blueprints"><em>Derby week</em><b>Kentucky Derby Blueprint</b><span>Every race on Derby Day: pace maps, figures, track trends, horse-by-horse notes and our tickets.</span><i>See Blueprints</i></a>
+</div>
+</section>
+
+<section class="bd bd-tint" aria-label="FAQ">
+<p class="kick">Quick answers</p><h2 id="faq">Road to the Kentucky Derby FAQ</h2>
+<!--TP:FAQ-->
+<details><summary>When is the 2027 Kentucky Derby?</summary><p>Saturday, May 1, 2027, at Churchill Downs in Louisville. The Kentucky Oaks is the day before, Friday, April 30.</p></details>
+<details><summary>Who leads the Road to the Kentucky Derby?</summary><p>Hughes, trained by Bob Baffert, with 40 points. American History is second with 25 and Salahudin third with 19.</p></details>
+<details><summary>When is the next Kentucky Derby prep race?</summary><p>The Kentucky Jockey Club at Churchill Downs on Saturday, Nov. 28, 2026. It pays 10-5-3-2-1 points to the top five.</p></details>
+<!--/TP:FAQ-->
+<details><summary>How many horses get into the Kentucky Derby on points?</summary><p>The top 17 on the American leaderboard. Three more spots are held for invitees, up to two from the Euro/Middle East series and one from Japan, and any spot that isn't used goes to the next American horse. The field is capped at 20.</p></details>
+<details><summary>How many points does a horse need to make the Kentucky Derby?</summary><p>There's no fixed number. It depends on how the season plays out and how many horses drop out. In 2026, the last horses into the field had 25 points.</p></details>
+<details><summary>Which prep races are worth the most points?</summary><p>The Louisiana Derby, Jeff Ruby Steaks, Florida Derby, Santa Anita Derby, Blue Grass, Wood Memorial and Arkansas Derby each pay 100-50-25-15-10.</p></details>
+<details><summary>How many points have Kentucky Derby winners had?</summary><p>Since the points system began in 2013, Authentic had the most (200, in 2020) and Rich Strike the fewest (21, in 2022). Rich Strike only got in from the also-eligible list.</p></details>
+<details><summary>What happens if horses are tied on points?</summary><p>The tiebreaker is earnings in non-restricted stakes races, then lifetime earnings. If they're still tied, it's decided by a draw.</p></details>
+<details><summary>Can a filly run in the Kentucky Derby?</summary><p>Yes. She has to earn her way in with points from Road to the Kentucky Derby races, the same as the colts.</p></details>
+
+<div class="trust"><b>How we keep this page accurate</b>Every result, point total and date on this page comes from Churchill Downs' official results, leaderboard and schedule, cross-checked against news reports. We update it every Monday through Derby week. If something changes midweek, or you spot a mistake, email <a href="mailto:matt@tracksideprofits.com">matt@tracksideprofits.com</a> and we'll fix it the same day.</div>
+</section>
+
+<section class="bd bd-white" aria-label="More Derby coverage">
+<p class="kick">Keep reading</p><h2>More Derby coverage</h2>
+<div class="related">
+  <a href="/blog/top-5-2027-kentucky-derby-contenders">Who can beat Hughes? 5 juveniles to know</a>
+  <a href="https://picks.tracksideprofits.com/previews/">Free stakes previews</a>
+  <a href="https://picks.tracksideprofits.com/churchill-downs-picks/">Churchill Downs picks</a>
+  <a href="/breeders-cup-results">2026 Breeders' Cup results</a>
+  <a href="/performance">Our public results</a>
+</div>
+
+<p class="fine">Sources: race dates, points, distances and results from <a href="https://www.kentuckyderby.com/prep-races/">KentuckyDerby.com</a> (Churchill Downs); leaderboard from <a href="https://www.horseracingnation.com/news/Kentucky_Derby_2027_Here_s_the_leaderboard_after_6_races_123">Horse Racing Nation</a>; Derby winners' points from <a href="https://www.americasbestracing.net/lifestyle/2026-how-horses-qualify-the-kentucky-derby-beginners-guide">America's Best Racing</a> and <a href="https://en.wikipedia.org/wiki/2026_Kentucky_Derby">the 2026 Derby chart</a>; prospect notes from <a href="https://www.americasbestracing.net/node/73288">America's Best Racing</a>; race plans from <a href="https://paulickreport.com/news/triple-crown/report-mystik-bayou-likely-for-remsen-coach-pope-to-kentucky-jockey-club">Paulick Report</a>; Champagne result from <a href="https://www.nyra.com/belmont/news/u-s-s-valor-sweeps-clear-to-dominant-g1-champagne-victory/">NYRA</a>; Future Wager dates from <a href="https://www.kentuckyderby.com/wager/future-wager">KentuckyDerby.com</a>. Updated every Monday through May 1, 2027. There are no guaranteed winners. Wager responsibly. If you or someone you know has a gambling problem, call 1-800-GAMBLER. Must be 21+ to wager.</p>
+</section>
+
+</div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"BreadcrumbList","itemListElement":[
+ {"@type":"ListItem","position":1,"name":"Home","item":"https://www.tracksideprofits.com/"},
+ {"@type":"ListItem","position":2,"name":"Road to the Kentucky Derby","item":"https://www.tracksideprofits.com/kentucky-derby/road-to-the-derby"}]},
+{"@type":"WebPage","@id":"https://www.tracksideprofits.com/kentucky-derby/road-to-the-derby","url":"https://www.tracksideprofits.com/kentucky-derby/road-to-the-derby","name":"Road to the Kentucky Derby 2027: Points Leaderboard","description":"The 2027 Kentucky Derby points leaderboard, every prep race with dates, distances and points, full results, up-and-comers and Future Wager dates. Updated weekly.","datePublished":"2026-11-18","dateModified":"2026-11-20","inLanguage":"en-US","isAccessibleForFree":true,"primaryImageOfPage":{"@type":"ImageObject","url":"https://images.squarespace-cdn.com/content/v1/69852027f272bc1a2ea010a3/cb4e9068-d073-497b-af9a-456cbbf76ff1/LEX_033-derbyturn4tb.JPG?format=1500w","width":1500,"height":843},"author":{"@type":"Person","name":"Tom","jobTitle":"Handicapper and host","url":"https://www.tracksideprofits.com/about","worksFor":{"@type":"Organization","name":"TracksideProfits"}},"publisher":{"@type":"Organization","name":"TracksideProfits","url":"https://www.tracksideprofits.com/","sameAs":["https://www.youtube.com/@TracksideProfits"]},"about":{"@id":"https://www.tracksideprofits.com/kentucky-derby/road-to-the-derby#derby-2027"}},
+{"@type":"SportsEvent","@id":"https://www.tracksideprofits.com/kentucky-derby/road-to-the-derby#derby-2027","name":"2027 Kentucky Derby","startDate":"2027-05-01","eventStatus":"https://schema.org/EventScheduled","eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode","sport":"Horse racing","location":{"@type":"Place","name":"Churchill Downs","address":{"@type":"PostalAddress","addressLocality":"Louisville","addressRegion":"KY","addressCountry":"US"}}},
+{"@type":"FAQPage","mainEntity":[
+ {"@type":"Question","name":"When is the 2027 Kentucky Derby?","acceptedAnswer":{"@type":"Answer","text":"Saturday, May 1, 2027, at Churchill Downs in Louisville. The Kentucky Oaks is Friday, April 30."}},
+ {"@type":"Question","name":"Who leads the Road to the Kentucky Derby?","acceptedAnswer":{"@type":"Answer","text":"Hughes, trained by Bob Baffert, with 40 points. American History is second with 25 and Salahudin third with 19."}},
+ {"@type":"Question","name":"When is the next Kentucky Derby prep race?","acceptedAnswer":{"@type":"Answer","text":"The Kentucky Jockey Club at Churchill Downs on Saturday, Nov. 28, 2026. It pays 10-5-3-2-1 points to the top five."}},
+ {"@type":"Question","name":"How many horses get into the Kentucky Derby on points?","acceptedAnswer":{"@type":"Answer","text":"The top 17 on the American leaderboard. Three more spots are held for invitees, up to two from the Euro/Middle East series and one from Japan, and any spot that isn't used goes to the next American horse. The field is capped at 20."}},
+ {"@type":"Question","name":"How many points does a horse need to make the Kentucky Derby?","acceptedAnswer":{"@type":"Answer","text":"There's no fixed number. It depends on how the season plays out and how many horses drop out. In 2026, the last horses into the field had 25 points."}},
+ {"@type":"Question","name":"Which prep races are worth the most points?","acceptedAnswer":{"@type":"Answer","text":"The Louisiana Derby, Jeff Ruby Steaks, Florida Derby, Santa Anita Derby, Blue Grass, Wood Memorial and Arkansas Derby each pay 100-50-25-15-10."}},
+ {"@type":"Question","name":"How many points have Kentucky Derby winners had?","acceptedAnswer":{"@type":"Answer","text":"Since the points system began in 2013, Authentic had the most (200, in 2020) and Rich Strike the fewest (21, in 2022). Rich Strike only got in from the also-eligible list."}},
+ {"@type":"Question","name":"What happens if horses are tied on points?","acceptedAnswer":{"@type":"Answer","text":"The tiebreaker is earnings in non-restricted stakes races, then lifetime earnings. If they're still tied, it's decided by a draw."}},
+ {"@type":"Question","name":"Can a filly run in the Kentucky Derby?","acceptedAnswer":{"@type":"Answer","text":"Yes. She has to earn her way in with points from Road to the Kentucky Derby races, the same as the colts."}}]}
+]}
+</script>
+<script>
+/* Sticky "jump to" bar + current-section highlight + Monday email signup */
+(function () {
+  var art = document.getElementById('tpb'); if (!art) return;
+  var inEditor = window.self !== window.top || /sqs-edit-mode/.test(document.body.className);
+  var toc = art.querySelector('.toc');
+  if (!inEditor && toc && !document.getElementById('tpb-jump')) {
+    var bar = document.createElement('nav'); bar.id = 'tpb-jump'; bar.setAttribute('aria-label', 'Jump to a section');
+    var inner = document.createElement('div'); inner.className = 'in';
+    var links = toc.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) { var a = document.createElement('a'); a.href = links[i].getAttribute('href'); a.textContent = links[i].textContent; inner.appendChild(a); }
+    bar.appendChild(inner); document.body.appendChild(bar);
+    var items = inner.querySelectorAll('a'), secs = [];
+    for (var k = 0; k < items.length; k++) { var el = document.getElementById(items[k].getAttribute('href').slice(1)); if (el) secs.push([el, items[k]]); }
+    function headerBottom() {
+      var h = document.querySelector('header#header'); if (!h) return 0;
+      var cs = getComputedStyle(h), r = h.getBoundingClientRect();
+      if ((cs.position === 'fixed' || cs.position === 'sticky') && r.bottom > 0 && r.top <= 0.5) return Math.round(r.bottom);
+      return 0;
+    }
+    var last = null;
+    function onScroll() {
+      var show = toc.getBoundingClientRect().bottom < 0 && art.getBoundingClientRect().bottom > 200;
+      bar.style.top = headerBottom() + 'px';
+      bar.classList.toggle('on', show);
+      var cur = null;
+      for (var j = 0; j < secs.length; j++) { if (secs[j][0].getBoundingClientRect().top < 160) cur = secs[j][1]; }
+      if (cur !== last) { if (last) last.classList.remove('cur'); if (cur) { cur.classList.add('cur'); if (show && cur.scrollIntoView) { var l = cur.offsetLeft - 20; inner.scrollTo ? inner.scrollTo({ left: l, behavior: 'smooth' }) : (inner.scrollLeft = l); } } last = cur; }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true }); window.addEventListener('resize', onScroll); onScroll();
+  }
+  var f = art.querySelector('.sig form');
+  if (f) f.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var btn = f.querySelector('button'), ok = f.parentNode.querySelector('.ok'); btn.disabled = true; btn.textContent = 'Sending...';
+    var done = function () { f.hidden = true; if (ok) ok.hidden = false; };
+    try {
+      fetch(f.action, { method: 'POST', body: new FormData(f), headers: { Accept: 'application/json' } })
+        .then(function (r) { return r.ok ? done() : f.submit(); }).catch(function () { f.submit(); });
+    } catch (x) { f.submit(); }
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var art = document.getElementById('tpb'); if (!art) return;
+  var inEditor = window.self !== window.top || /sqs-edit-mode/.test(document.body.className);
+  var sec = art.closest('.page-section'), blk = art.closest('.sqs-block'), hero = art.querySelector('.rc');
+  function navEdge() {
+    var h = document.querySelector('header#header, header.header'), b = h ? h.getBoundingClientRect().bottom : 0;
+    var bg = document.querySelector('.header-background-solid, .header-border');
+    if (bg) b = Math.max(b, bg.getBoundingClientRect().bottom);
+    return b;
+  }
+  function snap() {
+    if (!sec || !hero) return;
+    if (blk) blk.style.setProperty('padding-top', '0px', 'important');
+    var gap = hero.getBoundingClientRect().top - navEdge();
+    if (Math.abs(gap) < 1) return;
+    var cur = parseFloat(getComputedStyle(sec).paddingTop) || 0;
+    sec.style.setProperty('padding-top', Math.max(0, cur - gap) + 'px', 'important');
+  }
+  if (!inEditor && sec) {
+    snap();
+    window.addEventListener('load', snap);
+    window.addEventListener('resize', function () { setTimeout(snap, 60); });
+    if ('MutationObserver' in window) new MutationObserver(function () { requestAnimationFrame(snap); }).observe(sec, { attributes: true, attributeFilter: ['style'] });
+    setTimeout(snap, 400); setTimeout(snap, 1500);
+  }
+})();
+</script>
+
+<script>
+/* v3: countdown, leaderboard points bars, prep-season timeline, points-scale bars, Derby winners' points chart.
+   Everything is read from the tables and text on this page, so the weekly updates feed the charts automatically. */
+(function () {
+  var art = document.getElementById('tpb'); if (!art) return;
+  var NS = 'http://www.w3.org/2000/svg';
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canAnimate = !reduce && 'IntersectionObserver' in window;
+  function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+  function txt(el) { return el ? el.textContent.replace(/\s+/g, ' ').trim() : ''; }
+  function reveal(el) {
+    if (!canAnimate) return;
+    el.classList.add('v3-pre');
+    var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.remove('v3-pre'); io.unobserve(e.target); } }); }, { threshold: 0.2, rootMargin: '0px 0px -8% 0px' });
+    io.observe(el);
+  }
+
+  /* Derby date from the page's own structured data */
+  var derby = new Date(2027, 4, 1);
+  try { var ld = document.querySelector('script[type="application/ld+json"]'); var m = ld && ld.textContent.match(/"startDate":"(\d{4})-(\d{2})-(\d{2})"/); if (m) derby = new Date(+m[1], +m[2] - 1, +m[3]); } catch (e) {}
+
+  /* 1. countdown chip in the hero */
+  try {
+    var by = art.querySelector('.rc .by');
+    if (by && !art.querySelector('.v3-cd')) {
+      var now = new Date(); now.setHours(0, 0, 0, 0);
+      var days = Math.round((derby - now) / 86400000);
+      if (days > 0) { var cd = document.createElement('p'); cd.className = 'v3-cd'; cd.innerHTML = '<b>' + days + '</b> day' + (days === 1 ? '' : 's') + ' to the Kentucky Derby'; by.parentNode.insertBefore(cd, by.nextSibling); }
+    }
+  } catch (e) {}
+
+  /* 2. leaderboard: points bars + gold rank chips for the top 3 */
+  try {
+    var lb = art.querySelector('table.lb');
+    if (lb && !lb.querySelector('.v3-w')) {
+      var cells = lb.querySelectorAll('tbody td.pts'), max = 0, i;
+      for (i = 0; i < cells.length; i++) max = Math.max(max, parseFloat(txt(cells[i])) || 0);
+      if (max > 0) for (i = 0; i < cells.length; i++) {
+        var v = parseFloat(txt(cells[i])) || 0;
+        cells[i].classList.add('v3-bar');
+        cells[i].innerHTML = '<span class="v3-w"><span class="v3-t" aria-hidden="true"><i style="--w:' + (v / max * 100).toFixed(1) + '%;transition-delay:' + (i * 45) + 'ms"></i></span><span class="v3-n">' + esc(txt(cells[i])) + '</span></span>';
+      }
+      var tops = lb.querySelectorAll('tbody tr.top td.n');
+      for (i = 0; i < tops.length; i++) tops[i].innerHTML = '<span class="v3-rk">' + esc(txt(tops[i])) + '</span>';
+      reveal(lb.closest('.tw') || lb);
+    }
+  } catch (e) {}
+
+  /* 3. prep-season timeline, from the schedule table */
+  try {
+    var sched = document.getElementById('schedule');
+    var tw = sched; while (tw && !(tw.classList && tw.classList.contains('tw'))) tw = tw.nextElementSibling;
+    if (tw && !art.querySelector('.v3-tl')) {
+      var MON = { jan: 0, feb: 1, mar: 2, apr: 3, may: 4, jun: 5, jul: 6, aug: 7, sep: 8, sept: 8, oct: 9, nov: 10, dec: 11 };
+      var startY = derby.getFullYear() - 1, races = [];
+      var rows = tw.querySelectorAll('tbody tr');
+      for (var r = 0; r < rows.length; r++) {
+        var tr = rows[r]; if (tr.classList.contains('grp')) continue;
+        var td = tr.querySelectorAll('td'); if (td.length < 5) continue;
+        var dm = txt(td[0]).toLowerCase().match(/^([a-z]+)\.?\s+(\d{1,2})/); if (!dm || MON[dm[1]] == null) continue;
+        var mo = MON[dm[1]], d = new Date(mo >= 6 ? startY : startY + 1, mo, +dm[2]);
+        var nameEl = td[1].cloneNode(true); var tg = nameEl.querySelectorAll('.tag'); for (var t = 0; t < tg.length; t++) tg[t].remove();
+        races.push({ d: d, date: txt(td[0]), name: txt(nameEl), track: txt(td[2]), pts: parseInt(txt(td[4]), 10) || 0, done: tr.classList.contains('done'), next: tr.classList.contains('next'), win: txt(td[5]) });
+      }
+      if (races.length > 3) {
+        var W = 1000, H = 250, L = 18, R = 120, base = 188, top = 34;
+        var t0 = new Date(startY, 7, 25), t1 = new Date(derby.getTime() + 6 * 86400000);
+        var X = function (dt) { return L + (W - L - R) * (dt - t0) / (t1 - t0); };
+        var maxP = 100; races.forEach(function (x) { maxP = Math.max(maxP, x.pts); });
+        var Hs = function (p) { return 14 + (base - top - 14) * p / maxP; };
+        var g = '';
+        /* month ticks */
+        for (var mm = 8; mm <= 16; mm++) {
+          var md = new Date(startY, mm, 1); if (md > t1) break; var mx = X(md);
+          g += '<line x1="' + mx.toFixed(1) + '" x2="' + mx.toFixed(1) + '" y1="' + top + '" y2="' + (base + 6) + '" stroke="rgba(0,0,0,.07)"/>' +
+               (md.getMonth() === derby.getMonth() && md.getFullYear() === derby.getFullYear() ? '' : '<text x="' + (mx + 4).toFixed(1) + '" y="' + (base + 22) + '">' + md.toLocaleString('en-US', { month: 'short' }) + (mm === 12 ? " '" + String(startY + 1).slice(2) : '') + '</text>');
+        }
+        g += '<line x1="' + L + '" x2="' + X(derby).toFixed(1) + '" y1="' + base + '" y2="' + base + '" stroke="#0B0B0B" stroke-width="2"/>';
+        /* today */
+        var today = new Date(); if (today > t0 && today < derby) { var tx = X(today); g += '<line x1="' + tx.toFixed(1) + '" x2="' + tx.toFixed(1) + '" y1="' + (top - 8) + '" y2="' + base + '" stroke="#1F7A3A" stroke-width="1.5" stroke-dasharray="4 4"/><text x="' + (tx + 5).toFixed(1) + '" y="' + (top - 2) + '" style="fill:#1F7A3A;font-weight:700">Today</text>'; }
+        /* races: same-day races sit side by side */
+        var seen = {}, nextLbl = null;
+        races.forEach(function (x, ri) {
+          var dl = 150 + ri * 40;
+          var key = x.d.getTime(); var k = seen[key] = (seen[key] || 0) + 1;
+          var cx = X(x.d) + (k - 1) * 7, h = Hs(x.pts), cy = base - h;
+          var col = x.next ? '#1F7A3A' : (x.done ? '#0B0B0B' : '#D4AF37');
+          var tip = x.date + ' · ' + x.name + ' · ' + x.track + ' · ' + x.pts + ' points to the winner' + (x.done && x.win && x.win !== '—' ? ' · Won by ' + x.win : '');
+          g += '<g><title>' + esc(tip) + '</title><line class="v3-stem" style="transition-delay:' + dl + 'ms" x1="' + cx.toFixed(1) + '" x2="' + cx.toFixed(1) + '" y1="' + base + '" y2="' + cy.toFixed(1) + '" stroke="' + col + '" stroke-width="' + (x.pts >= 100 ? 3 : 2) + '" stroke-linecap="round"/>' +
+               '<circle class="v3-fade" style="transition-delay:' + (dl + 500) + 'ms" cx="' + cx.toFixed(1) + '" cy="' + cy.toFixed(1) + '" r="' + (x.pts >= 100 ? 5.5 : 4) + '" fill="' + (x.done ? col : '#fff') + '" stroke="' + col + '" stroke-width="2"/></g>';
+          if (x.next && !nextLbl) nextLbl = { x: cx, y: cy, t: 'Next: ' + x.name + ', ' + x.date };
+        });
+        if (nextLbl) { var ly = top + 22; g += '<line class="v3-txt" style="transition-delay:1.6s" x1="' + nextLbl.x.toFixed(1) + '" x2="' + nextLbl.x.toFixed(1) + '" y1="' + (nextLbl.y - 6).toFixed(1) + '" y2="' + (ly + 5) + '" stroke="#1F7A3A" stroke-width="1"/><text x="' + (nextLbl.x + 7).toFixed(1) + '" y="' + ly + '" class="v3-txt" style="fill:#1F7A3A;font-weight:700;transition-delay:1.6s">' + esc(nextLbl.t) + '</text>'; }
+        /* the Derby */
+        var dx = X(derby);
+        g += '<g><title>' + esc('Kentucky Derby · ' + derby.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) + ' · Churchill Downs') + '</title><circle class="v3-fade" style="transition-delay:' + (300 + races.length * 40 + 400) + 'ms" cx="' + dx.toFixed(1) + '" cy="' + base + '" r="11" fill="#D4AF37" stroke="#0B0B0B" stroke-width="2"/></g>' +
+             '<text x="' + (dx + 18).toFixed(1) + '" y="' + (base - 4) + '" style="fill:#0B0B0B;font-weight:800;font-size:13px">Kentucky Derby</text>' +
+             '<text x="' + (dx + 18).toFixed(1) + '" y="' + (base + 13) + '">' + derby.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }) + '</text>';
+        /* y guide labels */
+        [10, 50, 100].forEach(function (p) { if (p > maxP) return; var y = base - Hs(p); g += '<text x="' + (W - R + 104) + '" y="' + (y + 4).toFixed(1) + '" text-anchor="end" style="fill:#999">' + p + ' pts</text><line x1="' + L + '" x2="' + (W - R + 70) + '" y1="' + y.toFixed(1) + '" y2="' + y.toFixed(1) + '" stroke="rgba(0,0,0,.05)"/>'; });
+        var done = races.filter(function (x) { return x.done; }).length;
+        var box = document.createElement('figure'); box.className = 'v3-chart v3-tl';
+        box.innerHTML = '<div class="v3-ch"><b>The season at a glance</b><span>' + done + ' of ' + races.length + ' points races run · taller line = more points to the winner</span></div>' +
+          '<div class="v3-scroll"><svg viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="Timeline of ' + races.length + ' Kentucky Derby points races from September to April, ' + done + ' already run, ending with the Kentucky Derby on May 1">' + g + '</svg></div>' +
+          '<div class="v3-key"><span><i style="background:#0B0B0B"></i>Run</span><span><i style="background:#1F7A3A"></i>Next up</span><span><i style="background:#fff;border:2px solid #D4AF37;box-sizing:border-box"></i>Still to come</span></div>';
+        var anchor = sched.nextElementSibling; while (anchor && anchor.tagName === 'P' && anchor !== tw) anchor = anchor.nextElementSibling;
+        tw.parentNode.insertBefore(box, tw);
+        reveal(box);
+      }
+    }
+  } catch (e) {}
+
+  /* 4. points scale as bars */
+  try {
+    var sc = art.querySelector('.scale');
+    if (sc && !sc.classList.contains('v3-sc')) {
+      var ds = sc.children, mx2 = 0, j; for (j = 0; j < ds.length; j++) mx2 = Math.max(mx2, parseFloat(txt(ds[j].querySelector('b'))) || 0);
+      if (mx2) { for (j = 0; j < ds.length; j++) ds[j].style.setProperty('--h', ((parseFloat(txt(ds[j].querySelector('b'))) || 0) / mx2).toFixed(3)); ds[j].style.setProperty('--d', (j * 140) + 'ms'); sc.classList.add('v3-sc'); reveal(sc); }
+    }
+  } catch (e) {}
+
+  /* 5. Derby winners' points: column chart built from the tiles */
+  try {
+    var wp = art.querySelector('.wp');
+    if (wp && !art.querySelector('.wpc')) {
+      var data = [];
+      Array.prototype.forEach.call(wp.children, function (dv) {
+        var p = parseFloat(txt(dv.querySelector('b'))), s = txt(dv.querySelector('span')), mm2 = s.match(/^(\d{4})\s*·\s*([^(]+)/);
+        if (!isNaN(p) && mm2) data.push({ y: +mm2[1], n: mm2[2].trim(), p: p, note: (s.match(/\(([^)]+)\)/) || [])[1] || '' });
+      });
+      if (data.length > 4) {
+        data.sort(function (a, b) { return a.y - b.y; });
+        var W2 = 1000, H2 = 300, L2 = 40, R2 = 78, base2 = 222, top2 = 26, maxV = 0;
+        data.forEach(function (x) { maxV = Math.max(maxV, x.p); }); maxV = Math.ceil(maxV / 50) * 50;
+        var slot = (W2 - L2 - R2) / data.length, bw = Math.min(42, slot * .58);
+        var Y = function (v) { return base2 - (base2 - top2) * v / maxV; };
+        var s2 = '';
+        for (var gv = 0; gv <= maxV; gv += 50) s2 += '<line x1="' + L2 + '" x2="' + (W2 - R2) + '" y1="' + Y(gv).toFixed(1) + '" y2="' + Y(gv).toFixed(1) + '" stroke="' + (gv ? 'rgba(0,0,0,.06)' : '#0B0B0B') + '"' + (gv ? '' : ' stroke-width="1.5"') + '/><text x="' + (L2 - 8) + '" y="' + (Y(gv) + 4).toFixed(1) + '" text-anchor="end" style="fill:#999">' + gv + '</text>';
+        var ref = 60, ry = Y(ref);
+        data.forEach(function (x, k) {
+          var cx = L2 + slot * k + slot / 2, y = Y(x.p), recent = x.y >= 2019 && x.p <= ref;
+          var col = recent ? '#D4AF37' : '#2A2A2A';
+          s2 += '<g><title>' + esc(x.y + ' · ' + x.n + ': ' + x.p + ' points' + (x.note ? ' (' + x.note + ')' : '')) + '</title>' +
+                '<rect class="v3-stem" style="transition-delay:' + (k * 70) + 'ms" x="' + (cx - bw / 2).toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + bw.toFixed(1) + '" height="' + (base2 - y).toFixed(1) + '" rx="4" fill="' + col + '"/>' +
+                '<text class="v3-txt" x="' + cx.toFixed(1) + '" y="' + (y - 7).toFixed(1) + '" text-anchor="middle" style="fill:#0B0B0B;font-weight:700;font-size:13px;transition-delay:' + (k * 70 + 600) + 'ms">' + x.p + '</text>' +
+                '<text x="' + cx.toFixed(1) + '" y="' + (base2 + 18) + '" text-anchor="middle" style="fill:#333;font-weight:700">' + x.y + '</text>' +
+                '<text transform="translate(' + (cx + 4).toFixed(1) + ' ' + (base2 + 30) + ') rotate(32)" style="font-size:11px">' + esc(x.n) + '</text></g>';
+        });
+        s2 += '<line x1="' + L2 + '" x2="' + (W2 - R2) + '" y1="' + ry.toFixed(1) + '" y2="' + ry.toFixed(1) + '" stroke="#B8921F" stroke-width="1.5" stroke-dasharray="6 5"/>' +
+              '<text x="' + (W2 - R2 + 8) + '" y="' + (ry + 4).toFixed(1) + '" style="fill:#8A6D12;font-weight:700">' + ref + ' pts</text>';
+        var box2 = document.createElement('figure'); box2.className = 'v3-chart wpc';
+        box2.innerHTML = '<div class="v3-ch"><b>Points each Derby winner had</b><span>' + data[0].y + '–' + data[data.length - 1].y + ' · gold = winners since 2019 with ' + ref + ' or fewer</span></div>' +
+          '<div class="v3-scroll"><svg viewBox="0 0 ' + W2 + ' ' + H2 + '" role="img" aria-label="Column chart of the qualifying points every Kentucky Derby winner had from ' + data[0].y + ' to ' + data[data.length - 1].y + '">' + s2 + '</svg></div>';
+        wp.parentNode.insertBefore(box2, wp);
+        wp.classList.add('v3-sr');
+        reveal(box2);
+      }
+    }
+  } catch (e) {}
+})();
+</script>
